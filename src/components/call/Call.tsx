@@ -22,11 +22,48 @@ export interface State {
   numberContactsLeft: number;
 }
 
+const BREAKPOINT_MEDIUM = 768;
+
 export class Call extends React.Component<Props, State> {
+
+  private containerRef = React.createRef<HTMLElement>();
   constructor(props: Props) {
     super(props);
     // set initial state
     this.state = this.setStateFromProps(props);
+  }
+
+  scrollToTitleOnMobile = (): void => {
+    if (!window.matchMedia) {
+      return;
+    }
+    if (window.matchMedia(`(min-width: ${BREAKPOINT_MEDIUM}px)`).matches) {
+      return;
+    }
+    if (!this.containerRef || !this.containerRef.current) {
+      return;
+    }
+
+    const pageTitle = this.containerRef.current.querySelector('h1');
+    if (!pageTitle) {
+      return;
+    }
+
+    const crossBrowserScrollY = window.scrollY || window.pageYOffset || 0;
+
+    const h1ScrollTop =
+      pageTitle.getBoundingClientRect().top + crossBrowserScrollY - 5;
+    const canSmoothScroll = 'scrollBehavior' in document.body.style;
+
+    if (canSmoothScroll) {
+      window.scrollTo({
+        left: 0,
+        top: h1ScrollTop,
+        behavior: 'smooth'
+      });
+    } else {
+      window.scrollTo(0, h1ScrollTop);
+    }
   }
 
   /**
@@ -58,11 +95,15 @@ export class Call extends React.Component<Props, State> {
     };
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidMount() {
+    this.scrollToTitleOnMobile();
+  }
 
+  componentDidUpdate(prevProps: Props) {
     if (!isEqual(prevProps, this.props)) {
       this.setState(this.setStateFromProps(this.props));
     }
+    this.scrollToTitleOnMobile();
   }
 
   // this should obviously be somewhere on issue but as an interface and not a class I don't know where...
@@ -116,7 +157,7 @@ export class Call extends React.Component<Props, State> {
     return (
       <locationStateContext.Consumer>
       { locationState =>
-        <section className="call">
+        <section className="call" ref={this.containerRef}>
           <CallHeaderTranslatable
             invalidAddress={locationState.invalidAddress}
             currentIssue={this.state.issue}
@@ -148,7 +189,7 @@ export class Call extends React.Component<Props, State> {
                     eventEmitter={eventManager.ee}
                     numberContactsLeft={this.state.numberContactsLeft}
                     currentContactId={(this.state.currentContact ? this.state.currentContact.id : '')}
-                  />                
+                  />
                 }
               </eventContext.Consumer>
             }
