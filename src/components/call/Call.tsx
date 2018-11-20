@@ -44,7 +44,7 @@ export class Call extends React.Component<Props, State> {
       return;
     }
 
-    const pageTitle = this.containerRef.current.querySelector("[data-scroll-anchor]");
+    const pageTitle = this.containerRef.current.querySelector('[data-scroll-anchor]');
     if (!pageTitle) {
       return;
     }
