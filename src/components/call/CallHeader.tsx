@@ -14,7 +14,7 @@ export const CallHeader: React.StatelessComponent<Props> = ({ invalidAddress, cu
   if (currentIssue) {
     return (
       <header className="call__header">
-        <h1 className="call__title">{currentIssue.name}</h1>
+        <h1 className="call__title" data-scroll-anchor="true">{currentIssue.name}</h1>
         <div className="call__reason">
           <ReactMarkdown source={currentIssue.reason}/>
         </div>

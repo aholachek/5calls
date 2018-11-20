@@ -44,7 +44,7 @@ export class Call extends React.Component<Props, State> {
       return;
     }
 
-    const pageTitle = this.containerRef.current.querySelector('h1');
+    const pageTitle = this.containerRef.current.querySelector("[data-scroll-anchor]");
     if (!pageTitle) {
       return;
     }
@@ -96,14 +96,15 @@ export class Call extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.scrollToTitleOnMobile();
+    // wait a tick to ensure rendering of children is complete
+    setTimeout(this.scrollToTitleOnMobile, 1);
   }
 
   componentDidUpdate(prevProps: Props) {
     if (!isEqual(prevProps, this.props)) {
       this.setState(this.setStateFromProps(this.props));
+      this.scrollToTitleOnMobile();
     }
-    this.scrollToTitleOnMobile();
   }
 
   // this should obviously be somewhere on issue but as an interface and not a class I don't know where...
