@@ -13,6 +13,7 @@ interface Props {
 }
 
 export const CallHeader: React.StatelessComponent<Props> = ({ invalidAddress, currentIssue }: Props) => {
+
   if (currentIssue) {
     return (
       <header className="call__header">

@@ -27,6 +27,11 @@ import AppProvider from './components/AppProvider';
 import { startup } from './redux/remoteData';
 import './components/bundle.css';
 
+<<<<<<< Updated upstream
+=======
+console.assert('fooo');
+
+>>>>>>> Stashed changes
 ReactGA.initialize('UA-90915119-1');
 const trackPageView = location => {
   ReactGA.set({
