@@ -5,6 +5,8 @@ import * as ReactMarkdown from 'react-markdown';
 
 import { Issue } from '../../common/model';
 
+
+
 console.log("foo")
 
 interface Props {
