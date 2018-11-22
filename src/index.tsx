@@ -27,7 +27,7 @@ import AppProvider from './components/AppProvider';
 import { startup } from './redux/remoteData';
 import './components/bundle.css';
 
-console.log("fooo")
+console.assert("fooo")
 
 ReactGA.initialize('UA-90915119-1');
 const trackPageView = location => {

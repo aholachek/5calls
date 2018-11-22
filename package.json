@@ -115,8 +115,8 @@
     "test": "npm run tslint && npm run test:nolint",
     "test:nolint": "node scripts/test.js --env=jsdom",
     "test:coverage": "node scripts/test.js --env=jsdom --coverage",
-    "lint": "tslint 'src/**/*.ts' 'src/**/*.tsx'",
-    "tslint-fix": "tslint --fix 'src/**/*.{ts, tsx}'",
+    "tslint": "tslint 'src/**/*.ts' 'src/**/*.tsx'",
+    "tslint-fix": "npm run tslint -- --fix",
     "postinstall": "npm run build-css",
     "web-tests:all": "testcafe chrome ./web-tests/*.ts",
     "web-tests:browserstack": "node runner.js"
