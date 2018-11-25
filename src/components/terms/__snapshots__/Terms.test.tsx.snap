@@ -17,7 +17,8 @@ exports[`Terms component snapshot renders correctly 1`] = `
     <h2
       className="callout"
     >
-      Your question not listed here? Get in touch at 
+      Your question not listed here? Get in touch at
+       
       <a
         href="mailto:make5calls@gmail.com"
       >
@@ -185,7 +186,8 @@ exports[`Terms component snapshot renders correctly 1`] = `
       >
         Facebook
       </a>
-       and 
+       
+      and 
       <a
         href="https://twitter.com/make5calls"
       >
