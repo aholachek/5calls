@@ -111,9 +111,9 @@ export const fetchCallCount = () => {
     return getCountData()
       .then((response: CountData) => {
         dispatch(callCountActionCreator(response.count));
-        // tslint:disable-next-line:no-console
       })
       .catch(error =>
+        // tslint:disable-next-line:no-console
         console.error(`fetchCallCount error: ${error.message}`, error)
       );
   };
@@ -179,8 +179,8 @@ export const fetchBrowserGeolocation = () => {
     const fetchType = state.locationState.locationFetchType;
     // const useGeolocation = state.locationState.useGeolocation || null;
 
-    // tslint:disable-next-line:no-shadowed-variable no-any
     setTimeoutHandle = setTimeout(
+      // tslint:disable-next-line:no-shadowed-variable no-any
       () => dispatch<any>(fetchLocationByIP()),
       GEOLOCATION_TIMEOUT + 1000
     );

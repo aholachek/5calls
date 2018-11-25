@@ -20,8 +20,8 @@ interface Props {
 }
 interface State {}
 
-// tslint:disable-next-line:no-any
 class Outcomes extends React.Component<
+  // tslint:disable-next-line:no-any
   Props & RouteComponentProps<any>,
   State
 > {
