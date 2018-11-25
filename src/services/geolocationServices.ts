@@ -12,10 +12,10 @@ export const GEOLOCATION_MAX_AGE = 30000;
 /**
  * Use browser geolocation API to find location.
  */
-export const getBrowserGeolocation = (): Promise<GeolocationPosition>  => {
+export const getBrowserGeolocation = (): Promise<GeolocationPosition> => {
   return new Promise<GeolocationPosition>((resolve, reject) => {
     if (navigator.geolocation) {
-      const geolocation: Geolocation =  navigator.geolocation;
+      const geolocation: Geolocation = navigator.geolocation;
       geolocation.getCurrentPosition(
         // getCurrentPosition() parameter TS type definition:
         // (successCallback: PositionCallback, errorCallback?: PositionErrorCallback, options?: PositionOptions) => {
@@ -24,7 +24,10 @@ export const getBrowserGeolocation = (): Promise<GeolocationPosition>  => {
         (position: Position) => {
           const coords: Coordinates = position.coords;
           // tslint:disable-next-line:no-shadowed-variable
-          const geolocation: GeolocationPosition = { latitude: coords.latitude, longitude: coords.longitude };
+          const geolocation: GeolocationPosition = {
+            latitude: coords.latitude,
+            longitude: coords.longitude
+          };
           resolve(geolocation);
         },
         // PositionErrorCallback
@@ -41,7 +44,7 @@ export const getBrowserGeolocation = (): Promise<GeolocationPosition>  => {
             // tslint:disable-next-line:no-console
             console.warn(msg, e);
             // send back an undefined location
-            resolve({latitude: undefined, longitude: undefined});
+            resolve({ latitude: undefined, longitude: undefined });
           } else {
             const msg = `Problem doing browser geolocation;
             PositionError code: ${code};
@@ -68,7 +71,8 @@ export const getBrowserGeolocation = (): Promise<GeolocationPosition>  => {
  * Use ipinfo.io to find location by IP address.
  */
 export const getLocationByIP = (): Promise<IpInfoData> => {
-  return axios.get(Constants.IP_INFO_URL)
+  return axios
+    .get(Constants.IP_INFO_URL)
     .then(response => Promise.resolve(response.data))
     .catch(e => Promise.reject(e));
 };

@@ -5,7 +5,7 @@ import { UserProfile } from './index';
 export enum UserStateActionType {
   SET_AUTH_TOKEN = 'SET_AUTH_TOKEN',
   SET_USER_PROFILE = 'SET_USER_PROFILE',
-  CLEAR_USER_PROFILE = 'CLEAR_USER_PROFILE',
+  CLEAR_USER_PROFILE = 'CLEAR_USER_PROFILE'
 }
 
 export interface UserStateAction extends Action {
@@ -34,7 +34,9 @@ export const setAuthTokenActionCreator = (idToken?: string): SetAuthToken => {
   };
 };
 
-export const setProfileActionCreator = (profile?: UserProfile): SetUserProfile => {
+export const setProfileActionCreator = (
+  profile?: UserProfile
+): SetUserProfile => {
   return {
     type: UserStateActionType.SET_USER_PROFILE,
     payload: profile

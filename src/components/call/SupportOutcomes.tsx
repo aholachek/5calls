@@ -20,35 +20,35 @@ export default class SupportOutcomes extends React.Component<Props, State> {
 
   render() {
     const outcomeButtons: OutcomeButton[] = [
-      {title: 'Contacted', emoji: '😀', key: 'contacted'},
-      {title: 'Not Available / VM', emoji: '😕', key: 'nothome'},
-      {title: 'Refused', emoji: '🤐', key: 'refused'},
-      {title: 'Out of Service', emoji: '📵', key: 'disconnected'},
-      {title: 'Wrong Number', emoji: '👽', key: 'wrongnumber'},
+      { title: 'Contacted', emoji: '😀', key: 'contacted' },
+      { title: 'Not Available / VM', emoji: '😕', key: 'nothome' },
+      { title: 'Refused', emoji: '🤐', key: 'refused' },
+      { title: 'Out of Service', emoji: '📵', key: 'disconnected' },
+      { title: 'Wrong Number', emoji: '👽', key: 'wrongnumber' }
     ];
-  
+
     return (
       <div className="call__outcomes">
-        <h3 className="call__outcomes__header">
-          How did the call go?
-        </h3>
+        <h3 className="call__outcomes__header">How did the call go?</h3>
         <div className="call__outcomes__items">
-          {outcomeButtons.map((button, index) =>
+          {outcomeButtons.map((button, index) => (
             <button
               key={index}
-              onClick={(e) => this.setOutcome(e, button.key)}
+              onClick={e => this.setOutcome(e, button.key)}
               className={this.buttonClass(button.key)}
             >
-              {button.title}<br/>{button.emoji}
+              {button.title}
+              <br />
+              {button.emoji}
             </button>
-          )}
+          ))}
         </div>
         <h3 className="call__outcomes__header">
-          If contacted: do they support Danica? Use your judgment.    
+          If contacted: do they support Danica? Use your judgment.
         </h3>
         {this.supportButtons()}
         <h3 className="call__outcomes__header">
-          Done? Move on to the next voter           
+          Done? Move on to the next voter
         </h3>
         {this.nextButton()}
       </div>
@@ -69,31 +69,41 @@ export default class SupportOutcomes extends React.Component<Props, State> {
 
   supportButtons() {
     const buttons: OutcomeButton[] = [
-      {title: 'Strong Support', emoji: '🎉', key: 'strongsupport'},
-      {title: 'Lean Support', emoji: '⭐', key: 'leansupport'},
-      {title: 'Undecided', emoji: '🌀', key: 'undecided'},
-      {title: 'Lean Opponent', emoji: '😰', key: 'leanopp'},
-      {title: 'Strong Opponent', emoji: '🚫', key: 'strongopp'},
-      {title: 'Not Voting', emoji: '😡', key: 'novote'},
+      { title: 'Strong Support', emoji: '🎉', key: 'strongsupport' },
+      { title: 'Lean Support', emoji: '⭐', key: 'leansupport' },
+      { title: 'Undecided', emoji: '🌀', key: 'undecided' },
+      { title: 'Lean Opponent', emoji: '😰', key: 'leanopp' },
+      { title: 'Strong Opponent', emoji: '🚫', key: 'strongopp' },
+      { title: 'Not Voting', emoji: '😡', key: 'novote' }
     ];
 
     if (this.supportEnabled()) {
       return (
-      <div className="call__outcomes__items call__outcomes__support">
-        {buttons.map((button, index) => 
-          <button key={index} onClick={(e) => this.setSupport(e, button.key)} className={this.buttonClass(button.key)}>
-            {button.title}<br/>{button.emoji}
-          </button>
-        )}
-      </div>
+        <div className="call__outcomes__items call__outcomes__support">
+          {buttons.map((button, index) => (
+            <button
+              key={index}
+              onClick={e => this.setSupport(e, button.key)}
+              className={this.buttonClass(button.key)}
+            >
+              {button.title}
+              <br />
+              {button.emoji}
+            </button>
+          ))}
+        </div>
       );
     }
 
     return (
       <div className="call__outcomes__items call__outcomes__support disabled">
-        {buttons.map((button, index) => 
-          <button key={index} disabled={true}>{button.title}<br/>{button.emoji}</button>
-        )}
+        {buttons.map((button, index) => (
+          <button key={index} disabled={true}>
+            {button.title}
+            <br />
+            {button.emoji}
+          </button>
+        ))}
       </div>
     );
   }
@@ -126,7 +136,7 @@ export default class SupportOutcomes extends React.Component<Props, State> {
     if (this.nextEnabled()) {
       return (
         <div className="call__outcomes__items">
-          <button onClick={(e) => this.nextContact(e)}>Next Contact ➡️</button>
+          <button onClick={e => this.nextContact(e)}>Next Contact ➡️</button>
         </div>
       );
     }
@@ -145,7 +155,11 @@ export default class SupportOutcomes extends React.Component<Props, State> {
     }
 
     // support for contacted
-    if (this.state.outcomeState && this.state.outcomeState === 'contacted' && this.state.supportState) {
+    if (
+      this.state.outcomeState &&
+      this.state.outcomeState === 'contacted' &&
+      this.state.supportState
+    ) {
       return true;
     }
 

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { CallState } from '../redux/callState';
 
-const defaultCallState: CallState  = {
+const defaultCallState: CallState = {
   currentIssueId: '',
   contactIndexes: {},
-  completedIssueIds: [],
+  completedIssueIds: []
 };
 
-export const callStateContext = React.createContext<CallState>(defaultCallState);
+export const callStateContext = React.createContext<CallState>(
+  defaultCallState
+);

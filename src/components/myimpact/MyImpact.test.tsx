@@ -9,13 +9,8 @@ test('MyImpact component snapshot renders correctly', () => {
     all: [],
     voicemail: 0,
     unavailable: 0,
-    contact: 0,
+    contact: 0
   };
-  const component = shallow(
-    <MyImpact
-      userStats={userStats}
-      t={i18n.t}
-    />
-  );
+  const component = shallow(<MyImpact userStats={userStats} t={i18n.t} />);
   expect(component).toMatchSnapshot();
 });

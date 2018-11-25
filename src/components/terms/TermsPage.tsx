@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Terms } from './index';
 import { Layout } from '../layout';
 
-interface Props extends RouteComponentProps<{ id: string }> { }
+interface Props extends RouteComponentProps<{ id: string }> {}
 
 const TermsPage: React.SFC<Props> = (props: Props) => (
   <Layout>

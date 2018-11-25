@@ -30,5 +30,5 @@ export {
   IssueLink,
   NoContactSplitDistrict,
   SupportOutcomes,
-  ACAOutcomes,
+  ACAOutcomes
 };

@@ -9,7 +9,7 @@ interface Props {
   readonly isIssueActive: boolean;
 }
 
-interface State { }
+interface State {}
 
 export class IssuesListItem extends React.Component<Props, State> {
   render() {
@@ -25,13 +25,20 @@ export class IssuesListItem extends React.Component<Props, State> {
           to={issueLink}
           onClick={() => selectIssueActionCreator(this.props.issue.id)}
         >
-          <span aria-live="polite" className={`issues-list__item__status ${isCompleted} ${isActive}`}>
+          <span
+            aria-live="polite"
+            className={`issues-list__item__status ${isCompleted} ${isActive}`}
+          >
             <span className="visually-hidden" />
           </span>
-          <span className={`issues-list__item__title ${isCompleted} ${isActive}`}>
+          <span
+            className={`issues-list__item__title ${isCompleted} ${isActive}`}
+          >
             {this.props.issue.name}
           </span>
-          <span className={`issues-list__item__summary ${isCompleted} ${isActive}`}>
+          <span
+            className={`issues-list__item__summary ${isCompleted} ${isActive}`}
+          >
             {/* TODO: Finish this impl */}
             <span>X calls to make</span>
           </span>
@@ -39,7 +46,6 @@ export class IssuesListItem extends React.Component<Props, State> {
       </li>
     );
   }
-
 }
 
 export default IssuesListItem;

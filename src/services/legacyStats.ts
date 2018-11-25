@@ -7,7 +7,9 @@ export interface LegacyUserStatsState {
   contacted: number;
 }
 
-export const transform = (legacyStats: LegacyUserStatsState): UserStatsState => {
+export const transform = (
+  legacyStats: LegacyUserStatsState
+): UserStatsState => {
   let userStats: UserStatsState = {
     all: legacyStats.all.map(i => {
       return {
@@ -15,12 +17,12 @@ export const transform = (legacyStats: LegacyUserStatsState): UserStatsState => 
         issueid: i.issueid,
         result: i.result,
         time: i.time,
-        uploaded: false,
+        uploaded: false
       };
     }),
     unavailable: legacyStats.unavailable,
     voicemail: legacyStats.vm,
-    contact: legacyStats.contacted,
+    contact: legacyStats.contacted
   };
 
   return userStats;

@@ -18,10 +18,7 @@ export const IssuesList: React.StatelessComponent<Props> = (props: Props) => {
   const listFooter = () => {
     return (
       <li>
-        <Link
-          to={`/more`}
-          className={`issues__footer-link`}
-        >
+        <Link to={`/more`} className={`issues__footer-link`}>
           <span>{i18n.t('issues.viewAllActiveIssues')}</span>
         </Link>
       </li>
@@ -30,20 +27,24 @@ export const IssuesList: React.StatelessComponent<Props> = (props: Props) => {
 
   const listItems = () => {
     if (props.issues && props.issues.map) {
-      return props.issues.map(issue =>
-        (
+      return props.issues.map(issue => (
         <IssuesListItem
           key={issue.id}
           issue={issue}
           isIssueComplete={
             props.completedIssueIds &&
-            (find(props.completedIssueIds, (issueId: string) => issue.slug === issueId) !== undefined)
+            find(
+              props.completedIssueIds,
+              (issueId: string) => issue.slug === issueId
+            ) !== undefined
           }
           isIssueActive={currentIssueId === issue.id}
         />
       ));
     } else {
-      return <div style={{ textAlign: 'center' }}>{i18n.t('noCalls.title')}</div>;
+      return (
+        <div style={{ textAlign: 'center' }}>{i18n.t('noCalls.title')}</div>
+      );
     }
   };
 

@@ -5,7 +5,7 @@ const defaultDonation = {
   count: 0,
   amount: 0,
   total: 0,
-  kind: '',
+  kind: ''
 };
 
 const defaultRemoteState = {
@@ -13,7 +13,9 @@ const defaultRemoteState = {
   inactiveIssues: [],
   callTotal: 0,
   donations: defaultDonation,
-  errorMessage: '',
+  errorMessage: ''
 };
 
-export const remoteStateContext = React.createContext<RemoteDataState>(defaultRemoteState);
+export const remoteStateContext = React.createContext<RemoteDataState>(
+  defaultRemoteState
+);

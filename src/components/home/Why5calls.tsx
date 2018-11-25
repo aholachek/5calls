@@ -10,16 +10,18 @@ interface Props {
 }
 
 export const Why5calls: React.StatelessComponent<Props> = (props: Props) => (
-  <div className="hypothesis" >
+  <div className="hypothesis">
     <header className="hypothesis__header">
       <h1 className="hypothesis__title">{props.t('hypothesis.title')}</h1>
       <h2 className="hypothesis__subtitle">
-        {/*tslint:disable-next-line:max-line-length*/}
-        <strong>5 Calls</strong> is the easiest and most effective way for citizens to make an impact in national and local politics
+        <strong>5 Calls</strong> is the easiest and most effective way for
+        citizens to make an impact in national and local politics
       </h2>
     </header>
     <div className="hypothesis__text">
-      <a href={Constants.contact.apps}><img src="/img/5calls-apps.png" className="hypothesis__text__mobile" /></a>
+      <a href={Constants.contact.apps}>
+        <img src="/img/5calls-apps.png" className="hypothesis__text__mobile" />
+      </a>
       <p dangerouslySetInnerHTML={{ __html: props.t('hypothesis.p3') }} />
       <div className="subscribe">
         <form
@@ -27,14 +29,21 @@ export const Why5calls: React.StatelessComponent<Props> = (props: Props) => (
           method="post"
           target="popupwindow"
         >
-          <label htmlFor="email"><strong>{props.t('footer.emailLabel')}</strong></label>
+          <label htmlFor="email">
+            <strong>{props.t('footer.emailLabel')}</strong>
+          </label>
           <span className="emailform">
-            <input type="text" placeholder="youremail@example.com" name="email" id="email" />
+            <input
+              type="text"
+              placeholder="youremail@example.com"
+              name="email"
+              id="email"
+            />
             <input type="submit" value={props.t('footer.subscribe')} />
           </span>
         </form>
       </div>
-      <div style={{'clear': 'both'}} />
+      <div style={{ clear: 'both' }} />
     </div>
   </div>
 );

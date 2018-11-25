@@ -37,7 +37,7 @@ export class Done extends React.Component<Props, State> {
     this.state = {
       reminderPhone: '',
       reminderError: undefined,
-      reminderSet: false,
+      reminderSet: false
     };
   }
 
@@ -48,9 +48,14 @@ export class Done extends React.Component<Props, State> {
     const ga = ReactGA.ga();
     ga('send', 'event', 'share', 'twitter', 'twitter');
 
-    // tslint:disable-next-line:max-line-length
-    window.open(`https://twitter.com/share?url=${this.url}${this.additionalTwitterComps}&text=${this.tweet}`, 'sharewindow', 'width=500, height=350');
-  }
+    window.open(
+      `https://twitter.com/share?url=${this.url}${
+        this.additionalTwitterComps
+      }&text=${this.tweet}`,
+      'sharewindow',
+      'width=500, height=350'
+    );
+  };
 
   facebookShare = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -58,9 +63,12 @@ export class Done extends React.Component<Props, State> {
     const ga = ReactGA.ga();
     ga('send', 'event', 'share', 'facebook', 'facebook');
 
-    // tslint:disable-next-line:max-line-length
-    window.open('https://www.facebook.com/sharer/sharer.php?u=http://bit.ly/2iJb5nH', 'sharewindow', 'width=500, height=350');
-  }
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u=http://bit.ly/2iJb5nH',
+      'sharewindow',
+      'width=500, height=350'
+    );
+  };
 
   setReminder(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -68,10 +76,9 @@ export class Done extends React.Component<Props, State> {
     if (isValidNumber(this.state.reminderPhone, 'US')) {
       // ignore errors from the server
       postPhoneRemind(this.state.reminderPhone);
-      this.setState({reminderSet: true});
-
+      this.setState({ reminderSet: true });
     } else {
-      this.setState({reminderError: 'Please enter a valid US phone number'});
+      this.setState({ reminderError: 'Please enter a valid US phone number' });
     }
   }
 
@@ -85,18 +92,25 @@ export class Done extends React.Component<Props, State> {
   render() {
     // for selected issues, customize the share text a bit more
     if (this.props.currentIssue) {
-      const issueID = this.props.currentIssue.slug ? this.props.currentIssue.slug : this.props.currentIssue.id;
+      const issueID = this.props.currentIssue.slug
+        ? this.props.currentIssue.slug
+        : this.props.currentIssue.id;
 
       this.url = encodeURIComponent(`${Constants.APP_URL}/issue/${issueID}`);
       // the additional "via @make5calls" text that the via param introduces doesn't fit with issue titles, remove it
       this.additionalTwitterComps = '';
-      // tslint:disable-next-line:max-line-length
-      this.tweet = encodeURIComponent(i18n.t('promote.iJustCalled') + this.props.currentIssue.name.substring(0, 72) + i18n.t('promote.youShouldToo'));
+      this.tweet = encodeURIComponent(
+        i18n.t('promote.iJustCalled') +
+          this.props.currentIssue.name.substring(0, 72) +
+          i18n.t('promote.youShouldToo')
+      );
       this.twitterTitle = i18n.t('promote.tweetThisIssue');
       this.facebookTitle = i18n.t('promote.shareThisIssue');
     }
 
-    const shareURL = `${Constants.SHARE_BUCKET_URL}${this.props.currentIssue.id}.png`;
+    const shareURL = `${Constants.SHARE_BUCKET_URL}${
+      this.props.currentIssue.id
+    }.png`;
 
     return (
       <section className="call">
@@ -105,29 +119,35 @@ export class Done extends React.Component<Props, State> {
           <p className="call__text">
             {i18n.t('callComplete.pickAnotherIssue')}
           </p>
-          <CallCount
-            totalCount={this.props.totalCount}
-          />
+          <CallCount totalCount={this.props.totalCount} />
           <div className="call__complete__donate">
             <h2>
               <span>Donate to 5 Calls</span>
             </h2>
             <p>
-              5 Calls is an <strong>all-volunteer non-profit organization</strong>,
-              we rely on donations from members like you to keep our activities
-              fresh and develop new ways to make your voice heard!
+              5 Calls is an{' '}
+              <strong>all-volunteer non-profit organization</strong>, we rely on
+              donations from members like you to keep our activities fresh and
+              develop new ways to make your voice heard!
             </p>
             <div className="call__complete__donate__grid">
-              <button onClick={(e) => this.donateClick(10)} className="grid-1">$10
+              <button onClick={e => this.donateClick(10)} className="grid-1">
+                $10
                 <span>Supports 200 calls to Congress</span>
               </button>
-              <button onClick={(e) => this.donateClick(15)} className="grid-2">$15
+              <button onClick={e => this.donateClick(15)} className="grid-2">
+                $15
                 <span>Supports outreach to new activists</span>
               </button>
-              <button onClick={(e) => this.donateClick(25)} className="donate-best grid-1">$25
+              <button
+                onClick={e => this.donateClick(25)}
+                className="donate-best grid-1"
+              >
+                $25
                 <span>Supports issue research and writeups</span>
               </button>
-              <button onClick={(e) => this.donateClick(100)} className="grid-2">$100
+              <button onClick={e => this.donateClick(100)} className="grid-2">
+                $100
                 <span>Keeps the server running for a month</span>
               </button>
             </div>
@@ -137,27 +157,34 @@ export class Done extends React.Component<Props, State> {
               <h3>
                 <span>⏰ Remind me:</span>
               </h3>
-              <p>Enter your phone number to get a reminder to make your next call.</p>
+              <p>
+                Enter your phone number to get a reminder to make your next
+                call.
+              </p>
               <blockquote>
-                {this.state.reminderSet ?
-                <h3><strong>Thanks, we'll remind you!</strong></h3>
-                :
-                <span>
-                <PhoneInput
-                  placeholder="415 555 1212"
-                  countries={['US']}
-                  error={this.state.reminderError}
-                  indicateInvalid={true}
-                  onChange={phone => this.setState({ reminderPhone: phone })}
-                />
-                <button
-                  className="button"
-                  onClick={(e) => this.setReminder(e)}
-                >
-                  Remind me
-                </button>
-                </span>
-                }
+                {this.state.reminderSet ? (
+                  <h3>
+                    <strong>Thanks, we'll remind you!</strong>
+                  </h3>
+                ) : (
+                  <span>
+                    <PhoneInput
+                      placeholder="415 555 1212"
+                      countries={['US']}
+                      error={this.state.reminderError}
+                      indicateInvalid={true}
+                      onChange={phone =>
+                        this.setState({ reminderPhone: phone })
+                      }
+                    />
+                    <button
+                      className="button"
+                      onClick={e => this.setReminder(e)}
+                    >
+                      Remind me
+                    </button>
+                  </span>
+                )}
               </blockquote>
             </div>
             <div className="call__complete__share">
@@ -167,10 +194,16 @@ export class Done extends React.Component<Props, State> {
               <img src={shareURL} className="call__complete__share__img" />
               <div className="call__complete__share__links">
                 <p className="call__complete__share__links__twitter">
-                  <a onClick={(e) => this.twitterShare(e)}><i className="fab fa-twitter"/>Share</a>
+                  <a onClick={e => this.twitterShare(e)}>
+                    <i className="fab fa-twitter" />
+                    Share
+                  </a>
                 </p>
                 <p className="call__complete__share__links__facebook">
-                  <a onClick={(e) => this.facebookShare(e)}><i className="fab fa-facebook"/>Share</a>
+                  <a onClick={e => this.facebookShare(e)}>
+                    <i className="fab fa-facebook" />
+                    Share
+                  </a>
                 </p>
               </div>
             </div>

@@ -14,7 +14,9 @@ import { store } from '../../redux/store';
  *
  * @param location the location stored in locationState.address
  */
-export const formatLocationForBackEnd = (location: string | null | undefined): string => {
+export const formatLocationForBackEnd = (
+  location: string | null | undefined
+): string => {
   if (!location) {
     return '';
   }
@@ -59,16 +61,25 @@ export const formatNumber = (unformattedNumber: number | string) => {
   }
 };
 
-export const getIssue = (remoteDataState: RemoteDataState, issueId: string): Issue | undefined => {
+export const getIssue = (
+  remoteDataState: RemoteDataState,
+  issueId: string
+): Issue | undefined => {
   if (remoteDataState.issues) {
-    const currentActiveIssue = find(remoteDataState.issues, (i => i.id === issueId || i.slug === issueId));
+    const currentActiveIssue = find(
+      remoteDataState.issues,
+      i => i.id === issueId || i.slug === issueId
+    );
     if (currentActiveIssue) {
       return currentActiveIssue;
     }
   }
 
   if (remoteDataState.inactiveIssues) {
-    const currentInactiveIssue = find(remoteDataState.inactiveIssues, (i => i.id === issueId || i.slug === issueId));
+    const currentInactiveIssue = find(
+      remoteDataState.inactiveIssues,
+      i => i.id === issueId || i.slug === issueId
+    );
     if (currentInactiveIssue) {
       return currentInactiveIssue;
     }
@@ -81,7 +92,12 @@ export const isIssueComplete = (issueID: string): boolean => {
   let state = store.getState();
 
   if (state.callState && state.callState.completedIssueIds) {
-    return find(state.callState.completedIssueIds, (issueId: string) => issueID === issueId) !== undefined;
+    return (
+      find(
+        state.callState.completedIssueIds,
+        (issueId: string) => issueID === issueId
+      ) !== undefined
+    );
   }
 
   return false;

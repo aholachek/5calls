@@ -5,9 +5,7 @@ import * as ReactMarkdown from 'react-markdown';
 
 import { Issue, VoterContact } from '../../common/model';
 import { CallHeaderTranslatable, SupportOutcomes, ACAOutcomes } from './index';
-import {
-  submitOutcome,
-} from '../../redux/callState';
+import { submitOutcome } from '../../redux/callState';
 import { locationStateContext } from '../../contexts';
 
 // This defines the props that we must pass into this component.
@@ -60,7 +58,9 @@ export default class FetchCall extends React.Component<Props, State> {
       outcome: outcome,
       numberContactsLeft: 0,
       issueId: this.props.issue.id,
-      contactId: this.state.currentContact ? this.state.currentContact.id : 'none',
+      contactId: this.state.currentContact
+        ? this.state.currentContact.id
+        : 'none'
     });
     this.setState({ currentContact: undefined, checkedForContact: false });
     this.fillContact();
@@ -78,39 +78,55 @@ export default class FetchCall extends React.Component<Props, State> {
         <div>
           <div className="call__contact" id="contact">
             {/* <div className="call__contact__image"><img alt="" src="" /></div> */}
-            <h3 className="call__contact__type">{i18n.t('contact.callThisOffice')}</h3>
+            <h3 className="call__contact__type">
+              {i18n.t('contact.callThisOffice')}
+            </h3>
             <p className="call__contact__name">
-              {this.state.currentContact.name} <span>from</span> {this.state.currentContact.location}
+              {this.state.currentContact.name} <span>from</span>{' '}
+              {this.state.currentContact.location}
             </p>
             <p className="call__contact__phone">
-              <a href={`tel:${this.state.currentContact.phone}`}>{this.state.currentContact.phone}</a>
+              <a href={`tel:${this.state.currentContact.phone}`}>
+                {this.state.currentContact.phone}
+              </a>
             </p>
           </div>
-          <h3 className="call__script__header">{i18n.t('script.yourScript')}</h3>
+          <h3 className="call__script__header">
+            {i18n.t('script.yourScript')}
+          </h3>
           <div className="call__script__body">
-            <ReactMarkdown source={this.formatScript(this.props.issue.script, this.state.currentContact)}/>
+            <ReactMarkdown
+              source={this.formatScript(
+                this.props.issue.script,
+                this.state.currentContact
+              )}
+            />
           </div>
-          { this.props.issue.id === '51' ?
-            <ACAOutcomes
-              onNextContact={(outcome) => this.nextContact(outcome)}
-            />
-            :
+          {this.props.issue.id === '51' ? (
+            <ACAOutcomes onNextContact={outcome => this.nextContact(outcome)} />
+          ) : (
             <SupportOutcomes
-              onNextContact={(outcome) => this.nextContact(outcome)}
+              onNextContact={outcome => this.nextContact(outcome)}
             />
-          }
+          )}
         </div>
       );
     }
 
     if (!this.state.checkedForContact) {
-      return <h3 className="call__outcomes__header">Getting your next contact...</h3>;
+      return (
+        <h3 className="call__outcomes__header">Getting your next contact...</h3>
+      );
     } else {
       return (
         <blockquote>
           <h2 className="call__outcomes__header">All done for today!</h2>
-          {/*tslint:disable-next-line:max-line-length*/}
-          <p>Looks like we're all out of calls to make for today, or we're outside of normal calling hours (9am-9pm in the local time zone). Come back tomorrow for more calls!</p>
+
+          <p>
+            Looks like we're all out of calls to make for today, or we're
+            outside of normal calling hours (9am-9pm in the local time zone).
+            Come back tomorrow for more calls!
+          </p>
         </blockquote>
       );
     }
@@ -119,16 +135,16 @@ export default class FetchCall extends React.Component<Props, State> {
   render() {
     return (
       <locationStateContext.Consumer>
-      { location =>
-        <section className="call voter">
-          <CallHeaderTranslatable
-            invalidAddress={location.invalidAddress}
-            currentIssue={this.state.issue}
-          />
-          {this.contactArea()}
-        </section>
-      }
-    </locationStateContext.Consumer>
+        {location => (
+          <section className="call voter">
+            <CallHeaderTranslatable
+              invalidAddress={location.invalidAddress}
+              currentIssue={this.state.issue}
+            />
+            {this.contactArea()}
+          </section>
+        )}
+      </locationStateContext.Consumer>
     );
   }
 }

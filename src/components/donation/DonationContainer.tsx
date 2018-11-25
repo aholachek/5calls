@@ -9,11 +9,21 @@ interface StateProps {
   goal: number;
 }
 
-const mapStateToProps = (state: ApplicationState, ownProps: OwnProps): StateProps => {
+const mapStateToProps = (
+  state: ApplicationState,
+  ownProps: OwnProps
+): StateProps => {
   return {
-    total: state.remoteDataState.donations ? state.remoteDataState.donations.total : 0,
-    goal: state.remoteDataState.donations ? state.remoteDataState.donations.amount : 0
+    total: state.remoteDataState.donations
+      ? state.remoteDataState.donations.total
+      : 0,
+    goal: state.remoteDataState.donations
+      ? state.remoteDataState.donations.amount
+      : 0
   };
 };
 
-export default connect(mapStateToProps, {})(Donation);
+export default connect(
+  mapStateToProps,
+  {}
+)(Donation);

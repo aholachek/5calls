@@ -1,6 +1,10 @@
-import { CurrentIssueAction,
-  CompleteIssueAction, NextContact,
-  CallStateActionType, ClearContactIndexesAction } from './index';
+import {
+  CurrentIssueAction,
+  CompleteIssueAction,
+  NextContact,
+  CallStateActionType,
+  ClearContactIndexesAction
+} from './index';
 
 /* REDUX DATA FLOW 3: At this point in the data flow, the IssueListItem View Component was clicked, the method was
     passed up through the Redux Container which called this actionCreator.
@@ -12,14 +16,18 @@ import { CurrentIssueAction,
     A reducers that matches this action type will take charge of it an run its defined reducer logic.
     See /src/redux/callState/reducer.ts for next step(4) in Redux Data Flow
  */
-export const selectIssueActionCreator = (issueId: string): CurrentIssueAction => {
+export const selectIssueActionCreator = (
+  issueId: string
+): CurrentIssueAction => {
   return {
     type: CallStateActionType.CURRENT_ISSUE_SELECTED,
     payload: issueId
   };
 };
 
-export const completeIssueActionCreator = (issueId?: string): CompleteIssueAction => {
+export const completeIssueActionCreator = (
+  issueId?: string
+): CompleteIssueAction => {
   // completes the current issue: callState.currentIssueId
   return {
     type: CallStateActionType.COMPLETE_ISSUE,

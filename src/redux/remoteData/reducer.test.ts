@@ -1,6 +1,12 @@
 import { Issue } from './../../common/model';
-import { RemoteDataState, remoteDataReducer, IssuesAction,
-  CallCountAction, ApiErrorAction, RemoteDataActionType } from './index';
+import {
+  RemoteDataState,
+  remoteDataReducer,
+  IssuesAction,
+  CallCountAction,
+  ApiErrorAction,
+  RemoteDataActionType
+} from './index';
 
 let defaultState;
 beforeEach(() => {
@@ -12,9 +18,8 @@ beforeEach(() => {
 });
 
 test('Remote Data reducer processes GET_ISSUES action correctly', () => {
-  const issues = [ new Issue(), new Issue()];
-  const state: RemoteDataState =
-    Object.assign({}, defaultState, issues);
+  const issues = [new Issue(), new Issue()];
+  const state: RemoteDataState = Object.assign({}, defaultState, issues);
   const action: IssuesAction = {
     type: RemoteDataActionType.GET_ISSUES,
     payload: issues
@@ -25,8 +30,7 @@ test('Remote Data reducer processes GET_ISSUES action correctly', () => {
 
 test('Remote Data reducer processes GET_CALL_TOTAL action correctly', () => {
   const callTotal = 99999;
-  const state: RemoteDataState =
-    Object.assign({}, defaultState, callTotal);
+  const state: RemoteDataState = Object.assign({}, defaultState, callTotal);
   const action: CallCountAction = {
     type: RemoteDataActionType.GET_CALL_TOTAL,
     payload: callTotal
@@ -37,8 +41,7 @@ test('Remote Data reducer processes GET_CALL_TOTAL action correctly', () => {
 
 test('Remote Data reducer processes API_ERROR action correctly', () => {
   const errorMessage = 'You made a boo boo!';
-  const state: RemoteDataState =
-    Object.assign({}, defaultState, errorMessage);
+  const state: RemoteDataState = Object.assign({}, defaultState, errorMessage);
   const action: ApiErrorAction = {
     type: RemoteDataActionType.API_ERROR,
     payload: errorMessage

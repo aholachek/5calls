@@ -16,10 +16,7 @@ test('Location component should show location prop value if locationState.addres
   };
 
   const component = shallow(
-    <Location
-      t={i18n.t}
-      locationState={locationState}
-    />
+    <Location t={i18n.t} locationState={locationState} />
   );
   const node = component.find('#locationMessage span');
   expect(node.text()).toEqual(locationState.address);
@@ -36,10 +33,7 @@ test('Location component should show location prop value if locationState.cached
   };
 
   const component = shallow(
-    <Location
-      t={i18n.t}
-      locationState={locationState}
-    />
+    <Location t={i18n.t} locationState={locationState} />
   );
   const node = component.find('#locationMessage span');
   expect(node.text()).toEqual(locationState.cachedCity);
@@ -56,10 +50,7 @@ test('Should show "Getting your location" label if fetching location', () => {
   };
 
   const component = shallow(
-    <Location
-      locationState={locationState}
-      t={i18n.t}
-    />
+    <Location locationState={locationState} t={i18n.t} />
   );
   const label = component.find('p.loadingAnimation').first();
   expect(label).toBeDefined();
@@ -76,10 +67,7 @@ test('If address is invalid, show proper message and form with input and "Go" bu
   };
 
   const component = shallow(
-    <Location
-      locationState={locationState}
-      t={i18n.t}
-    />
+    <Location locationState={locationState} t={i18n.t} />
   );
   const label = component.find('p[role="alert"]');
   expect(label).toBeDefined();

@@ -13,7 +13,10 @@ test('Location action creator setLocation dispatched correctly', () => {
   store.dispatch(setLocationAction);
   // Test if your store dispatched the expected actions
   const actions = store.getActions();
-  const expectedPayload = { type: LocationActionType.LOCATION_SET, payload: address };
+  const expectedPayload = {
+    type: LocationActionType.LOCATION_SET,
+    payload: address
+  };
   expect(actions).toEqual([expectedPayload]);
 });
 

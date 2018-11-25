@@ -5,11 +5,11 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Phonebanks } from './index';
 import { Layout } from '../layout';
 
-interface Props extends RouteComponentProps<{ id: string }> { }
+interface Props extends RouteComponentProps<{ id: string }> {}
 
 const PhonebanksPage: React.StatelessComponent<Props> = (props: Props) => (
   <Layout>
-    <Phonebanks/>
+    <Phonebanks />
   </Layout>
 );
 

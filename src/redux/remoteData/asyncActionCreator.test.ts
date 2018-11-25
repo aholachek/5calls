@@ -5,7 +5,13 @@ import * as moxios from 'moxios';
 import { RemoteDataActionType } from './action';
 import { fetchCallCount, fetchAllIssues, fetchLocationByIP } from './index';
 import { ApplicationState } from './../root';
-import { ApiData, Issue, IpInfoData, LocationFetchType, LocationUiState } from './../../common/model';
+import {
+  ApiData,
+  Issue,
+  IpInfoData,
+  LocationFetchType,
+  LocationUiState
+} from './../../common/model';
 import * as Constants from '../../common/constants';
 
 const middlewares = [thunk];
@@ -23,8 +29,10 @@ test('getApiData() action creator functions correctly', () => {
   const address = 'New Gloucester, ME';
   const issueName = 'Issue';
   const apiData: ApiData = getApiDataResponse(address, issueName);
-  moxios.stubRequest(`${Constants.ISSUES_API_URL}${encodeURIComponent(address)}`,
-                     { response: apiData });
+  moxios.stubRequest(
+    `${Constants.ISSUES_API_URL}${encodeURIComponent(address)}`,
+    { response: apiData }
+  );
 
   const initialState = {} as ApplicationState;
   const locationState = {
@@ -38,17 +46,16 @@ test('getApiData() action creator functions correctly', () => {
   initialState.locationState = locationState;
   const store = mockStore(initialState);
   // tslint:disable-next-line:no-any
-  store.dispatch<any>(fetchAllIssues(address))
-    .then(() => {
-      const actions = store.getActions();
-      // console.log('Actions', actions);
-      expect(actions[1].payload).toEqual(address);
-      expect(actions[4].payload[0].name).toEqual(issueName);
-    });
+  store.dispatch<any>(fetchAllIssues(address)).then(() => {
+    const actions = store.getActions();
+    // console.log('Actions', actions);
+    expect(actions[1].payload).toEqual(address);
+    expect(actions[4].payload[0].name).toEqual(issueName);
+  });
 });
 
 const getApiDataResponse = (address, issueName): ApiData => {
-  const mockIssue = Object.assign({}, new Issue(), {name: issueName});
+  const mockIssue = Object.assign({}, new Issue(), { name: issueName });
 
   const mockResponse: ApiData = {
     splitDistrict: false,
@@ -78,24 +85,22 @@ test.skip('fetchLocationByIP() action creator works correctly', () => {
   // initialState.locationState = {address: ''};
   const store = mockStore(initialState);
   // tslint:disable-next-line:no-any
-  store.dispatch<any>(fetchLocationByIP())
-    .then(() => {
-      // const actions = store.getActions();
-      // console.log('fetchLocationByIP() Actions', actions);
-    });
+  store.dispatch<any>(fetchLocationByIP()).then(() => {
+    // const actions = store.getActions();
+    // console.log('fetchLocationByIP() Actions', actions);
+  });
 });
 
 test('fetchCallCount() action creator dispatches proper action', () => {
   const count = 999999;
   const expectedType = RemoteDataActionType.GET_CALL_TOTAL;
-  moxios.stubRequest(/counts/, { response: { count} });
+  moxios.stubRequest(/counts/, { response: { count } });
   const initialState = {} as ApplicationState;
   const store = mockStore(initialState);
   // tslint:disable-next-line:no-any
-  store.dispatch<any>(fetchCallCount())
-    .then(() => {
-      const actions = store.getActions();
-      expect(actions[0].type).toEqual(expectedType);
-      expect(actions[0].payload).toEqual(count);
-    });
+  store.dispatch<any>(fetchCallCount()).then(() => {
+    const actions = store.getActions();
+    expect(actions[0].type).toEqual(expectedType);
+    expect(actions[0].payload).toEqual(count);
+  });
 });

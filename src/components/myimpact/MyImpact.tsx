@@ -22,7 +22,6 @@ interface State {
 }
 
 export class MyImpact extends React.Component<Props, State> {
-
   constructor(props: Props) {
     super(props);
 
@@ -33,15 +32,21 @@ export class MyImpact extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    if (this.props.currentUser && this.props.currentUser.idToken && !this.state.fetchedStats) {
-      this.setState({fetchedStats: true});
+    if (
+      this.props.currentUser &&
+      this.props.currentUser.idToken &&
+      !this.state.fetchedStats
+    ) {
+      this.setState({ fetchedStats: true });
 
-      getUserStats(this.props.currentUser.idToken).then((userStats) => {
-        this.setState({remoteUserStats: userStats});
-      }).catch((error) => {
-        // tslint:disable-next-line:no-console
-        console.error('error getting user stats', error);
-      });
+      getUserStats(this.props.currentUser.idToken)
+        .then(userStats => {
+          this.setState({ remoteUserStats: userStats });
+        })
+        .catch(error => {
+          // tslint:disable-next-line:no-console
+          console.error('error getting user stats', error);
+        });
     }
   }
 
@@ -49,7 +54,7 @@ export class MyImpact extends React.Component<Props, State> {
     let callSummaryParams = {
       contactedCalls: this.props.userStats.contact,
       vmCalls: this.props.userStats.voicemail,
-      unavailableCalls: this.props.userStats.unavailable,
+      unavailableCalls: this.props.userStats.unavailable
     };
     let myTotalCalls = this.props.userStats.all.length;
     let streakLength = 0;
@@ -60,52 +65,60 @@ export class MyImpact extends React.Component<Props, State> {
       callSummaryParams.vmCalls = this.state.remoteUserStats.stats.voicemail;
       callSummaryParams.unavailableCalls = this.state.remoteUserStats.stats.unavailable;
 
-      myTotalCalls = callSummaryParams.contactedCalls + callSummaryParams.vmCalls + callSummaryParams.unavailableCalls;
+      myTotalCalls =
+        callSummaryParams.contactedCalls +
+        callSummaryParams.vmCalls +
+        callSummaryParams.unavailableCalls;
       streakLength = this.state.remoteUserStats.weeklyStreak;
     }
 
     return (
-    <section className="impact">
-      <h1 className="impact__title">{i18n.t('impact.title')}</h1>
-      {myTotalCalls === 0 &&
-        <div>
-          <h2 className="impact_total">{i18n.t('impact.noCallsYet')}</h2>
-          { this.props.currentUser && this.props.currentUser.idToken === undefined &&
-            <p>Sign in to save your calls across devices, and track your weekly call streaks!</p>
-          }
-        </div>
-      }
-
-      {myTotalCalls > 0 &&
-        <div>
-          <h2 className="impact_total">
-            { streakLength > 0 &&
-              <React.Fragment>
-                {/*tslint:disable-next-line:max-line-length*/}
-                You've made <Pluralize singular="call" count={myTotalCalls} /> and your streak is <Pluralize singular="week" count={streakLength} />!
-              </React.Fragment>
-            }
-            { streakLength === 0 &&
-              <React.Fragment>
-                You've made <Pluralize singular="call" count={myTotalCalls} />!
-              </React.Fragment>
-            }
-          </h2>
-          { this.props.currentUser && this.props.currentUser.idToken &&
-            <p>Sign in to save your calls across devices, and track your weekly call streaks!</p>
-          }
-          <div className="impact_result">
-            {i18n.t('impact.callSummaryText', callSummaryParams)}
+      <section className="impact">
+        <h1 className="impact__title">{i18n.t('impact.title')}</h1>
+        {myTotalCalls === 0 && (
+          <div>
+            <h2 className="impact_total">{i18n.t('impact.noCallsYet')}</h2>
+            {this.props.currentUser &&
+              this.props.currentUser.idToken === undefined && (
+                <p>
+                  Sign in to save your calls across devices, and track your
+                  weekly call streaks!
+                </p>
+              )}
           </div>
-        </div>
-      }
+        )}
+
+        {myTotalCalls > 0 && (
+          <div>
+            <h2 className="impact_total">
+              {streakLength > 0 && (
+                <React.Fragment>
+                  You've made <Pluralize singular="call" count={myTotalCalls} />{' '}
+                  and your streak is{' '}
+                  <Pluralize singular="week" count={streakLength} />!
+                </React.Fragment>
+              )}
+              {streakLength === 0 && (
+                <React.Fragment>
+                  You've made <Pluralize singular="call" count={myTotalCalls} />
+                  !
+                </React.Fragment>
+              )}
+            </h2>
+            {this.props.currentUser && this.props.currentUser.idToken && (
+              <p>
+                Sign in to save your calls across devices, and track your weekly
+                call streaks!
+              </p>
+            )}
+            <div className="impact_result">
+              {i18n.t('impact.callSummaryText', callSummaryParams)}
+            </div>
+          </div>
+        )}
 
         <remoteStateContext.Consumer>
-        { remoteData =>
-          <CallCount
-            totalCount={remoteData.callTotal}
-          />
-        }
+          {remoteData => <CallCount totalCount={remoteData.callTotal} />}
         </remoteStateContext.Consumer>
       </section>
     );
