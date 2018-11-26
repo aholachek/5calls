@@ -1,4 +1,4 @@
-import { Call, CallTranslatable } from './Call';
+import Call from './Call';
 import FetchCall from './FetchCall';
 import CallDetail from './CallDetail';
 import { CallHeader, CallHeaderTranslatable } from './CallHeader';
@@ -15,7 +15,6 @@ import ACAOutcomes from './ACAOutcomes';
 export {
   Call,
   FetchCall,
-  CallTranslatable,
   CallDetail,
   CallHeader,
   CallHeaderTranslatable,

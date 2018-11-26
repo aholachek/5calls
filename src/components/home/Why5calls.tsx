@@ -1,18 +1,24 @@
 import * as React from 'react';
+import lifecycle from 'react-pure-lifecycle';
 
-import { TranslationFunction } from 'i18next';
-import { translate } from 'react-i18next';
 import * as Constants from '../../common/constants';
+import { Link } from 'react-router-dom';
+import { Mixpanel } from '../../services/mixpanel';
 
 interface Props {
   totalCount: number;
-  t: TranslationFunction;
 }
 
-export const Why5calls: React.StatelessComponent<Props> = (props: Props) => (
+const methods = {
+  componentDidMount(props: Props) {
+    Mixpanel.track('Home');
+  }
+};
+
+const Why5calls: React.StatelessComponent<Props> = (props: Props) => (
   <div className="hypothesis">
     <header className="hypothesis__header">
-      <h1 className="hypothesis__title">{props.t('hypothesis.title')}</h1>
+      <h1 className="hypothesis__title">Make your voice heard</h1>
       <h2 className="hypothesis__subtitle">
         <strong>5 Calls</strong> is the easiest and most effective way for
         citizens to make an impact in national and local politics
@@ -22,7 +28,10 @@ export const Why5calls: React.StatelessComponent<Props> = (props: Props) => (
       <a href={Constants.contact.apps}>
         <img src="/img/5calls-apps.png" className="hypothesis__text__mobile" />
       </a>
-      <p dangerouslySetInnerHTML={{ __html: props.t('hypothesis.p3') }} />
+      <p>
+        Calling is the most effective way to influence your representative. Read
+        more about <Link to="/about">why calling works.</Link>
+      </p>
       <div className="subscribe">
         <form
           action="//5calls.us16.list-manage.com/subscribe/post?u=82a164d5fe7f51f4a4efb1f83&amp;id=624ef52208"
@@ -30,7 +39,7 @@ export const Why5calls: React.StatelessComponent<Props> = (props: Props) => (
           target="popupwindow"
         >
           <label htmlFor="email">
-            <strong>{props.t('footer.emailLabel')}</strong>
+            <strong>Get email alerts once a week</strong>
           </label>
           <span className="emailform">
             <input
@@ -39,7 +48,7 @@ export const Why5calls: React.StatelessComponent<Props> = (props: Props) => (
               name="email"
               id="email"
             />
-            <input type="submit" value={props.t('footer.subscribe')} />
+            <input type="submit" value="Subscribe" />
           </span>
         </form>
       </div>
@@ -48,4 +57,4 @@ export const Why5calls: React.StatelessComponent<Props> = (props: Props) => (
   </div>
 );
 
-export const Why5callsTranslatable = translate()(Why5calls);
+export default lifecycle(methods)(Why5calls);

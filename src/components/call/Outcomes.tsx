@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { TranslationFunction } from 'i18next';
-import { translate } from 'react-i18next';
 
 import EventEmitter = require('wolfy87-eventemitter');
 
@@ -9,6 +7,7 @@ import { submitOutcome } from '../../redux/callState';
 import { store } from '../../redux/store';
 import { Issue, slugOrID } from '../../common/model';
 import { UserState } from '../../redux/userState';
+import { Mixpanel } from '../../services/mixpanel';
 
 interface Props {
   readonly currentIssue: Issue;
@@ -16,17 +15,20 @@ interface Props {
   readonly eventEmitter: EventEmitter;
   readonly currentContactId: string;
   readonly numberContactsLeft: number;
-  readonly t: TranslationFunction;
 }
 interface State {}
 
 class Outcomes extends React.Component<
-  // tslint:disable-next-line:no-any
-  Props & RouteComponentProps<any>,
+  Props & RouteComponentProps<any>, // tslint:disable-line:no-any
   State
 > {
   dispatchOutcome(e: React.MouseEvent<HTMLButtonElement>, outcome: string) {
     e.currentTarget.blur();
+
+    Mixpanel.people.increment({
+      call: 1,
+      outcome: 1
+    });
 
     // tslint:disable-next-line:no-any
     store.dispatch<any>(
@@ -106,7 +108,7 @@ class Outcomes extends React.Component<
         return (
           <div className="call__outcomes">
             <h3 className="call__outcomes__header">
-              {this.props.t('outcomes.enterYourCallResult')}
+              Enter your call result to get the next call:
             </h3>
             <div className="call__outcomes__items">
               {this.props.currentIssue.outcomeModels.map((outcome, index) => (
@@ -114,7 +116,7 @@ class Outcomes extends React.Component<
                   key={index}
                   onClick={e => this.dispatchOutcome(e, outcome.label)}
                 >
-                  {this.props.t('outcomes.' + outcome.label)}
+                  {outcome.label}
                 </button>
               ))}
             </div>
@@ -127,4 +129,4 @@ class Outcomes extends React.Component<
   }
 }
 
-export default translate()(withRouter(Outcomes));
+export default withRouter(Outcomes);

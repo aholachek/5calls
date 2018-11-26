@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Why5callsTranslatable, HomeExtras } from './index';
+import { Why5calls, HomeExtras } from './index';
 import { Layout } from '../layout';
 import { remoteStateContext } from '../../contexts/RemoteStateContext';
 
@@ -18,7 +18,7 @@ export const HomePage: React.StatelessComponent<Props> = (props: Props) => (
   <remoteStateContext.Consumer>
     {state => (
       <Layout extraComponent={<HomeExtras />}>
-        <Why5callsTranslatable totalCount={state.callTotal} />
+        <Why5calls totalCount={state.callTotal} />
       </Layout>
     )}
   </remoteStateContext.Consumer>

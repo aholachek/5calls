@@ -50,3 +50,5 @@ ID = "5calls"
   to = "/index.html"
   status = 200
 
+[context.deploy-preview.environment]
+  PUBLIC_URL = "/"
