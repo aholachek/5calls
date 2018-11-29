@@ -36,7 +36,7 @@ test('Sidebar Header exists and user may set location', async t => {
 
     const addressField = Selector('#address');
     await t.expect(addressField.getAttribute('placeholder'))
-      .eql('Enter an address or zip code');
+      .eql('Address or zip code');
     const submitButton = Location.findReact('button');
     await t.expect(submitButton.innerText).eql('GO');
 
