@@ -1,15 +1,18 @@
 // RESPONSIVE
 
-$bp-large:  1024px;
+$bp-large: 1024px;
 $bp-medium: 768px;
-$bp-small:  481px;
+$bp-small: 481px;
 
 @mixin bp($point) {
   @if $point == medium {
-    @media only screen and (max-width: $bp-medium) { @content; }
-  }
-  @else if $point == small {
-    @media only screen and (max-width: $bp-small) { @content; }
+    @media only screen and (max-width: $bp-medium) {
+      @content;
+    }
+  } @else if $point == small {
+    @media only screen and (max-width: $bp-small) {
+      @content;
+    }
   }
 }
 
@@ -20,7 +23,7 @@ $blue: #1875d1;
 $blue-light: #baddfa;
 $green: #0f9d58;
 $gray: #666;
-$grey: #EBEBEB; // yes, we went there
+$grey: #ebebeb; // yes, we went there
 $gray-lesslight: #e5e5e5;
 $gray-light: #eeeeee;
 $gray-xlight: #f5f5f5;
@@ -48,11 +51,11 @@ $form-radius: 4px;
 @mixin debug-layout($color: black, $important: false) {
   @if $important {
     * {
-      background: rgba($color, .05) !important;
+      background: rgba($color, 0.05) !important;
     }
   } @else {
     * {
-      background: rgba($color, .05);
+      background: rgba($color, 0.05);
     }
   }
 }
@@ -62,7 +65,7 @@ $form-radius: 4px;
     opacity: 1;
   }
   50% {
-    opacity: .5;
+    opacity: 0.5;
   }
   100% {
     opacity: 1;

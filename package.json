@@ -121,7 +121,7 @@
     "test:coverage": "node scripts/test.js --env=jsdom --coverage",
     "tslint": "tslint 'src/**/*.ts' 'src/**/*.tsx'",
     "tslint-fix": "tslint --fix 'src/**/*.{ts,tsx}'",
-    "format": "prettier --write 'src/**/*.{ts,tsx}'",
+    "format": "prettier --write 'src/**/*.{ts,tsx,scss}'",
     "format-and-fix": "npm-run-all format tslint-fix",
     "postinstall": "npm run build-css",
     "web-tests:all": "testcafe chrome ./web-tests/*.ts",

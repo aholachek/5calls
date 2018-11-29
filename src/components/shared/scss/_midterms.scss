@@ -4,7 +4,7 @@
 
   img {
     width: 400px;
-    margin: 0 auto;  
+    margin: 0 auto;
   }
 }
 
@@ -17,7 +17,7 @@
       font-size: 22px;
     }
 
-    input[type=text] {
+    input[type='text'] {
       margin: 0 10px;
       width: 200px;
       text-align: center;
@@ -51,7 +51,7 @@
     }
 
     &__status {
-      position: absolute;;
+      position: absolute;
       top: 10px;
       left: 10px;
       border-radius: 50%;

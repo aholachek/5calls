@@ -140,7 +140,7 @@
         padding: 4px 0;
         background-color: #fff;
         border-radius: 3px;
-        box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 
         ul {
           width: 100%;
@@ -163,7 +163,7 @@
           height: 1px;
           margin: 3px 0;
           padding: 0;
-          background-color: rgba(0, 0, 0, .1);
+          background-color: rgba(0, 0, 0, 0.1);
         }
       }
 
@@ -192,9 +192,7 @@
         display: inline-block;
         width: 100%;
       }
-
     }
-
   }
 
   &__donatejustify {
@@ -414,7 +412,7 @@
     ul {
       // width: 800px;
       margin: 0 auto;
-      li  {
+      li {
         width: 33%;
         // margin: 0 10px;
         @include bp(medium) {

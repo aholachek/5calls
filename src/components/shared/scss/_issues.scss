@@ -9,7 +9,8 @@
     text-align: center;
     background-color: #fff;
 
-    h2, h3 {
+    h2,
+    h3 {
       margin: 0;
       padding: 12px;
       text-align: center;
@@ -92,7 +93,7 @@
     color: $blue;
 
     &__status {
-      position: absolute;;
+      position: absolute;
       top: 14px;
       left: 12px;
       border-radius: 50%;
@@ -137,7 +138,8 @@
       right: -35px;
     }
 
-    &.is-active, &:hover {
+    &.is-active,
+    &:hover {
       background-color: $white;
     }
 
