@@ -129,7 +129,7 @@ export class Location extends React.Component<Props, State> {
                 aria-labelledby="locationMessage"
                 aria-invalid={this.state.uiState === LocationUiState.LOCATION_ERROR}
                 onFocus={clearTextBox}
-                placeholder="address or zip code"
+                placeholder="Address or zip code"
               />
               <button>{this.props.t('common.go')}</button>
             </form>
