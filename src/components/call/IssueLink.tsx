@@ -11,9 +11,13 @@ const IssueLink: React.StatelessComponent<Props> = ({ issue }: Props) => {
     if (issue.linkTitle) {
       linkTitle = issue.linkTitle;
     }
-  
+
     return (
-      <h4 className="call__script__link"><a target="link" href={issue.link}>{linkTitle}</a></h4>
+      <h4 className="call__script__link">
+        <a target="link" href={issue.link}>
+          {linkTitle}
+        </a>
+      </h4>
     );
   } else {
     return <span />;

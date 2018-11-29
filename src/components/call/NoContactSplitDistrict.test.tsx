@@ -7,9 +7,7 @@ import { NoContactSplitDistrict } from './';
 test('NoContactSplitDistrict component snapshot renders correctly when splitDistrict=true', () => {
   const component = shallow(
     <I18nextProvider i18n={i18n}>
-      <NoContactSplitDistrict
-        splitDistrict={false}
-      />
+      <NoContactSplitDistrict splitDistrict={false} />
     </I18nextProvider>
   );
   expect(component).toMatchSnapshot();

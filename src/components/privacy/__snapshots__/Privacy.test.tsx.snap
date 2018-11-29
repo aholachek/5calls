@@ -20,7 +20,8 @@ exports[`Privacy component snapshot renders correctly 1`] = `
     </strong>
   </p>
   <p>
-     5calls.org ("us", "we", or "our") operates the 5 Calls website (the "Service").
+     
+    5calls.org ("us", "we", or "our") operates the 5 Calls website (the "Service").
   </p>
   <p>
     This page informs you of our policies regarding the collection, use and disclosure of Personal Information when you use our Service.
@@ -32,7 +33,8 @@ exports[`Privacy component snapshot renders correctly 1`] = `
     <strong>
       We use your Personal Information for providing and improving the Service. By using the Service, you agree to the collection and use of information in accordance with this policy.
     </strong>
-     Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.
+     
+    Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.
   </p>
   <p>
     <strong>
@@ -96,7 +98,8 @@ exports[`Privacy component snapshot renders correctly 1`] = `
     These third parties have access to your Personal Information only to perform specific tasks on our behalf and are obligated not to disclose or use your information for any other purpose.
   </p>
   <p>
-    Specifically, we use OneSignal to help us send notifications. You can find their 
+    Specifically, we use OneSignal to help us send notifications. You can find their
+     
     <a
       href="https://onesignal.com/privacy_policy"
     >
@@ -157,7 +160,8 @@ exports[`Privacy component snapshot renders correctly 1`] = `
     </strong>
   </p>
   <p>
-    If you have any questions about this Privacy Policy, please 
+    If you have any questions about this Privacy Policy, please
+     
     <a
       href="mailto:make5calls@gmail.com"
     >

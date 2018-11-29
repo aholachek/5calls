@@ -15,10 +15,7 @@ import { Issue } from '../common/model';
 
 import { SidebarHeader, Sidebar, Footer, Header } from './layout';
 
-import {
-  callStateContext,
-  remoteStateContext,
-} from '../contexts';
+import { callStateContext, remoteStateContext } from '../contexts';
 
 type AllProps = Props & DispatchProps;
 
@@ -28,33 +25,42 @@ const NotFoundPage: React.StatelessComponent<AllProps> = (props: AllProps) => {
       <Helmet>
         <title>5 Calls: Make your voice heard</title>
       </Helmet>
-      <Header/>
+      <Header />
       <div className="layout">
         <aside id="nav" role="contentinfo" className="layout__side">
           <div className="issues">
             <SidebarHeader />
             <remoteStateContext.Consumer>
-            { remoteState =>
-              <callStateContext.Consumer>
-              { callState =>
-                <Sidebar
-                  issues={remoteState.issues}
-                  currentIssue={undefined}
-                  completedIssueIds={callState.completedIssueIds}
-                />
-                }
-              </callStateContext.Consumer>
-            }
+              {remoteState => (
+                <callStateContext.Consumer>
+                  {callState => (
+                    <Sidebar
+                      issues={remoteState.issues}
+                      currentIssue={undefined}
+                      completedIssueIds={callState.completedIssueIds}
+                    />
+                  )}
+                </callStateContext.Consumer>
+              )}
             </remoteStateContext.Consumer>
           </div>
         </aside>
-        <main id="content" role="main" aria-live="polite" className="layout__main">
+        <main
+          id="content"
+          role="main"
+          aria-live="polite"
+          className="layout__main"
+        >
           <h1>There's nothing here 😢</h1>
           {/*tslint:disable-next-line:max-line-length*/}
-          <p>Looks like you visited a page that doesn't exist. Pick one of the issues on the sidebar or <Link to="/">go back to the homepage</Link>.</p>
+          <p>
+            Looks like you visited a page that doesn't exist. Pick one of the
+            issues on the sidebar or <Link to="/">go back to the homepage</Link>
+            .
+          </p>
         </main>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
@@ -78,10 +84,16 @@ interface DispatchProps {
   readonly clearLocation: () => void;
 }
 
-const mapStateToProps = (state: ApplicationState, ownProps: OwnProps): Props => {
+const mapStateToProps = (
+  state: ApplicationState,
+  ownProps: OwnProps
+): Props => {
   let currentIssue: Issue | undefined = undefined;
   if (state.remoteDataState.issues) {
-    currentIssue = find(state.remoteDataState.issues, i => i.id === ownProps.issueId);
+    currentIssue = find(
+      state.remoteDataState.issues,
+      i => i.id === ownProps.issueId
+    );
   }
 
   let issues: Issue[] = [];
@@ -93,18 +105,24 @@ const mapStateToProps = (state: ApplicationState, ownProps: OwnProps): Props => 
     currentIssue: currentIssue,
     completedIssueIds: state.callState.completedIssueIds,
     callState: state.callState,
-    locationState: state.locationState,
+    locationState: state.locationState
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<ApplicationState>): DispatchProps => {
+const mapDispatchToProps = (
+  dispatch: Dispatch<ApplicationState>
+): DispatchProps => {
   return bindActionCreators(
     {
       onSelectIssue: selectIssueActionCreator,
       setLocation: newLocationLookup,
-      clearLocation: clearAddress,
+      clearLocation: clearAddress
     },
-    dispatch);
+    dispatch
+  );
 };
 
-export default connect<Props, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(NotFoundPage);
+export default connect<Props, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(NotFoundPage);

@@ -3,7 +3,10 @@ import * as moment from 'moment';
 
 import { Layout } from '../layout';
 import { UserState, UserProfile } from '../../redux/userState';
-import { getProfileInfo, UserCallDetails } from '../../redux/remoteData/asyncActionCreator';
+import {
+  getProfileInfo,
+  UserCallDetails
+} from '../../redux/remoteData/asyncActionCreator';
 
 interface Props {
   readonly currentUser?: UserState;
@@ -14,7 +17,6 @@ interface State {
   profile?: UserProfile;
 }
 
-// tslint:disable-next-line:max-line-length
 const fakePhotoUrl = '/img/example-activist.jpg';
 
 const fakeUserProfile = {
@@ -27,37 +29,38 @@ const fakeUserProfile = {
     stats: {
       unavailable: 20,
       contact: 203,
-      voicemail: 140,
+      voicemail: 140
     },
     firstCallTime: 1494383929,
     calls: [
       {
-        'date': 'Monday, Jun 18, 2018',
-        'issues': [
+        date: 'Monday, Jun 18, 2018',
+        issues: [
           {
-            'count': 3,
-            'issue_name': 'Support Sanctions to Check Trump\'s ZTE Deal'
+            count: 3,
+            issue_name: 'Support Sanctions to Check Trump\'s ZTE Deal'
           },
           {
-            'count': 2,
-            'issue_name': 'Protect Our Elections from Foreign Interference'
+            count: 2,
+            issue_name: 'Protect Our Elections from Foreign Interference'
           }
         ]
       },
       {
-        'date': 'Sunday, Jun 10, 2018',
-        'issues': [
+        date: 'Sunday, Jun 10, 2018',
+        issues: [
           {
-            'count': 2,
-            'issue_name': 'Protect Clean Air Car Emissions Standards'
+            count: 2,
+            issue_name: 'Protect Clean Air Car Emissions Standards'
           },
           {
-            'count': 2,
-            'issue_name': 'Urge Your State Reps to Pass Net Neutrality Protections'
+            count: 2,
+            issue_name:
+              'Urge Your State Reps to Pass Net Neutrality Protections'
           }
         ]
       }
-    ],
+    ]
   }
 } as UserProfile;
 
@@ -69,15 +72,21 @@ class ProfilePage extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    getProfileInfo().then(profile => {
-      this.setState({ profile: profile, loadedProfile: true });
-    }).catch(error => {
-      // console.log('error getting profile', error);
-    });  
+    getProfileInfo()
+      .then(profile => {
+        this.setState({ profile: profile, loadedProfile: true });
+      })
+      .catch(error => {
+        // console.log('error getting profile', error);
+      });
   }
 
   totalCalls(callDetails: UserCallDetails): number {
-    return callDetails.stats.contact + callDetails.stats.unavailable + callDetails.stats.voicemail;
+    return (
+      callDetails.stats.contact +
+      callDetails.stats.unavailable +
+      callDetails.stats.voicemail
+    );
   }
 
   callLine(callDetails?: UserCallDetails): String {
@@ -98,7 +107,7 @@ class ProfilePage extends React.Component<Props, State> {
       const firstCall = moment.unix(callDetails.firstCallTime);
       return 'Making Calls Since ' + firstCall.format('MMMM YYYY');
     }
-    
+
     return '';
   }
 
@@ -124,24 +133,28 @@ class ProfilePage extends React.Component<Props, State> {
           <li>🏅Midterm Challenge</li>
         </ul> */}
         <div className="profile-history">
-          {profile.callDetails && profile.callDetails.calls.map((day, index) => {
-            return (
-            <span key={index}>
-            <div className="profile-history-day">
-              <h4>{day.date}</h4>
-              {day.issues.map((issue, issueIndex) => {
-                return (
-                  <div className="profile-history-item" key={issueIndex}>
-                    <img src="/img/5calls-stars-white.png" />
-                    <p><strong>{issue.count} calls</strong> for {issue.issue_name}</p>
+          {profile.callDetails &&
+            profile.callDetails.calls.map((day, index) => {
+              return (
+                <span key={index}>
+                  <div className="profile-history-day">
+                    <h4>{day.date}</h4>
+                    {day.issues.map((issue, issueIndex) => {
+                      return (
+                        <div className="profile-history-item" key={issueIndex}>
+                          <img src="/img/5calls-stars-white.png" />
+                          <p>
+                            <strong>{issue.count} calls</strong> for{' '}
+                            {issue.issue_name}
+                          </p>
+                        </div>
+                      );
+                    })}
                   </div>
-                );
-              })}
-            </div>
-            <hr />
-            </span>
-            );
-          })}
+                  <hr />
+                </span>
+              );
+            })}
           <p>{this.moreCalls(profile.callDetails)}</p>
         </div>
       </section>
@@ -164,22 +177,18 @@ class ProfilePage extends React.Component<Props, State> {
       // not logged in state
       return (
         <span>
-        <section className="loading">
-          <h2>Log in to see your call history 📊</h2>
-          <p>Your current call total will be saved</p>
-        </section>
-        {this.profileContent(fakeUserProfile, true)}        
+          <section className="loading">
+            <h2>Log in to see your call history 📊</h2>
+            <p>Your current call total will be saved</p>
+          </section>
+          {this.profileContent(fakeUserProfile, true)}
         </span>
       );
     }
   }
 
   render() {
-    return (
-      <Layout>
-        {this.pageContent()}
-      </Layout>
-    );
+    return <Layout>{this.pageContent()}</Layout>;
   }
 }
 

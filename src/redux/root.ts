@@ -29,7 +29,7 @@ export const DefaultApplicationState: ApplicationState = {
   callState: {} as CallState,
   locationState: {} as LocationState,
   userStatsState: {} as UserStatsState,
-  userState: {} as UserState,
+  userState: {} as UserState
 };
 
 // DANGER: TypeScript magic ahead!!
@@ -43,14 +43,16 @@ export const DefaultApplicationState: ApplicationState = {
 export type ApplicationStateKeyType = keyof ApplicationState;
 // A TS mapped type to type out an object shape that represents
 // all ApplicationState keys and their string equivalents.
-type ApplicationStateKeyTypes = {[K in ApplicationStateKeyType]: ApplicationStateKeyType };
+type ApplicationStateKeyTypes = {
+  [K in ApplicationStateKeyType]: ApplicationStateKeyType
+};
 // Object that maps out all possible ApplicationState keys
 export const ApplicationStateKey: ApplicationStateKeyTypes = {
   locationState: 'locationState',
   remoteDataState: 'remoteDataState',
   callState: 'callState',
   userStatsState: 'userStatsState',
-  userState: 'userState',
+  userState: 'userState'
 };
 
 const v4config = {
@@ -58,8 +60,8 @@ const v4config = {
     ApplicationStateKey.locationState,
     ApplicationStateKey.userStatsState,
     ApplicationStateKey.userState,
-    ApplicationStateKey.callState,
-  ],
+    ApplicationStateKey.callState
+  ]
 };
 
 const config = {
@@ -70,9 +72,9 @@ const config = {
     ApplicationStateKey.locationState,
     ApplicationStateKey.userStatsState,
     ApplicationStateKey.userState,
-    ApplicationStateKey.callState,
+    ApplicationStateKey.callState
   ],
-  getStoredState: getStoredState(v4config),
+  getStoredState: getStoredState(v4config)
 };
 
 const rootReducer = persistCombineReducers(config, {
@@ -80,7 +82,7 @@ const rootReducer = persistCombineReducers(config, {
   callState: callStateReducer,
   locationState: locationStateReducer,
   userStatsState: userStatsReducer,
-  userState: userStateReducer,
+  userState: userStateReducer
 });
 
 export default rootReducer;

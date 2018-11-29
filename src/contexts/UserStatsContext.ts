@@ -5,7 +5,9 @@ const defaultUserStats = {
   all: [],
   unavailable: 0,
   voicemail: 0,
-  contact: 0,
+  contact: 0
 };
 
-export const userStatsContext = React.createContext<UserStatsState>(defaultUserStats);
+export const userStatsContext = React.createContext<UserStatsState>(
+  defaultUserStats
+);

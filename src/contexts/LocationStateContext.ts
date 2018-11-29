@@ -11,4 +11,6 @@ const defaultLocationState: LocationState = {
   locationFetchType: undefined
 };
 
-export const locationStateContext = React.createContext<LocationState>(defaultLocationState);
+export const locationStateContext = React.createContext<LocationState>(
+  defaultLocationState
+);

@@ -1,5 +1,11 @@
-import { userStatsReducer, UserStatsState, UserStatsActionType, 
-  SetUserStatsAction, AddCallEventAction, UserContactEventType } from './index';
+import {
+  userStatsReducer,
+  UserStatsState,
+  UserStatsActionType,
+  SetUserStatsAction,
+  AddCallEventAction,
+  UserContactEventType
+} from './index';
 import { UserOutcomeResult } from './reducer';
 
 let defaultState;
@@ -9,7 +15,7 @@ beforeEach(() => {
     voicemail: 0,
     unavailable: 0,
     contact: 0,
-    yes: 0,
+    yes: 0
   };
 });
 
@@ -62,6 +68,6 @@ const getUserContactObject = (result: UserOutcomeResult) => {
     contactid: 'fake-contact-id',
     issueid: 'fake-issue-id',
     time: Date.now(),
-    uploaded: false,
+    uploaded: false
   };
 };

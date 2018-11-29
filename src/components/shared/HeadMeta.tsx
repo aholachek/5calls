@@ -10,8 +10,11 @@ interface Props {
 
 class HeadMeta extends React.Component<Props> {
   public render() {
-    const pageTitle = this.props.issue ? this.props.issue.name + ': 5 Calls' : '5 Calls: Make Your Voice Heard';
-    const pageDescription = 'Spend 5 minutes. Make 5 calls. Make your voice heard.';
+    const pageTitle = this.props.issue
+      ? this.props.issue.name + ': 5 Calls'
+      : '5 Calls: Make Your Voice Heard';
+    const pageDescription =
+      'Spend 5 minutes. Make 5 calls. Make your voice heard.';
 
     let canonicalURL: string | undefined = undefined;
     let shareImageURL = 'https://5calls.org/img/5calls-twitter.png';
@@ -37,7 +40,7 @@ class HeadMeta extends React.Component<Props> {
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDescription} />
         <meta name="twitter:image:src" content={shareImageURL} />
- 
+
         {/* <!-- Open Graph data --> */}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:type" content="website" />

@@ -1,13 +1,19 @@
-import { CallState, CurrentIssueAction, NextContact,
-  CallStateActionType, callStateReducer,
-  CompleteIssueAction, ClearContactIndexesAction } from './';
+import {
+  CallState,
+  CurrentIssueAction,
+  NextContact,
+  CallStateActionType,
+  callStateReducer,
+  CompleteIssueAction,
+  ClearContactIndexesAction
+} from './';
 
 let defaultState: CallState;
 beforeEach(() => {
   defaultState = {
     currentIssueId: '',
     contactIndexes: {},
-    completedIssueIds: [],
+    completedIssueIds: []
   };
 });
 
@@ -25,7 +31,7 @@ test('Call State reducer processes CURRENT_ISSUE_SELECTED action', () => {
 test('Call State reducer processes NEXT_CONTACT action', () => {
   const issueId1 = 'issue1';
   const issueId1Index = 1;
-  const contactIndexes = {'issue1': 1, 'issue2': 2};
+  const contactIndexes = { issue1: 1, issue2: 2 };
   const state = { ...defaultState, contactIndexes, currentIssueId: issueId1 };
   const action: NextContact = {
     type: CallStateActionType.NEXT_CONTACT
@@ -38,7 +44,11 @@ test('Call State reducer processes NEXT_CONTACT action', () => {
 test('Call State reducer processes COMPLETE_ISSUE action with callState.currentIssueId', () => {
   const issueId1 = 'issue1';
   const completedIssues = ['issue2', 'issue3'];
-  const state = { ...defaultState, currentIssueId: issueId1, completedIssueIds: completedIssues };
+  const state = {
+    ...defaultState,
+    currentIssueId: issueId1,
+    completedIssueIds: completedIssues
+  };
   const action: CompleteIssueAction = {
     type: CallStateActionType.COMPLETE_ISSUE
   };
@@ -64,7 +74,7 @@ test('Call State reducer processes COMPLETE_ISSUE action with issueId argument',
 });
 
 test('Call State reducer processes CLEAR_CONTACT_INDEXES action', () => {
-  const contactIndexes = {'issue1': 1, 'issue2': 2};
+  const contactIndexes = { issue1: 1, issue2: 2 };
   const state = { ...defaultState, contactIndexes };
   const action: ClearContactIndexesAction = {
     type: CallStateActionType.CLEAR_CONTACT_INDEXES

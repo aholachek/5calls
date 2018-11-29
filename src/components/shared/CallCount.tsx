@@ -41,12 +41,11 @@ export const CallCount: React.StatelessComponent<Props> = (props: Props) => {
   }
 
   const pctDone = (props.totalCount / callGoal) * 100;
-  const pctStyle = {width: `${pctDone}%`};
+  const pctStyle = { width: `${pctDone}%` };
 
-  const callText = props.minimal ?
-    `${formatNumber(props.totalCount)} Calls`
-    :
-    `Together we've made ${formatNumber(props.totalCount)} Calls!`;
+  const callText = props.minimal
+    ? `${formatNumber(props.totalCount)} Calls`
+    : `Together we've made ${formatNumber(props.totalCount)} Calls!`;
 
   return (
     <div>

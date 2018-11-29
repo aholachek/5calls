@@ -1,4 +1,3 @@
-
 export const APP_NAME = '5 Calls';
 export const APP_URL = 'https://5calls.org';
 // export const APP_URL = 'http://localhost:8090';
@@ -16,9 +15,11 @@ export const REMINDER_API_URL = `${API_URL}/remind`;
 export const IP_INFO_URL = 'https://ipinfo.io/json';
 export const DONATE_URL = 'https://secure.actblue.com/donate/5calls-donate';
 export const WRITER_APPLY_URL = 'https://airtable.com/shrJBbpixnJ09iVb3';
-export const CODE_PROJECT_URL = 'https://github.com/5calls/5calls/wiki/Getting-Involved-with-5-Calls-Development';
+export const CODE_PROJECT_URL =
+  'https://github.com/5calls/5calls/wiki/Getting-Involved-with-5-Calls-Development';
 
-export const SHARE_BUCKET_URL = 'http://5callsorg-shareimages.s3-website-us-west-1.amazonaws.com/';
+export const SHARE_BUCKET_URL =
+  'http://5callsorg-shareimages.s3-website-us-west-1.amazonaws.com/';
 
 const callbackURI = () => {
   if (window.location.host.includes('localhost')) {
@@ -35,13 +36,13 @@ export const Auth0Config = {
   audience: 'https://5callsos.auth0.com/userinfo',
   callbackUri: callbackURI(),
   poweredURL: 'https://5calls.org',
-  popupAuth: false,
+  popupAuth: false
 };
 
 export const zipCodeRegex: RegExp = /^\d{5}(-\d{4})?$/;
 
 export const cacheTimeout = {
-  default:  24 * 60 * 60 * 1000, // 1 day
+  default: 24 * 60 * 60 * 1000, // 1 day
   groups: 24 * 60 * 60 * 1000 // 1 day
 };
 
@@ -50,5 +51,5 @@ export const contact = {
   github: 'https://github.com/5calls',
   twitter: 'https://twitter.com/make5calls',
   facebook: 'https://www.facebook.com/make5calls',
-  apps: 'https://crgj.app.link/7R2bEB0R4F',
+  apps: 'https://crgj.app.link/7R2bEB0R4F'
 };

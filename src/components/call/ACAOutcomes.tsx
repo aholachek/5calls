@@ -13,11 +13,11 @@ export interface State {
 }
 
 const outcomeButtons: OutcomeButton[] = [
-  {title: 'Contacted', emoji: '😀', key: 'contacted'},
-  {title: 'Not Available / VM', emoji: '😕', key: 'nothome'},
-  {title: 'Refused', emoji: '🤐', key: 'refused'},
-  {title: 'Out of Service', emoji: '📵', key: 'disconnected'},
-  {title: 'Wrong Number', emoji: '👽', key: 'wrongnumber'},
+  { title: 'Contacted', emoji: '😀', key: 'contacted' },
+  { title: 'Not Available / VM', emoji: '😕', key: 'nothome' },
+  { title: 'Refused', emoji: '🤐', key: 'refused' },
+  { title: 'Out of Service', emoji: '📵', key: 'disconnected' },
+  { title: 'Wrong Number', emoji: '👽', key: 'wrongnumber' }
 ];
 
 export default class ACAOutcomes extends React.Component<Props, State> {
@@ -30,30 +30,30 @@ export default class ACAOutcomes extends React.Component<Props, State> {
   render() {
     return (
       <div className="call__outcomes">
-        <h3 className="call__outcomes__header">
-          How did the call go?
-        </h3>
+        <h3 className="call__outcomes__header">How did the call go?</h3>
         <div className="call__outcomes__items">
-          {outcomeButtons.map((button) =>
+          {outcomeButtons.map(button => (
             <button
               key={button.key}
-              onClick={(e) => this.setOutcome(e, button.key)}
+              onClick={e => this.setOutcome(e, button.key)}
               className={this.buttonClass(button.key)}
             >
-              {button.title}<br/>{button.emoji}
+              {button.title}
+              <br />
+              {button.emoji}
             </button>
-          )}
+          ))}
         </div>
         <h3 className="call__outcomes__header">
-          If contacted: Did they have insurance?    
+          If contacted: Did they have insurance?
         </h3>
         {this.insuranceButtons()}
         <h3 className="call__outcomes__header">
-          If not insured: Were you able to schedule them via the Connector Tool?    
+          If not insured: Were you able to schedule them via the Connector Tool?
         </h3>
         {this.scheduledButtons()}
         <h3 className="call__outcomes__header">
-          Done? Move on to the next person           
+          Done? Move on to the next person
         </h3>
         {this.nextButton()}
       </div>
@@ -80,7 +80,7 @@ export default class ACAOutcomes extends React.Component<Props, State> {
     if (this.nextEnabled()) {
       return (
         <div className="call__outcomes__items">
-          <button onClick={(e) => this.nextContact(e)}>Next Contact ➡️</button>
+          <button onClick={e => this.nextContact(e)}>Next Contact ➡️</button>
         </div>
       );
     }
@@ -98,9 +98,12 @@ export default class ACAOutcomes extends React.Component<Props, State> {
       return true;
     }
 
-    if (this.state.outcomeState && this.state.outcomeState === 'contacted' &&
-        this.state.hasInsuranceState &&
-        (this.state.scheduledState || this.state.hasInsuranceState === 'insured')) {
+    if (
+      this.state.outcomeState &&
+      this.state.outcomeState === 'contacted' &&
+      this.state.hasInsuranceState &&
+      (this.state.scheduledState || this.state.hasInsuranceState === 'insured')
+    ) {
       return true;
     }
 
@@ -111,27 +114,37 @@ export default class ACAOutcomes extends React.Component<Props, State> {
 
   insuranceButtons() {
     const buttons: OutcomeButton[] = [
-      {title: 'Has Insurance', emoji: '🎉', key: 'insured'},
-      {title: 'No Insurance', emoji: '🤒', key: 'noinsurance'},
+      { title: 'Has Insurance', emoji: '🎉', key: 'insured' },
+      { title: 'No Insurance', emoji: '🤒', key: 'noinsurance' }
     ];
 
     if (this.insuranceButtonsEnabled()) {
       return (
-      <div className="call__outcomes__items call__outcomes__support">
-        {buttons.map((button, index) => 
-          <button key={index} onClick={(e) => this.setInsured(e, button.key)} className={this.buttonClass(button.key)}>
-            {button.title}<br/>{button.emoji}
-          </button>
-        )}
-      </div>
+        <div className="call__outcomes__items call__outcomes__support">
+          {buttons.map((button, index) => (
+            <button
+              key={index}
+              onClick={e => this.setInsured(e, button.key)}
+              className={this.buttonClass(button.key)}
+            >
+              {button.title}
+              <br />
+              {button.emoji}
+            </button>
+          ))}
+        </div>
       );
     }
 
     return (
       <div className="call__outcomes__items call__outcomes__support disabled">
-        {buttons.map((button, index) => 
-          <button key={index} disabled={true}>{button.title}<br/>{button.emoji}</button>
-        )}
+        {buttons.map((button, index) => (
+          <button key={index} disabled={true}>
+            {button.title}
+            <br />
+            {button.emoji}
+          </button>
+        ))}
       </div>
     );
   }
@@ -148,38 +161,48 @@ export default class ACAOutcomes extends React.Component<Props, State> {
 
   scheduledButtons() {
     const buttons: OutcomeButton[] = [
-      {title: 'Yes, Scheduled', emoji: '📆', key: 'scheduled'},
-      {title: 'No, Couldn\'t Schedule', emoji: '🤷‍♂️', key: 'notscheduled'},
+      { title: 'Yes, Scheduled', emoji: '📆', key: 'scheduled' },
+      { title: 'No, Couldn\'t Schedule', emoji: '🤷‍♂️', key: 'notscheduled' }
     ];
 
     if (this.scheduledButtonsEnabled()) {
       return (
-      <div className="call__outcomes__items call__outcomes__support">
-        {buttons.map((button, index) => 
-          <button
-            key={index}
-            onClick={(e) => this.setScheduled(e, button.key)}
-            className={this.buttonClass(button.key)}
-          >
-            {button.title}<br/>{button.emoji}
-          </button>
-        )}
-      </div>
+        <div className="call__outcomes__items call__outcomes__support">
+          {buttons.map((button, index) => (
+            <button
+              key={index}
+              onClick={e => this.setScheduled(e, button.key)}
+              className={this.buttonClass(button.key)}
+            >
+              {button.title}
+              <br />
+              {button.emoji}
+            </button>
+          ))}
+        </div>
       );
     }
 
     return (
       <div className="call__outcomes__items call__outcomes__support disabled">
-        {buttons.map((button, index) => 
-          <button key={index} disabled={true}>{button.title}<br/>{button.emoji}</button>
-        )}
+        {buttons.map((button, index) => (
+          <button key={index} disabled={true}>
+            {button.title}
+            <br />
+            {button.emoji}
+          </button>
+        ))}
       </div>
     );
   }
 
   scheduledButtonsEnabled(): Boolean {
-    if (this.state.outcomeState && this.state.outcomeState === 'contacted' &&
-        this.state.hasInsuranceState && this.state.hasInsuranceState === 'noinsurance') {
+    if (
+      this.state.outcomeState &&
+      this.state.outcomeState === 'contacted' &&
+      this.state.hasInsuranceState &&
+      this.state.hasInsuranceState === 'noinsurance'
+    ) {
       return true;
     }
 
@@ -200,7 +223,7 @@ export default class ACAOutcomes extends React.Component<Props, State> {
 
         if (this.state.scheduledState) {
           outcomeState += ':' + this.state.scheduledState;
-        }  
+        }
       }
     }
 
@@ -208,7 +231,7 @@ export default class ACAOutcomes extends React.Component<Props, State> {
   }
 
   // Helpers for setting state from button clicks
-  
+
   setOutcome(e: React.MouseEvent<HTMLButtonElement>, outcome: string) {
     e.currentTarget.blur();
 

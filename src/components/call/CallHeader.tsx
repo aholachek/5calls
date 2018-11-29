@@ -10,32 +10,39 @@ interface Props {
   currentIssue: Issue;
 }
 
-export const CallHeader: React.StatelessComponent<Props> = ({ invalidAddress, currentIssue }: Props) => {
+export const CallHeader: React.StatelessComponent<Props> = ({
+  invalidAddress,
+  currentIssue
+}: Props) => {
   if (currentIssue) {
     return (
       <header className="call__header">
         <h1 className="call__title">{currentIssue.name}</h1>
         <div className="call__reason">
-          <ReactMarkdown source={currentIssue.reason}/>
+          <ReactMarkdown source={currentIssue.reason} />
         </div>
       </header>
     );
   } else {
     return (
       <header className="call__header">
-        {invalidAddress ?
+        {invalidAddress ? (
           <span>
             <h1 className="call__title">Invalid Address or Zip</h1>
-            {/* tslint:disable-next-line:max-line-length */}
-            <p>Looks like we couldn't find your reps based on the address or zip code you entered. Use the left sidebar to enter a more specific address or just click the <strong>"Go"</strong> button to find it automatically.</p>
+            <p>
+              Looks like we couldn't find your reps based on the address or zip
+              code you entered. Use the left sidebar to enter a more specific
+              address or just click the <strong>"Go"</strong> button to find it
+              automatically.
+            </p>
           </span>
-        :
+        ) : (
           <span>
             <h1 className="call__title">{i18n.t('noCalls.title')}</h1>
             <p>{i18n.t('noCalls.reason')}</p>
             <p>{i18n.t('noCalls.nextStep')}</p>
           </span>
-        }
+        )}
       </header>
     );
   }

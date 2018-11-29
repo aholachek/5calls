@@ -4,7 +4,7 @@ import { Navigation } from './index';
 const Footer: React.StatelessComponent = () => {
   return (
     <footer>
-      <Navigation/>
+      <Navigation />
     </footer>
   );
 };

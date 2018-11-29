@@ -9,7 +9,7 @@ export enum RemoteDataActionType {
   API_ERROR = 'API_ERROR'
 }
 
-export interface RemoteDataAction extends  Action {
+export interface RemoteDataAction extends Action {
   type: RemoteDataActionType;
   payload?: {};
 }

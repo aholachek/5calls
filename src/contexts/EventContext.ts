@@ -5,7 +5,7 @@ interface EventManager {
   ee: EventEmitter;
 }
 
-const eventManager: EventManager  = {
+const eventManager: EventManager = {
   ee: new EventEmitter()
 };
 

@@ -10,7 +10,7 @@ interface StateProps {
 
 const mapStateToProps = (state: ApplicationState): StateProps => {
   return {
-    currentUser: state.userState,
+    currentUser: state.userState
   };
 };
 

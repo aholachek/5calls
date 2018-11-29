@@ -8,12 +8,8 @@ interface Props {
 
 const CallDetail: React.StatelessComponent<Props> = (props: Props) => (
   <div>
-    <ContactDetails
-      currentIssue={props.currentIssue}
-      contactIndex={0}
-    />
+    <ContactDetails currentIssue={props.currentIssue} contactIndex={0} />
   </div>
-
 );
 
 export default CallDetail;

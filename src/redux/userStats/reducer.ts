@@ -9,7 +9,7 @@ export enum UserContactEventType {
 }
 
 // for the most part we use the event type enum, but we also want to support arbitrary result strings
-export type UserOutcomeResult =  UserContactEventType | string;
+export type UserOutcomeResult = UserContactEventType | string;
 
 export interface UserContactEvent {
   contactid: string;
@@ -30,11 +30,13 @@ const initialState: UserStatsState = {
   all: [],
   unavailable: 0,
   voicemail: 0,
-  contact: 0,
+  contact: 0
 };
 
 export const userStatsReducer: Reducer<UserStatsState> = (
-  state: UserStatsState = initialState as UserStatsState, action: UserStatsAction): UserStatsState => {
+  state: UserStatsState = initialState as UserStatsState,
+  action: UserStatsAction
+): UserStatsState => {
   switch (action.type) {
     case UserStatsActionType.SET_USER_STATS: {
       const userStats: UserStatsState = action.payload as UserStatsState;

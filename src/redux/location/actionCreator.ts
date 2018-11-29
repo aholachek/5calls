@@ -1,6 +1,11 @@
-import { LocationClearedAction, LocationSetAction,
-  SetUiStateAction, LocationActionType, SetLocationFetchTypeAction,
-  SetSplitDistrictAction } from './index';
+import {
+  LocationClearedAction,
+  LocationSetAction,
+  SetUiStateAction,
+  LocationActionType,
+  SetLocationFetchTypeAction,
+  SetSplitDistrictAction
+} from './index';
 import { LocationFetchType, LocationUiState } from '../../common/model';
 import { SetInvalidAddressAction } from './action';
 
@@ -31,21 +36,27 @@ export function setUiState(uiState: LocationUiState): SetUiStateAction {
   };
 }
 
-export function setLocationFetchType(fetchType: LocationFetchType): SetLocationFetchTypeAction {
+export function setLocationFetchType(
+  fetchType: LocationFetchType
+): SetLocationFetchTypeAction {
   return {
     type: LocationActionType.SET_LOCATION_FETCH_TYPE,
     payload: fetchType
   };
 }
 
-export function setSplitDistrict(isDistrictSplit: boolean): SetSplitDistrictAction {
+export function setSplitDistrict(
+  isDistrictSplit: boolean
+): SetSplitDistrictAction {
   return {
     type: LocationActionType.SET_SPLIT_DISTRICT,
     payload: isDistrictSplit
   };
 }
 
-export function setInvalidAddress(invalidAddress: boolean): SetInvalidAddressAction {
+export function setInvalidAddress(
+  invalidAddress: boolean
+): SetInvalidAddressAction {
   return {
     type: LocationActionType.SET_INVALID_ADDRESS,
     payload: invalidAddress

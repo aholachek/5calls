@@ -3,14 +3,8 @@ import { isEqual } from 'lodash';
 import { DoneTranslatable } from './index';
 import { Layout } from '../layout';
 import { Issue } from '../../common/model';
-import {
-  withRouter,
-  RouteComponentProps,
-} from 'react-router';
-import {
-  getIssuesIfNeeded,
-  RemoteDataState,
-} from '../../redux/remoteData';
+import { withRouter, RouteComponentProps } from 'react-router';
+import { getIssuesIfNeeded, RemoteDataState } from '../../redux/remoteData';
 import { selectIssueActionCreator } from '../../redux/callState';
 import { store } from '../../redux/store';
 import { getIssue } from '../shared/utils';
@@ -37,7 +31,7 @@ class DonePageView extends React.Component<Props, State> {
     let currentIssue = this.getCurrentIssue(props.remoteState);
     return {
       currentIssue: currentIssue,
-      totalCount: props.remoteState.callTotal,
+      totalCount: props.remoteState.callTotal
     };
   }
 
@@ -46,7 +40,7 @@ class DonePageView extends React.Component<Props, State> {
       const curIssue = this.getCurrentIssue(this.props.remoteState);
       this.setState({
         currentIssue: curIssue,
-        totalCount: this.props.remoteState.callTotal,
+        totalCount: this.props.remoteState.callTotal
       });
     }
   }
@@ -67,18 +61,18 @@ class DonePageView extends React.Component<Props, State> {
     }
 
     return currIssue;
-  }
+  };
 
   getView() {
     if (this.state.currentIssue) {
       return (
         <Layout>
-          {this.state.currentIssue &&
+          {this.state.currentIssue && (
             <DoneTranslatable
               currentIssue={this.state.currentIssue}
               totalCount={this.state.totalCount}
             />
-          }
+          )}
         </Layout>
       );
     } else {
@@ -87,11 +81,7 @@ class DonePageView extends React.Component<Props, State> {
   }
 
   render() {
-    return (
-      <div>
-        {this.getView()}
-      </div>
-    );
+    return <div>{this.getView()}</div>;
   }
 }
 
@@ -101,9 +91,7 @@ export default class DonePage extends React.Component {
   render() {
     return (
       <remoteStateContext.Consumer>
-      { remoteState =>
-        <DonePageWithRouter remoteState={remoteState} />
-      }
+        {remoteState => <DonePageWithRouter remoteState={remoteState} />}
       </remoteStateContext.Consumer>
     );
   }

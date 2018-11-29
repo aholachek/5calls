@@ -26,8 +26,8 @@ export interface OutcomeData {
 export function submitOutcome(data: OutcomeData) {
   return (
     dispatch: Dispatch<ApplicationState>,
-    getState: () => ApplicationState) => {
-
+    getState: () => ApplicationState
+  ) => {
     const state = getState();
     const location = state.locationState.address;
 
@@ -49,7 +49,8 @@ export function submitOutcome(data: OutcomeData) {
     if (data.outcome !== UserContactEventType.SKIP) {
       // This parameter will indicate to the backend api where this call report came from
       // A value of test indicates that it did not come from the production environment
-      const viaParameter = window.location.host === '5calls.org' ? 'web' : 'test';
+      const viaParameter =
+        window.location.host === '5calls.org' ? 'web' : 'test';
       data.via = viaParameter;
 
       // if we have a userid, the call is counted server side
@@ -58,12 +59,13 @@ export function submitOutcome(data: OutcomeData) {
         contactid: data.contactId || '',
         issueid: data.issueId,
         time: Date.now(),
-        uploaded: data.userId ? true : false,
+        uploaded: data.userId ? true : false
       };
 
       dispatch(addCallEventActionCreator(userContactData));
 
-      apiServices.postOutcomeData(data)
+      apiServices
+        .postOutcomeData(data)
         // tslint:disable-next-line:no-console
         .catch(e => console.error('Problem posting outcome data', e));
     }

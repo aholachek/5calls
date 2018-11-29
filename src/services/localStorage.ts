@@ -1,4 +1,3 @@
-
 export const getAll = (storeName: string) => {
   try {
     return JSON.parse(window.localStorage[storeName]);

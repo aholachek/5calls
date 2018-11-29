@@ -6,7 +6,7 @@
 ### Automated testing
 [![CircleCI](https://circleci.com/gh/5calls/5calls.svg?style=svg)](https://circleci.com/gh/5calls/5calls)
 ### Cross-browser testing
-[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=5calls)](https://www.browserstack.com/automate/public-build/5calls)
+[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=UjRNc0oxeXBESnloeEtyaUNZNEhYaHVVd25tS0x2VHZvUlVuK0gwaFNYTT0tLTlNcFhySGROOThHZW1YSDYxZ2Zid3c9PQ==--505e91904e448bf498ea1905b0e8d17b5fedc7bf)](https://www.browserstack.com/automate/public-build/UjRNc0oxeXBESnloeEtyaUNZNEhYaHVVd25tS0x2VHZvUlVuK0gwaFNYTT0tLTlNcFhySGROOThHZW1YSDYxZ2Zid3c9PQ==--505e91904e448bf498ea1905b0e8d17b5fedc7bf)
 
 
 # Table of Contents

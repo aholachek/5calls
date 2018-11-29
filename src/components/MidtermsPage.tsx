@@ -107,29 +107,69 @@ class MidtermsPage extends React.Component<Props, State> {
       <Layout>
         <main role="main" id="content" className="layout__main midterms">
           <h1>5 Calls 2018 Midterm Challenge</h1>
-          {/*tslint:disable-next-line:max-line-length*/}
+
           <p>Hello and welcome to the 5 Calls Midterm Challenge!</p>
-          {/*tslint:disable-next-line:max-line-length*/}
-          <p>Our priority is to <strong>help <em>you</em> get out the vote</strong> by talking with other voters. Why are we focused on that? Studies have shown that peer to peer (and particularly friend to friend) discussions are the <strong>number one most effective tactic to get people to vote</strong>.</p>
-          {/*tslint:disable-next-line:max-line-length*/}
-          <p>How it works: Each week, we will <strong>send you a new challenge</strong>, along with the guidance and resources you need to complete it. Each challenge has been carefully chosen to <strong>maximize your impact on the 2018 midterm election</strong> — both in your local races as well as key swing races nationally. Each challenge is also designed to be <strong>doable in less than an hour</strong>. Just like we made calling Congress easy, we’re doing the same for this.</p>
+
+          <p>
+            Our priority is to{' '}
+            <strong>
+              help <em>you</em> get out the vote
+            </strong>{' '}
+            by talking with other voters. Why are we focused on that? Studies
+            have shown that peer to peer (and particularly friend to friend)
+            discussions are the{' '}
+            <strong>
+              number one most effective tactic to get people to vote
+            </strong>
+            .
+          </p>
+
+          <p>
+            How it works: Each week, we will{' '}
+            <strong>send you a new challenge</strong>, along with the guidance
+            and resources you need to complete it. Each challenge has been
+            carefully chosen to{' '}
+            <strong>maximize your impact on the 2018 midterm election</strong>
+             — both in your local races as well as key swing races nationally.
+            Each challenge is also designed to be{' '}
+            <strong>doable in less than an hour</strong>. Just like we made
+            calling Congress easy, we’re doing the same for this.
+          </p>
           <div className="subscribe">
-            {/*tslint:disable-next-line:max-line-length*/}
-            <form action="//5calls.us16.list-manage.com/subscribe/post?u=82a164d5fe7f51f4a4efb1f83&amp;id=624ef52208" method="post" target="popupwindow">
-              <label htmlFor="email"><strong>Get email alerts once every week</strong></label>
+            <form
+              action="//5calls.us16.list-manage.com/subscribe/post?u=82a164d5fe7f51f4a4efb1f83&amp;id=624ef52208"
+              method="post"
+              target="popupwindow"
+            >
+              <label htmlFor="email">
+                <strong>Get email alerts once every week</strong>
+              </label>
               <span className="emailform">
-                <input type="text" placeholder="youremail@example.com" name="email" id="email" />
+                <input
+                  type="text"
+                  placeholder="youremail@example.com"
+                  name="email"
+                  id="email"
+                />
                 <input type="submit" value="Subscribe" />
               </span>
             </form>
           </div>
           <ul className="midterms-list">
             <li className="item">
-              <span className={`item__status ${isIssueComplete('midterm-challenge-week1') ? 'is-complete' : ''}`}>
+              <span
+                className={`item__status ${
+                  isIssueComplete('midterm-challenge-week1')
+                    ? 'is-complete'
+                    : ''
+                }`}
+              >
                 <span className="visually-hidden" />
               </span>
               <span className="item__title">
-                <Link to="/issue/midterm-challenge-week-1">Week 1: Commit to Vote</Link>
+                <Link to="/issue/midterm-challenge-week-1">
+                  Week 1: Commit to Vote
+                </Link>
                 {this.week1actions()}
               </span>
               <span className="item__subtitle">
@@ -137,11 +177,19 @@ class MidtermsPage extends React.Component<Props, State> {
               </span>
             </li>
             <li className="item">
-              <span className={`item__status ${isIssueComplete('midterm-challenge-week2') ? 'is-complete' : ''}`}>
+              <span
+                className={`item__status ${
+                  isIssueComplete('midterm-challenge-week2')
+                    ? 'is-complete'
+                    : ''
+                }`}
+              >
                 <span className="visually-hidden" />
               </span>
               <span className="item__title">
-                <Link to="/issue/midterm-challenge-week-2">Week 2: Register to Vote</Link>
+                <Link to="/issue/midterm-challenge-week-2">
+                  Week 2: Register to Vote
+                </Link>
                 {this.week2actions()}
               </span>
               <span className="item__subtitle">
@@ -149,11 +197,19 @@ class MidtermsPage extends React.Component<Props, State> {
               </span>
             </li>
             <li className="item">
-              <span className={`item__status ${isIssueComplete('midterm-challenge-week3') ? 'is-complete' : ''}`}>
+              <span
+                className={`item__status ${
+                  isIssueComplete('midterm-challenge-week3')
+                    ? 'is-complete'
+                    : ''
+                }`}
+              >
                 <span className="visually-hidden" />
               </span>
               <span className="item__title">
-                <Link to="/issue/midterm-challenge-week-3">Week 3: Adopt a Key Race</Link>
+                <Link to="/issue/midterm-challenge-week-3">
+                  Week 3: Adopt a Key Race
+                </Link>
                 {this.week3actions()}
               </span>
               <span className="item__subtitle">
@@ -161,11 +217,19 @@ class MidtermsPage extends React.Component<Props, State> {
               </span>
             </li>
             <li className="item">
-              <span className={`item__status ${isIssueComplete('midterm-challenge-week4') ? 'is-complete' : ''}`}>
+              <span
+                className={`item__status ${
+                  isIssueComplete('midterm-challenge-week4')
+                    ? 'is-complete'
+                    : ''
+                }`}
+              >
                 <span className="visually-hidden" />
               </span>
               <span className="item__title">
-                <Link to="/issue/midterm-challenge-week-4">Week 4: Know Your Ballot</Link>
+                <Link to="/issue/midterm-challenge-week-4">
+                  Week 4: Know Your Ballot
+                </Link>
                 {this.week4actions()}
               </span>
               <span className="item__subtitle">
@@ -173,11 +237,19 @@ class MidtermsPage extends React.Component<Props, State> {
               </span>
             </li>
             <li className="item">
-              <span className={`item__status ${isIssueComplete('midterm-challenge-week5') ? 'is-complete' : ''}`}>
+              <span
+                className={`item__status ${
+                  isIssueComplete('midterm-challenge-week5')
+                    ? 'is-complete'
+                    : ''
+                }`}
+              >
                 <span className="visually-hidden" />
               </span>
               <span className="item__title">
-                <Link to="/issue/midterm-challenge-week-5">Week 5: Plan a Voting Party</Link>
+                <Link to="/issue/midterm-challenge-week-5">
+                  Week 5: Plan a Voting Party
+                </Link>
                 {this.week5actions()}
               </span>
               <span className="item__subtitle">
@@ -185,11 +257,19 @@ class MidtermsPage extends React.Component<Props, State> {
               </span>
             </li>
             <li className="item">
-              <span className={`item__status ${isIssueComplete('midterm-challenge-week6') ? 'is-complete' : ''}`}>
+              <span
+                className={`item__status ${
+                  isIssueComplete('midterm-challenge-week6')
+                    ? 'is-complete'
+                    : ''
+                }`}
+              >
                 <span className="visually-hidden" />
               </span>
               <span className="item__title">
-                <Link to="/issue/midterm-challenge-week-6">Week 6: Hit the Pavement</Link>
+                <Link to="/issue/midterm-challenge-week-6">
+                  Week 6: Hit the Pavement
+                </Link>
                 {this.week6actions()}
               </span>
               <span className="item__subtitle">
@@ -197,11 +277,19 @@ class MidtermsPage extends React.Component<Props, State> {
               </span>
             </li>
             <li className="item">
-              <span className={`item__status ${isIssueComplete('midterm-challenge-week7') ? 'is-complete' : ''}`}>
+              <span
+                className={`item__status ${
+                  isIssueComplete('midterm-challenge-week7')
+                    ? 'is-complete'
+                    : ''
+                }`}
+              >
                 <span className="visually-hidden" />
               </span>
               <span className="item__title">
-                <Link to="/issue/midterm-challenge-week-7">Week 7: All Hands on Deck!</Link>
+                <Link to="/issue/midterm-challenge-week-7">
+                  Week 7: All Hands on Deck!
+                </Link>
                 {this.week7actions()}
               </span>
               <span className="item__subtitle">
@@ -209,13 +297,16 @@ class MidtermsPage extends React.Component<Props, State> {
               </span>
             </li>
             <li className="item last preview">
-              <span className={`item__status ${isIssueComplete('midterm-challenge-week8') ? 'is-complete' : ''}`}>
+              <span
+                className={`item__status ${
+                  isIssueComplete('midterm-challenge-week8')
+                    ? 'is-complete'
+                    : ''
+                }`}
+              >
                 <span className="visually-hidden" />
               </span>
-              <span className="item__title">
-                Week 8
-                {this.week8actions()}
-              </span>
+              <span className="item__title">Week 8{this.week8actions()}</span>
               <span className="item__subtitle">
                 Week 8 starts {this.weekCountdown('20181105')}
               </span>

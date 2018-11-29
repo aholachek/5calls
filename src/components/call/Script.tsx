@@ -45,7 +45,11 @@ function getContactNameWithTitle(contacts: Contact[], contactIndex: number) {
   return title + currentContact.name;
 }
 
-function scriptFormat(issue: Issue, locationState: LocationState, contactIndex: number) {
+function scriptFormat(
+  issue: Issue,
+  locationState: LocationState,
+  contactIndex: number
+) {
   const location = locationState.cachedCity;
   let script = issue.script;
   if (location) {
@@ -59,14 +63,19 @@ function scriptFormat(issue: Issue, locationState: LocationState, contactIndex: 
   return script;
 }
 
-export const Script: React.StatelessComponent<Props> = ({ issue, contactIndex = 0, locationState, t }: Props) => {
+export const Script: React.StatelessComponent<Props> = ({
+  issue,
+  contactIndex = 0,
+  locationState,
+  t
+}: Props) => {
   if (issue && issue.contacts && issue.contacts.length !== 0) {
     let formattedScript = scriptFormat(issue, locationState, contactIndex);
     return (
       <div className="call__script">
         <h3 className="call__script__header">{t('script.yourScript')}</h3>
         <div className="call__script__body">
-          <ReactMarkdown source={formattedScript}/>
+          <ReactMarkdown source={formattedScript} />
         </div>
       </div>
     );
