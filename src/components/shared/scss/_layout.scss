@@ -45,7 +45,6 @@
     h2 {
       margin: 0 0 4px 0;
       font-size: 22px;
-      font-family: $font-sans-normal;
 
       a {
         color: $blue;
@@ -61,9 +60,6 @@
 
 .logo__header {
   min-height: 12px;
-  // this one is for non-donationbar
-  // border-bottom: solid 8px $red;
-  border-bottom: solid 2px $red;
 
   @include bp(small) {
     border-bottom: solid 2px $red;
@@ -140,7 +136,7 @@
         padding: 4px 0;
         background-color: #fff;
         border-radius: 3px;
-        box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 
         ul {
           width: 100%;
@@ -163,7 +159,7 @@
           height: 1px;
           margin: 3px 0;
           padding: 0;
-          background-color: rgba(0, 0, 0, .1);
+          background-color: rgba(0, 0, 0, 0.1);
         }
       }
 
@@ -192,15 +188,16 @@
         display: inline-block;
         width: 100%;
       }
-
     }
-
   }
 
   &__donatejustify {
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
 
     @include bp(medium) {
       display: inline-block;
@@ -221,7 +218,7 @@
       float: left;
       width: 120px;
       background-color: #fff;
-      margin: 6px 5px 0 0;
+      margin-right: 5px;
       padding: 8px 0;
       // border: 2px solid $blue;
       border-radius: 5px;
@@ -236,7 +233,7 @@
     }
 
     p {
-      margin: 5px 0 0 0;
+      margin: 0;
       color: #fff;
       font-size: 14px;
     }
@@ -258,9 +255,10 @@
     // width: 250px;
     line-height: inherit;
     margin: 5px 20px 0 20px;
-    font-size: 36px;
-    font-weight: 600;
+    font-size: $font-xlarge;
+    font-weight: 500;
     color: #fff;
+    font-family: $font-headings;
 
     @include bp(medium) {
       width: 100%;
@@ -414,7 +412,7 @@
     ul {
       // width: 800px;
       margin: 0 auto;
-      li  {
+      li {
         width: 33%;
         // margin: 0 10px;
         @include bp(medium) {

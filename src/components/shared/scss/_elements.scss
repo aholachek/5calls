@@ -3,7 +3,7 @@
 }
 
 body {
-  font-family: $font-sans;
+  font-family: $font-base;
   color: $color-text;
   background-color: $color-bg;
 }
@@ -28,6 +28,11 @@ h2 {
   margin: 24px 0 6px 0;
 }
 
+h1,h2,h3,h4,h5,h6 {
+  font-family: $font-headings;
+  color: $color-headings;
+}
+
 a,
 .subtle-button {
   color: $color-link;
@@ -46,7 +51,7 @@ a,
 
 button, input[type=submit] {
   &:not(.subtle-button) {
-    font-family: $font-sans;
+    font-family: $font-base;
     border: 1px solid transparent;
     border-radius: $form-radius;
     background-color: $blue-light;
@@ -69,7 +74,7 @@ button, input[type=submit] {
 }
 
 input[type=text] {
-  font-family: $font-sans;
+  font-family: $font-base;
   padding: 6px;
   border-radius: $form-radius;
   border: 2px solid $blue;
