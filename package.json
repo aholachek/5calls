@@ -23,7 +23,7 @@
     "react-ga": "^2.2.0",
     "react-helmet": "^5.2.0",
     "react-i18next": "^7.0.0",
-    "react-markdown": "^2.5.0",
+    "react-markdown": "^4.0.0",
     "react-onclickoutside": "^6.7.1",
     "react-phone-number-input": "^1.1.13",
     "react-pluralize": "^1.4.1",
@@ -108,6 +108,9 @@
     "webpack-manifest-plugin": "1.1.0",
     "whatwg-fetch": "2.0.3"
   },
+  "resolutions": {
+    "**/event-stream": "^4.0.1"
+  },
   "scripts": {
     "build-css-from-scss": "node-sass-chokidar src/ -o src/",
     "clean-built-css": "node scripts/deleteBuiltCss.js",
@@ -121,7 +124,7 @@
     "test:coverage": "node scripts/test.js --env=jsdom --coverage",
     "tslint": "tslint 'src/**/*.ts' 'src/**/*.tsx'",
     "tslint-fix": "tslint --fix 'src/**/*.{ts,tsx}'",
-    "format": "prettier --write 'src/**/*.{ts,tsx}'",
+    "format": "prettier --write 'src/**/*.{ts,tsx,scss}'",
     "format-and-fix": "npm-run-all format tslint-fix",
     "postinstall": "npm run build-css",
     "web-tests:all": "testcafe chrome ./web-tests/*.ts",

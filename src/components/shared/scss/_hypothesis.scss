@@ -3,8 +3,10 @@
     margin: 20px 0;
   }
 
-  &__header, &__list {
-    p, li {
+  &__header,
+  &__list {
+    p,
+    li {
       font-size: $font-large;
       @include bp(small) {
         font-size: $font-small;
@@ -68,8 +70,7 @@
   &__subtitle {
     margin-bottom: 26px;
     font-size: 32px;
-    font-weight: 100;
-    font-style: italic;
+    font-weight: 300;
     text-align: center;
   }
 
@@ -107,7 +108,7 @@
       margin-bottom: 10px;
     }
 
-    input[type=text] {
+    input[type='text'] {
       width: 180px;
     }
   }

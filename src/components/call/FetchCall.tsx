@@ -7,6 +7,7 @@ import { Issue, VoterContact } from '../../common/model';
 import { CallHeaderTranslatable, SupportOutcomes, ACAOutcomes } from './index';
 import { submitOutcome } from '../../redux/callState';
 import { locationStateContext } from '../../contexts';
+import { linkRefRenderer } from '../shared/markdown-utils';
 
 // This defines the props that we must pass into this component.
 export interface Props {
@@ -100,6 +101,8 @@ export default class FetchCall extends React.Component<Props, State> {
                 this.props.issue.script,
                 this.state.currentContact
               )}
+              linkTarget="_blank"
+              renderers={{ linkReference: linkRefRenderer }}
             />
           </div>
           {this.props.issue.id === '51' ? (

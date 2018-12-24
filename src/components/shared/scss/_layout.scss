@@ -196,8 +196,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    // otherwise small white text on bright red background
+    // is hard to read in firefox
+    font-weight: 500;
 
     @include bp(medium) {
       display: inline-block;
@@ -208,6 +211,7 @@
   &__donatebutton {
     width: 230px;
     margin-right: 10px;
+    height: 100%;
 
     @include bp(medium) {
       width: 90%;
@@ -215,17 +219,19 @@
     }
 
     a {
+      min-height: 2rem;
       float: left;
       width: 120px;
       background-color: #fff;
       margin-right: 5px;
-      padding: 8px 0;
-      // border: 2px solid $blue;
       border-radius: 5px;
       color: $blue;
-      text-align: center;
       font-size: $font-normal;
       font-weight: bold;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       @include bp(medium) {
         width: 100%;
@@ -252,9 +258,8 @@
   }
 
   &__donatetext {
-    // width: 250px;
     line-height: inherit;
-    margin: 5px 20px 0 20px;
+    margin: 0 1.2rem;
     font-size: $font-xlarge;
     font-weight: 500;
     color: #fff;
