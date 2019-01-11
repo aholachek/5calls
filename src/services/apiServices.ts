@@ -1,17 +1,75 @@
 import { OutcomeData } from './../redux/callState/asyncActionCreator';
 import axios from 'axios';
 import * as querystring from 'querystring';
-import { ApiData, CountData, MidtermStats } from './../common/model';
+import { ContactList, CountData, Issue, Contact } from './../common/models';
 import * as Constants from '../common/constants';
 import { UserContactEvent } from '../redux/userStats';
 import { UserCallDetails } from '../redux/remoteData/asyncActionCreator';
+import { store } from '../redux/store';
 
-export const getAllIssues = (address: string): Promise<ApiData> => {
+const prepareHeaders = (): Headers => {
+  const state = store.getState();
+
+  let headers: Headers = { 'Content-Type': 'application/json; charset=utf-8' };
+  if (state.userState.idToken) {
+    headers.Authorization = 'Bearer ' + state.userState.idToken;
+  }
+
+  return headers;
+};
+
+interface Headers {
+  Authorization?: string;
+  'Content-Type': string;
+}
+
+export const getAllIssues = (): Promise<Issue[]> => {
+  const headers = prepareHeaders();
+
   return axios
-    .get(`${Constants.ISSUES_API_URL}${encodeURIComponent(address)}`)
+    .get(Constants.ISSUES_API_URL, {
+      headers: headers
+    })
     .then(response => Promise.resolve(response.data))
     .catch(e => Promise.reject(e));
 };
+
+export const noLocationError = Error('no location entered');
+
+export const getContacts = (): Promise<ContactList> => {
+  const state = store.getState();
+  const location = state.locationState.address;
+
+  if (location === '' || location === undefined) {
+    return Promise.reject(noLocationError);
+  }
+
+  const headers = prepareHeaders();
+
+  return axios
+    .get<ContactResponse>(
+      `${Constants.REPS_API_URL}?location=${location}`,
+      // `http://localhost:8090/v1/reps?location=${location}`,
+      {
+        headers: headers
+      }
+    )
+    .then(result => {
+      const contactList = new ContactList();
+      contactList.location = result.data.location;
+      contactList.representatives = result.data.representatives;
+      return Promise.resolve(contactList);
+    })
+    .catch(error => {
+      // console.error("bad address",error);
+      return Promise.reject(error);
+    });
+};
+
+interface ContactResponse {
+  location: string;
+  representatives: Contact[];
+}
 
 export const getCountData = (): Promise<CountData> => {
   return axios
@@ -106,14 +164,6 @@ export const postOutcomeData = (data: OutcomeData) => {
     .then(response => {
       return Promise.resolve(null);
     })
-    .catch(e => Promise.reject(e));
-};
-
-export const getMidterms = (): Promise<MidtermStats> => {
-  const midtermsURL = `${Constants.MIDTERMS_API_URL}`;
-  return axios
-    .get(`${midtermsURL}`)
-    .then(response => Promise.resolve(response.data))
     .catch(e => Promise.reject(e));
 };
 

@@ -1,18 +1,12 @@
 import * as React from 'react';
 import { RemoteDataState } from '../redux/remoteData';
-
-const defaultDonation = {
-  count: 0,
-  amount: 0,
-  total: 0,
-  kind: ''
-};
+import { ContactList } from '../common/models';
 
 const defaultRemoteState = {
   issues: [],
   inactiveIssues: [],
+  contacts: new ContactList(),
   callTotal: 0,
-  donations: defaultDonation,
   errorMessage: ''
 };
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Issue } from '../../common/model';
+import { Issue } from '../../common/models';
 import { SidebarHeader, Sidebar, Footer, Header } from './index';
 
 import {
@@ -23,7 +23,8 @@ function currentIssue(
   if (issues) {
     issue = issues.find(eachIssue => {
       return (
-        eachIssue.id === currentIssueID || eachIssue.slug === currentIssueID
+        eachIssue.id.toString() === currentIssueID ||
+        eachIssue.slug === currentIssueID
       );
     });
   }

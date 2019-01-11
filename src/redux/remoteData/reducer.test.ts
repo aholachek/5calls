@@ -1,10 +1,9 @@
-import { Issue } from './../../common/model';
+import { Issue } from './../../common/models';
 import {
   RemoteDataState,
   remoteDataReducer,
   IssuesAction,
   CallCountAction,
-  ApiErrorAction,
   RemoteDataActionType
 } from './index';
 
@@ -18,7 +17,10 @@ beforeEach(() => {
 });
 
 test('Remote Data reducer processes GET_ISSUES action correctly', () => {
-  const issues = [new Issue(), new Issue()];
+  const issues = [
+    Object.assign({}, new Issue(), { id: '1', active: true }),
+    Object.assign({}, new Issue(), { id: '2', active: true })
+  ];
   const state: RemoteDataState = Object.assign({}, defaultState, issues);
   const action: IssuesAction = {
     type: RemoteDataActionType.GET_ISSUES,
@@ -37,15 +39,4 @@ test('Remote Data reducer processes GET_CALL_TOTAL action correctly', () => {
   };
   const newState = remoteDataReducer(state, action);
   expect(newState.callTotal).toEqual(callTotal);
-});
-
-test('Remote Data reducer processes API_ERROR action correctly', () => {
-  const errorMessage = 'You made a boo boo!';
-  const state: RemoteDataState = Object.assign({}, defaultState, errorMessage);
-  const action: ApiErrorAction = {
-    type: RemoteDataActionType.API_ERROR,
-    payload: errorMessage
-  };
-  const newState = remoteDataReducer(state, action);
-  expect(newState.errorMessage).toEqual(errorMessage);
 });

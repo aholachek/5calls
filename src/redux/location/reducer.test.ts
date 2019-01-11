@@ -6,14 +6,12 @@ import {
   LocationClearedAction,
   LocationActionType
 } from './index';
-import { LocationUiState } from '../../common/model';
 
 let defaultState;
 beforeEach(() => {
   defaultState = {
     address: '',
-    cachedCity: '',
-    uiState: LocationUiState.FETCHING_LOCATION
+    cachedCity: ''
   };
 });
 

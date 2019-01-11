@@ -1,55 +1,8 @@
-export class Issue {
-  id: string;
-  name: string;
-  reason: string;
-  script: string;
-  contactAreas?: string[];
-  contacts?: Contact[];
-  contactType?: string;
-  categories: Category[];
-  inactive: boolean;
-  outcomeModels: Outcome[];
-  link: string;
-  linkTitle: string;
-  slug: string;
-
-  constructor() {
-    this.id = '';
-    this.name = '';
-    this.reason = '';
-    this.script = '';
-    this.categories = [];
-    this.inactive = false;
-    this.outcomeModels = [];
-    this.link = '';
-    this.linkTitle = '';
-    this.slug = '';
-  }
-}
-
-export function slugOrID(issue: Issue): string {
-  if (issue.slug !== '') {
-    return issue.slug;
-  }
-
-  return issue.id;
-}
+import { Issue, Category } from './issue';
 
 export interface Outcome {
   label: string;
   status: string;
-}
-
-export interface Contact {
-  id: string;
-  name: string;
-  phone: string;
-  photoURL?: string;
-  party: Party;
-  state: string;
-  reason: string;
-  area?: string;
-  field_offices?: FieldOffice[];
 }
 
 export interface VoterContact {
@@ -59,18 +12,12 @@ export interface VoterContact {
   phone: string;
 }
 
-export interface Category {
-  name: string;
-}
-
 export class CategoryMap {
   category: Category;
   issues: Issue[];
 }
 
-export type Party = 'Democrat' | 'Republican' | 'Independent' | '';
-
-export const DefaultContact: Contact = {} as Contact;
+export type Party = 'democrat' | 'republican' | 'independent' | '';
 
 export interface FieldOffice {
   city: string;
@@ -109,11 +56,7 @@ export interface GeolocationPosition {
 }
 
 /* 5 Calls API data */
-export interface ApiData {
-  splitDistrict: boolean;
-  invalidAddress: boolean;
-  normalizedLocation: string | undefined;
-  divisions: string[];
+export interface IssueData {
   issues: Issue[];
 }
 
@@ -141,13 +84,6 @@ export interface IpInfoData {
   postal: string; // zip code
 }
 
-export enum LocationUiState {
-  FETCHING_LOCATION = 'FETCHING_LOCATION',
-  LOCATION_FOUND = 'LOCATION_FOUND',
-  ENTERING_LOCATION = 'ENTERING_LOCATION',
-  LOCATION_ERROR = 'LOCATION_ERROR'
-}
-
 export interface DonationGoal {
   goal: Donations; //
 }
@@ -163,15 +99,4 @@ export interface OutcomeButton {
   title: string;
   emoji: string;
   key: string;
-}
-
-export interface MidtermStats {
-  week1: number;
-  week2: number;
-  week3: number;
-  week4: number;
-  week5: number;
-  week6: number;
-  week7: number;
-  week8: number;
 }

@@ -1,5 +1,5 @@
 import * as Constants from '../../common/constants';
-import { Issue } from './../../common/model';
+import { Issue } from './../../common/models';
 import { RemoteDataState } from '../../redux/remoteData';
 
 import { find } from 'lodash';
@@ -68,7 +68,7 @@ export const getIssue = (
   if (remoteDataState.issues) {
     const currentActiveIssue = find(
       remoteDataState.issues,
-      i => i.id === issueId || i.slug === issueId
+      i => i.id.toString() === issueId || i.slug === issueId
     );
     if (currentActiveIssue) {
       return currentActiveIssue;
@@ -78,7 +78,7 @@ export const getIssue = (
   if (remoteDataState.inactiveIssues) {
     const currentInactiveIssue = find(
       remoteDataState.inactiveIssues,
-      i => i.id === issueId || i.slug === issueId
+      i => i.id.toString() === issueId || i.slug === issueId
     );
     if (currentInactiveIssue) {
       return currentInactiveIssue;
@@ -101,4 +101,24 @@ export const isIssueComplete = (issueID: string): boolean => {
   }
 
   return false;
+};
+
+export const removeURLParameter = (url: string, parameter: string): string => {
+  // prefer to use l.search if you have a location/link object
+  const urlparts = url.split('?');
+  if (urlparts.length >= 2) {
+    const prefix = encodeURIComponent(parameter) + '=';
+    let pars = urlparts[1].split(/[&;]/g);
+
+    // reverse iteration as may be destructive
+    for (let i = pars.length; i-- > 0; ) {
+      // idiom for string.startsWith
+      if (pars[i].lastIndexOf(prefix, 0) !== -1) {
+        pars.splice(i, 1);
+      }
+    }
+
+    return urlparts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
+  }
+  return url;
 };

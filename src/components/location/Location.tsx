@@ -1,179 +1,197 @@
 import * as React from 'react';
-import { isEqual } from 'lodash';
 import { LocationState } from '../../redux/location/reducer';
-import { TranslationFunction } from 'i18next';
-import { translate } from 'react-i18next';
-import { LocationUiState } from '../../common/model';
-import { newLocationLookup, clearAddress } from '../../redux/location';
+import { clearAddress, setLocation } from '../../redux/location';
 import { store } from '../../redux/store';
+import { getBrowserGeolocation } from '../../services/geolocationServices';
+import { getContactsIfNeeded } from '../../redux/remoteData/asyncActionCreator';
 
 interface Props {
-  t: TranslationFunction;
   locationState: LocationState;
 }
 
 // this will be needed
 interface State {
-  location: string;
-  uiState: LocationUiState;
+  uiState: LocationUIState;
+  triedAutoLocation: boolean;
+}
+
+export enum LocationUIState {
+  NO_LOCATION = 'NO_LOCATION',
+  FETCHING_LOCATION = 'FETCHING_LOCATION',
+  ENTERING_LOCATION = 'ENTERING_LOCATION',
+  LOCATION_FOUND = 'LOCATION_FOUND',
+  LOCATION_ERROR = 'LOCATION_ERROR'
 }
 
 export class Location extends React.Component<Props, State> {
-  private addressInput: HTMLInputElement | null;
-
   constructor(props: Props) {
     super(props);
     // set initial state
-    this.state = this.setStateFromProps(props);
+
+    this.state = {
+      uiState: LocationUIState.NO_LOCATION,
+      triedAutoLocation: false
+    };
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (!isEqual(prevProps, this.props)) {
-      this.setState(this.setStateFromProps(this.props));
+    if (
+      prevProps.locationState.address === '' &&
+      this.props.locationState.address !== ''
+    ) {
+      this.setState({ uiState: LocationUIState.LOCATION_FOUND });
+
+      // if the location has updated, force a contact refresh
+      if (
+        prevProps.locationState.address !== this.props.locationState.address
+      ) {
+        getContactsIfNeeded(true);
+      }
     }
   }
 
   componentDidMount() {
-    if (this.addressInput) {
-      this.addressInput.focus();
-    }
-  }
-
-  /**
-   * Set state from props when props
-   * are initialized or refreshed
-   *
-   * @param {Props} props
-   * @returns {State}
-   */
-  setStateFromProps(props: Props): State {
-    let location =
-      props.locationState.cachedCity || props.locationState.address;
-    let uiState = props.locationState.uiState;
-    if (!location && uiState !== LocationUiState.ENTERING_LOCATION) {
-      uiState = LocationUiState.LOCATION_ERROR;
-    }
-
-    return {
-      location,
-      uiState
-    };
-  }
-
-  getWidgetTitle() {
-    let title = <span />;
     switch (this.state.uiState) {
-      case LocationUiState.LOCATION_FOUND:
-        title = (
-          <p id="locationMessage">
-            {this.props.t('location.yourLocation')}:{' '}
-            <span>{this.state.location}</span>
-          </p>
-        );
-        break;
-      case LocationUiState.FETCHING_LOCATION:
-        title = (
-          <p id="locationMessage" className="loadingAnimation">
-            {this.props.t('location.gettingYourLocation')}
-          </p>
-        );
-        break;
-      case LocationUiState.LOCATION_ERROR:
-        title = (
-          <p id="locationMessage" role="alert">
-            {this.props.t('location.invalidAddress')}
-          </p>
-        );
-        break;
-      case LocationUiState.ENTERING_LOCATION:
-        title = (
-          <p id="locationMessage">{this.props.t('location.chooseALocation')}</p>
-        );
+      case LocationUIState.NO_LOCATION:
+        // if there's a saved location, set it
+        if (
+          this.props.locationState.address &&
+          this.props.locationState.address !== ''
+        ) {
+          this.setState({ uiState: LocationUIState.LOCATION_FOUND });
+        }
         break;
       default:
         break;
     }
-    return title;
   }
 
-  getWidget() {
-    let widget = <span />;
-    switch (this.state.uiState) {
-      case LocationUiState.FETCHING_LOCATION:
-        // No widget in this case
-        break;
-      case LocationUiState.LOCATION_FOUND:
-        const enterLocation = e => {
-          e.preventDefault();
-          store.dispatch(clearAddress());
-        };
-        widget = (
-          <div>
-            <button onClick={enterLocation}>
-              {this.props.t('location.changeLocation')}
-            </button>
-          </div>
-        );
-        break;
-      case LocationUiState.LOCATION_ERROR:
-      // FIXME: clear address text box
-      // console.log('Clear address text box')
-      // console.log('Remove break statement')
-      // break;
-      case LocationUiState.ENTERING_LOCATION:
-        const submitAddress = e => {
-          e.preventDefault();
-          const newLocation = e.target.elements.address.value;
+  fetchLocation() {
+    this.setState({ uiState: LocationUIState.FETCHING_LOCATION });
 
-          if (newLocation === '') {
-            // if the user hits "Go" with no location, clear what they had and refresh to try the default again
-            store.dispatch(clearAddress());
-            window.location.reload();
-          } else {
-            // tslint:disable-next-line:no-any
-            store.dispatch<any>(newLocationLookup(newLocation));
-          }
-        };
-        const clearTextBox = e => {
-          e.target.value = '';
-        };
-        widget = (
-          <div>
-            <form onSubmit={submitAddress}>
-              <input
-                type="text"
-                ref={input => {
-                  this.addressInput = input;
-                }}
-                autoFocus={true}
-                id="address"
-                name="address"
-                aria-labelledby="locationMessage"
-                aria-invalid={
-                  this.state.uiState === LocationUiState.LOCATION_ERROR
-                }
-                onFocus={clearTextBox}
-                placeholder="Address or zip code"
-              />
-              <button>{this.props.t('common.go')}</button>
-            </form>
-          </div>
-        );
-        break;
-      default:
-        break;
+    getBrowserGeolocation()
+      .then(loc => {
+        store.dispatch(setLocation(loc.latitude + ',' + loc.longitude));
+      })
+      .catch(err => {
+        // ok, go to manual entry
+        this.setState({ uiState: LocationUIState.ENTERING_LOCATION });
+      });
+  }
+
+  manuallySetLocation(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+
+    this.setState({ uiState: LocationUIState.ENTERING_LOCATION });
+  }
+
+  enterLocation(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    store.dispatch(clearAddress());
+
+    // see if browser supports location
+    let browserSupportsLocation = 'geolocation' in navigator;
+    if (browserSupportsLocation && this.state.triedAutoLocation === false) {
+      this.setState({ triedAutoLocation: true });
+      this.fetchLocation();
+    } else {
+      // go to manual entrys
+      this.setState({ uiState: LocationUIState.ENTERING_LOCATION });
     }
-    return widget;
+  }
+
+  submitLocation(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // tslint:disable-next-line:no-string-literal
+    const newLocation = e.currentTarget.elements['address'].value;
+
+    if (newLocation === '') {
+      // tslint:disable-next-line:no-console
+      console.error('not the right behavior anymore');
+      // if the user hits "Go" with no location, clear what they had and refresh to try the default again
+      store.dispatch(clearAddress());
+      window.location.reload();
+    } else {
+      store.dispatch(setLocation(newLocation));
+      this.setState({ uiState: LocationUIState.LOCATION_FOUND });
+    }
+  }
+
+  // --- each location state is below
+
+  noLocation() {
+    return (
+      <>
+        <p id="setLocationMessage">Set your location</p>
+        <button onClick={e => this.enterLocation(e)}>Set Location</button>
+      </>
+    );
+  }
+
+  findingLocation() {
+    return (
+      <>
+        <p className="loadingAnimation">
+          Getting your location automatically...
+        </p>
+        <p className="help">
+          <a href="#" onClick={e => this.manuallySetLocation(e)}>
+            Or enter an address manually
+          </a>
+        </p>
+      </>
+    );
+  }
+
+  enteringLocation() {
+    return (
+      <>
+        <p>Set your location</p>
+        <form onSubmit={e => this.submitLocation(e)}>
+          <input
+            type="text"
+            autoFocus={true}
+            id="address"
+            name="address"
+            placeholder="Enter an address or zip code"
+          />
+          <button>Go</button>
+        </form>
+      </>
+    );
+  }
+
+  locationFound() {
+    return (
+      <>
+        <p id="locationMessage">
+          Your location: <span>{this.props.locationState.cachedCity}</span>
+        </p>
+        <button onClick={e => this.enterLocation(e)}>Change Location</button>
+      </>
+    );
   }
 
   render() {
     return (
-      <div>
-        {this.getWidgetTitle()}
-        {this.getWidget()}
+      <div className="location">
+        {(() => {
+          switch (this.state.uiState) {
+            case LocationUIState.NO_LOCATION:
+              return this.noLocation();
+            case LocationUIState.LOCATION_ERROR:
+              return <h1>error lol</h1>;
+            case LocationUIState.LOCATION_FOUND:
+              return this.locationFound();
+            case LocationUIState.FETCHING_LOCATION:
+              return this.findingLocation();
+            case LocationUIState.ENTERING_LOCATION:
+              return this.enteringLocation();
+            default:
+              return <>no state for {this.state.uiState}</>;
+          }
+        })()}
       </div>
     );
   }
 }
-
-export const LocationTranslatable = translate()(Location);

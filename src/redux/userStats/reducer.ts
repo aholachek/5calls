@@ -26,7 +26,7 @@ export interface UserStatsState {
   contact: number;
 }
 
-const initialState: UserStatsState = {
+export const defaultUserStatsState: UserStatsState = {
   all: [],
   unavailable: 0,
   voicemail: 0,
@@ -34,7 +34,7 @@ const initialState: UserStatsState = {
 };
 
 export const userStatsReducer: Reducer<UserStatsState> = (
-  state: UserStatsState = initialState as UserStatsState,
+  state: UserStatsState = defaultUserStatsState as UserStatsState,
   action: UserStatsAction
 ): UserStatsState => {
   switch (action.type) {

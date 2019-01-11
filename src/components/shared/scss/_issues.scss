@@ -38,35 +38,6 @@
     width: 200px;
   }
 
-  &__location {
-    color: $blue;
-
-    p {
-      margin: 0;
-      font-size: 19px;
-      padding: 12px 6px 6px 6px;
-
-      &.loadingAnimation {
-        color: $gray;
-      }
-    }
-    input {
-      width: 200px;
-    }
-
-    a {
-      text-decoration: underline;
-    }
-
-    span {
-      font-weight: bold;
-    }
-
-    button {
-      margin: 6px 0 18px 3px;
-    }
-  }
-
   &__footer-link {
     display: block;
     text-align: center;

@@ -5,7 +5,7 @@ import EventEmitter = require('wolfy87-eventemitter');
 
 import { submitOutcome } from '../../redux/callState';
 import { store } from '../../redux/store';
-import { Issue, slugOrID } from '../../common/model';
+import { Issue } from '../../common/models';
 import { UserState } from '../../redux/userState';
 import { Mixpanel } from '../../services/mixpanel';
 
@@ -35,7 +35,7 @@ class Outcomes extends React.Component<
       submitOutcome({
         outcome: outcome,
         numberContactsLeft: this.props.numberContactsLeft,
-        issueId: this.props.currentIssue.id,
+        issueId: this.props.currentIssue.id.toString(),
         contactId: this.props.currentContactId
       })
     );
@@ -43,11 +43,7 @@ class Outcomes extends React.Component<
     // navigate to /done when finished
     if (this.props.numberContactsLeft <= 0 && this.props.history) {
       // it feels like this history push should be further up (maybe in onsubmitoutcome?)
-      if (this.props.match.params.groupid) {
-        this.props.history.push(`/team/${this.props.match.params.groupid}`);
-      } else {
-        this.props.history.push(`/done/${slugOrID(this.props.currentIssue)}`);
-      }
+      this.props.history.push(`/done/${this.props.currentIssue.slugOrID()}`);
 
       window.scroll(1, 1);
     } else {
@@ -108,8 +104,8 @@ class Outcomes extends React.Component<
         return (
           <div className="call__outcomes">
             <h3 className="call__outcomes__header">
-              Enter your call result to get the next call:
-            </h3>
+              Help track representative availability by selecting your result:
+            </h3>{' '}
             <div className="call__outcomes__items">
               {this.props.currentIssue.outcomeModels.map((outcome, index) => (
                 <button

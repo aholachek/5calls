@@ -1,4 +1,4 @@
-import { Issue } from './../../common/model';
+import { Issue } from './../../common/models';
 import { RemoteDataState } from '../../redux/remoteData';
 import { formatLocationForBackEnd, formatNumber, getIssue } from './utils';
 

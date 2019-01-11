@@ -13,6 +13,8 @@ require('string.prototype.includes');
 
 // some older browsers don't support Set, which apparently something compiles to
 require('core-js/fn/set');
+// ie 11 and old android don't have find
+require('core-js/fn/array/find');
 
 // seriously, not even map???
 require('core-js/es6/map');

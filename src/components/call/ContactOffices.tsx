@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { TranslationFunction } from 'i18next';
-import { translate } from 'react-i18next';
-import { Issue, Contact, DefaultContact } from '../../common/model';
+
+import { Issue, Contact } from '../../common/models';
 import { makePhoneLink, cityFormat } from '../shared/jsxUtils';
 
 interface Props {
   readonly currentIssue: Issue;
-  readonly contactIndex: number;
-  readonly t: TranslationFunction;
+  readonly currentContact: Contact;
 }
 
 export interface State {
@@ -27,30 +25,16 @@ export class ContactOffices extends React.Component<Props, State> {
   // this component is reused and the local state is maintained through contact changes,
   // we want the local state to reset when it's updated
   componentWillReceiveProps(nextProps: Props) {
-    const contact: Contact =
-      this.props.currentIssue.contacts &&
-      this.props.currentIssue.contacts.length !== 0
-        ? this.props.currentIssue.contacts[this.props.contactIndex]
-        : DefaultContact;
-    const nextContact: Contact =
-      nextProps.currentIssue.contacts &&
-      nextProps.currentIssue.contacts.length !== 0
-        ? nextProps.currentIssue.contacts[nextProps.contactIndex]
-        : DefaultContact;
-
-    if (contact !== nextContact) {
+    if (this.props.currentContact !== nextProps.currentContact) {
       this.setState({ showFieldOfficeNumbers: false });
     }
   }
 
   render() {
-    const contact: Contact =
-      this.props.currentIssue.contacts &&
-      this.props.currentIssue.contacts.length !== 0
-        ? this.props.currentIssue.contacts[this.props.contactIndex]
-        : DefaultContact;
-
-    if (contact.field_offices == null || contact.field_offices.length === 0) {
+    if (
+      this.props.currentContact.fieldOffices == null ||
+      this.props.currentContact.fieldOffices.length === 0
+    ) {
       return <span />;
     }
 
@@ -58,14 +42,14 @@ export class ContactOffices extends React.Component<Props, State> {
       return (
         <div>
           <h3 className="call__contact__field-offices__header">
-            {this.props.t('contact.localOfficeNumbers')}
+            Local office numbers:
           </h3>
           <ul className="call__contact__field-office-list">
-            {contact.field_offices ? (
-              contact.field_offices.map(office => (
+            {this.props.currentContact.fieldOffices ? (
+              this.props.currentContact.fieldOffices.map(office => (
                 <li key={office.phone}>
                   {makePhoneLink(office.phone)}
-                  {cityFormat(office, contact)}
+                  {cityFormat(office, this.props.currentContact)}
                 </li>
               ))
             ) : (
@@ -78,10 +62,7 @@ export class ContactOffices extends React.Component<Props, State> {
       return (
         <div>
           <p className="call__contact__show-field-offices">
-            {this.props.t('contact.busyLine')}&nbsp;
-            <a onClick={this.showField}>
-              {this.props.t('contact.busyLineGuidance')}
-            </a>
+            <a onClick={this.showField}>Or call a local office</a>
           </p>
         </div>
       );
@@ -89,6 +70,4 @@ export class ContactOffices extends React.Component<Props, State> {
   }
 }
 
-export default translate()(ContactOffices);
-
-export const ContactOfficesTranslatable = translate()(ContactOffices);
+export default ContactOffices;

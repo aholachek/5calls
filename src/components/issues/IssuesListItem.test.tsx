@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
+
 import { IssuesListItem } from './index';
-import { Issue } from '../../common/model';
+import { Issue } from '../../common/models';
 
 test('IssuesListItem issue click passes issue id', () => {
-  const id = 'id';
-  const issue = Object.assign({}, new Issue(), { id });
+  const issue = Object.assign(new Issue(), { id: '123', slug: 'issue' });
   const isIssueComplete = false;
   const isIssueActive = false;
 

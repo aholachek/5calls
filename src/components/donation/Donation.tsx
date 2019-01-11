@@ -1,10 +1,7 @@
 import * as React from 'react';
 import * as Constants from '../../common/constants';
 
-interface Props {
-  readonly total: number;
-  readonly goal: number;
-}
+interface Props {}
 
 interface State {}
 

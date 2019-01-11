@@ -1,7 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Call component should be rendered if passed a valid object 1`] = `
-<ContextConsumer>
-  <Component />
-</ContextConsumer>
+<section
+  className="call"
+>
+  <Component
+    currentIssue={
+      Issue {
+        "active": true,
+        "contactAreas": Array [],
+        "contactType": "REPS",
+        "createdAt": "",
+        "id": 123,
+        "link": "",
+        "linkTitle": "",
+        "name": "Issue Name",
+        "outcomeModels": Array [],
+        "reason": "reason",
+        "script": "issue *mock script*",
+        "slug": "issue-name",
+        "stats": Object {
+          "calls": 10,
+          "completion": 0,
+        },
+      }
+    }
+  />
+  <ContextConsumer>
+    <Component />
+  </ContextConsumer>
+</section>
 `;

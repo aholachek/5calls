@@ -6,29 +6,28 @@ import { getIssue } from '../shared/utils';
 import i18n from '../../services/i18n';
 import { Call } from './index';
 import { Layout } from '../layout';
-import { Issue } from '../../common/model';
+import { Issue } from '../../common/models';
 
 import { CallState, selectIssueActionCreator } from '../../redux/callState';
-import { getIssuesIfNeeded, RemoteDataState } from '../../redux/remoteData';
+import { RemoteDataState } from '../../redux/remoteData';
 import { store } from '../../redux/store';
 
 import { remoteStateContext, callStateContext } from '../../contexts';
+import { getContactsIfNeeded } from '../../redux/remoteData/asyncActionCreator';
 
 interface RouteProps {
   readonly groupid: string;
   readonly issueid: string;
 }
 
-// tslint:disable-next-line:no-bitwise
-type Props = RouteComponentProps<RouteProps> & {
+interface Props extends RouteComponentProps<RouteProps> {
   remoteState: RemoteDataState;
   callState: CallState;
-};
+}
 
 export interface State {
   currentIssue?: Issue;
   currentIssueId: string;
-  hasBeenCached: boolean;
 }
 
 class CallPageView extends React.Component<Props, State> {
@@ -38,20 +37,19 @@ class CallPageView extends React.Component<Props, State> {
     this.state = this.setStateFromProps(props);
   }
 
-  setStateFromProps(props: Props) {
+  setStateFromProps(props: Props): State {
     let currentIssue = this.getCurrentIssue(props.remoteState);
 
     return {
       currentIssue: currentIssue,
-      currentIssueId: currentIssue ? currentIssue.id : '',
-      hasBeenCached: false
+      currentIssueId: currentIssue ? currentIssue.id.toString() : ''
     };
   }
 
   componentDidMount() {
     // the user has clicked on an issue from the sidebar
     if (!this.state.currentIssueId && this.state.currentIssue) {
-      selectIssueActionCreator(this.state.currentIssue.id);
+      selectIssueActionCreator(this.state.currentIssue.id.toString());
     }
   }
 
@@ -60,9 +58,8 @@ class CallPageView extends React.Component<Props, State> {
       if (!isEqual(this.props, prevProps)) {
         const currentIssue = this.getCurrentIssue(this.props.remoteState);
         this.setState({
-          ...this.state,
           currentIssue: currentIssue,
-          currentIssueId: currentIssue ? currentIssue.id : ''
+          currentIssueId: currentIssue ? currentIssue.id.toString() : ''
         });
       }
     }
@@ -87,17 +84,15 @@ class CallPageView extends React.Component<Props, State> {
     return currentIssue;
   };
 
-  getView = () => {
-    if (!this.props.remoteState.issues) {
-      getIssuesIfNeeded();
-    }
-
+  render() {
     if (this.state.currentIssue) {
       return (
         <Layout>
           <Call
-            issue={this.state.currentIssue as Issue}
+            issue={this.state.currentIssue}
+            contacts={this.props.remoteState.contacts}
             callState={this.props.callState}
+            getContactsIfNeeded={getContactsIfNeeded}
           />
         </Layout>
       );
@@ -110,10 +105,6 @@ class CallPageView extends React.Component<Props, State> {
         </Layout>
       );
     }
-  };
-
-  render() {
-    return <>{this.getView()}</>;
   }
 }
 

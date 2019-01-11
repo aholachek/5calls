@@ -56,11 +56,6 @@ const Navigation: React.StatelessComponent = () => {
             © 2018 5 Calls Civic Action is a 501(c)4 non-profit that helps
             citizens make their voices heard.
           </p>
-          <p>
-            <a href="http://ipinfo.io" target="_blank" rel="noopener">
-              {i18n.t('footer.ipGeolocation')}
-            </a>
-          </p>
         </div>
         <div style={{ clear: 'both' }} />
       </div>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Issue, slugOrID } from '../../common/model';
+import { Issue } from '../../common/models';
 import { selectIssueActionCreator } from '../../redux/callState';
 
 interface Props {
@@ -15,7 +15,7 @@ export class IssuesListItem extends React.Component<Props, State> {
   render() {
     const isCompleted = this.props.isIssueComplete ? 'is-complete' : '';
     const isActive = this.props.isIssueActive ? 'is-active' : '';
-    const issueLink = `/issue/${slugOrID(this.props.issue)}`;
+    const issueLink = `/issue/${this.props.issue.slugOrID()}`;
 
     return (
       <li>
@@ -23,7 +23,9 @@ export class IssuesListItem extends React.Component<Props, State> {
           aria-controls="content"
           className={`issues-list__item ${isCompleted} ${isActive}`}
           to={issueLink}
-          onClick={() => selectIssueActionCreator(this.props.issue.id)}
+          onClick={() =>
+            selectIssueActionCreator(this.props.issue.id.toString())
+          }
         >
           <span
             aria-live="polite"

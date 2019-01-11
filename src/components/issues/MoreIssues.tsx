@@ -1,23 +1,16 @@
 import * as React from 'react';
-import { TranslationFunction } from 'i18next';
-import { translate } from 'react-i18next';
 import { find } from 'lodash';
-import { Issue, CategoryMap, Category } from '../../common/model';
+
+import { Issue, Category, CategoryMap } from '../../common/models';
 import { IssuesListItem } from './index';
-import { getIssuesIfNeeded } from '../../redux/remoteData';
-import { store } from '../../redux/store';
-import { selectIssueActionCreator } from '../../redux/callState';
+import { RemoteDataState } from '../../redux/remoteData';
 
 interface Props {
-  readonly activeIssues: Issue[];
-  readonly inactiveIssues: Issue[];
+  readonly remoteState: RemoteDataState;
   readonly completedIssueIds: string[];
-  readonly t: TranslationFunction;
-  readonly currentIssue: Issue;
 }
 
 interface State {
-  currentIssue: Issue;
   issueCategoryMap: CategoryMap[];
   totalCount: number;
 }
@@ -31,14 +24,15 @@ export class MoreIssues extends React.Component<Props, State> {
 
   setStateFromProps(props: Props): State {
     const totalCount =
-      (props.inactiveIssues ? props.inactiveIssues.length : 0) +
-      (props.activeIssues ? props.activeIssues.length : 0);
+      (props.remoteState.inactiveIssues
+        ? props.remoteState.inactiveIssues.length
+        : 0) + (props.remoteState.issues ? props.remoteState.issues.length : 0);
     let categoryMap: CategoryMap[] = [];
 
     // this makes more sense as an actual Map<string, Issues[]> but I couldn't get it
     // to render in the view no matter what I tried, so it's this /shrug
-    if (this.props.inactiveIssues) {
-      this.props.inactiveIssues.forEach(issue => {
+    if (this.props.remoteState.inactiveIssues) {
+      this.props.remoteState.inactiveIssues.forEach(issue => {
         let category: string = 'uncategorized';
 
         if (issue.categories[0]) {
@@ -80,35 +74,36 @@ export class MoreIssues extends React.Component<Props, State> {
     });
 
     return {
-      currentIssue: this.props.currentIssue,
       issueCategoryMap: categoryMap,
       totalCount: totalCount
     };
   }
 
-  componentDidMount() {
-    getIssuesIfNeeded();
-  }
-
   componentDidUpdate(prevProps: Props) {
-    if (this.props.activeIssues && !prevProps.activeIssues) {
+    if (
+      this.props.remoteState.issues.length > 0 &&
+      prevProps.remoteState.issues.length === 0
+    ) {
       let newState = this.setStateFromProps(this.props);
       this.setState(newState);
     }
   }
 
-  render() {
-    if (!this.state.currentIssue && this.props.currentIssue) {
-      store.dispatch(selectIssueActionCreator(this.props.currentIssue.id));
-    }
+  isIssueComplete(issue: Issue): boolean {
+    return (
+      find(
+        this.props.completedIssueIds,
+        (issueId: string) => issue.slugOrID() === issueId
+      ) !== undefined
+    );
+  }
 
+  render() {
     return (
       <section className="call">
         <div className="call_complete">
           <h1 className="call__title">
-            {this.props.t('issues.activeIssuesWithCount', {
-              count: this.state.totalCount
-            })}
+            {this.state.totalCount + ' Active Issues'}
           </h1>
           {this.state.issueCategoryMap ? (
             this.state.issueCategoryMap.map((cat, key) => (
@@ -119,13 +114,7 @@ export class MoreIssues extends React.Component<Props, State> {
                     <IssuesListItem
                       key={issue.id}
                       issue={issue}
-                      isIssueComplete={
-                        this.props.completedIssueIds &&
-                        find(
-                          this.props.completedIssueIds,
-                          (issueId: string) => issue.id === issueId
-                        ) !== undefined
-                      }
+                      isIssueComplete={this.isIssueComplete(issue)}
                       isIssueActive={false}
                     />
                   ))}
@@ -140,5 +129,3 @@ export class MoreIssues extends React.Component<Props, State> {
     );
   }
 }
-
-export const MoreIssuesTranslatable = translate()(MoreIssues);

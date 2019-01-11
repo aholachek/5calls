@@ -1,0 +1,33 @@
+.location {
+  color: $blue;
+  padding: 12px 6px;
+
+  p {
+    margin: 0;
+    font-size: 19px;
+    // padding: 12px 6px 6px 6px;
+
+    &.loadingAnimation {
+      color: $gray;
+    }
+  }
+  input {
+    width: 200px;
+  }
+
+  .help {
+    font-size: 14px;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  button {
+    margin: 6px 0 8px 0;
+  }
+}

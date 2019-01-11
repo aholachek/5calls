@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
+
 import { IssuesList } from './index';
-import { Issue } from '../../common/model';
+import { Issue } from '../../common/models';
 
 test('should show IssuesListItem elements', () => {
   const issues = [
@@ -9,7 +10,11 @@ test('should show IssuesListItem elements', () => {
     Object.assign({}, new Issue(), { id: '2' })
   ];
   const component = shallow(
-    <IssuesList issues={issues} completedIssueIds={[]} />
+    <IssuesList
+      issues={issues}
+      completedIssueIds={[]}
+      getIssuesIfNeeded={jest.fn()}
+    />
   );
   const items = component.find('IssuesListItem');
   expect(items.length).toBe(issues.length);
@@ -18,7 +23,11 @@ test('should show IssuesListItem elements', () => {
 test('should show no IssueListItem elements if there are no issues to show', () => {
   const issues = [];
   const component = shallow(
-    <IssuesList issues={issues} completedIssueIds={[]} />
+    <IssuesList
+      issues={issues}
+      completedIssueIds={[]}
+      getIssuesIfNeeded={jest.fn()}
+    />
   );
   const node = component.find('ul').find('IssuesListItem');
   // console.log('node: \n', node);

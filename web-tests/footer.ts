@@ -1,20 +1,11 @@
-import {
-  ClientFunction,
-  t,
-  Selector,
-} from 'testcafe';
-import {
-  waitForReact,
-  ReactSelector,
-} from 'testcafe-react-selectors';
+import { ClientFunction, t, Selector } from 'testcafe';
+import { waitForReact, ReactSelector } from 'testcafe-react-selectors';
 
 const getWindowLocation = ClientFunction(() => window.location.href);
 
-fixture`Footer`
-  .page`http://localhost:3000`
-  .beforeEach(async () => {
-    await waitForReact(15000);
-  });
+fixture`Footer`.page`http://localhost:3000`.beforeEach(async () => {
+  await waitForReact(15000);
+});
 
 // tslint:disable-next-line:no-shadowed-variable
 test('Footer displays left links', async t => {
@@ -43,7 +34,9 @@ test('Footer displays left links', async t => {
 
   const opensource = leftLinks.nth(2);
   const osLink = opensource.find('a');
-  await t.expect(osLink.getAttribute('href')).eql('https://github.com/5calls/5calls');
+  await t
+    .expect(osLink.getAttribute('href'))
+    .eql('https://github.com/5calls/5calls');
   await t.expect(osLink.innerText).eql('Open Source');
   const osLabel = await osLink.find('.fa fa-github');
   await t.expect(osLabel).ok();
@@ -74,7 +67,9 @@ test('Footer displays right links', async t => {
 
   const support = rightLinks.nth(1);
   const supportLink = support.find('a');
-  await t.expect(supportLink.getAttribute('href')).eql('https://secure.actblue.com/contribute/page/5calls?refcode=web');
+  await t
+    .expect(supportLink.getAttribute('href'))
+    .eql('https://secure.actblue.com/contribute/page/5calls?refcode=web');
   await t.expect(supportLink.innerText).eql('Be a Supporter');
   const supportLabel = await supportLink.find('.fa fa-money');
   await t.expect(supportLabel).ok();
@@ -88,16 +83,8 @@ test('Footer center copyright and link is shown', async t => {
   const centerContainer = await colophon.find('.colophon__center');
   const centerItems = await centerContainer.find('p');
 
-  const count = await centerItems.count;
-  await t.expect(count).eql(2);
-
   let expectedText = '© 2018 5 Calls Civic Action is a 501(c)4 non-profit ';
   expectedText += 'that helps citizens make their voices heard.';
   const copyright = centerItems.nth(0);
   await t.expect(copyright.innerText).eql(expectedText);
-
-  const geo = centerItems.nth(1);
-  const geoLink = await geo.find('a');
-  await t.expect(geoLink.getAttribute('href')).eql('http://ipinfo.io');
-  await t.expect(geoLink.innerText).eql('IP geolocation by ipinfo.io');
 });

@@ -6,7 +6,7 @@ import {
   Middleware
 } from 'redux';
 import { persistStore, Persistor } from 'redux-persist';
-import rootReducer, { ApplicationState } from './root';
+import rootReducer, { ApplicationState, DefaultApplicationState } from './root';
 import thunk from 'redux-thunk';
 
 const middlewares: Middleware[] = [thunk];
@@ -17,7 +17,7 @@ export let store = {} as Store<ApplicationState>;
 export default initialState => {
   store = createStore(
     rootReducer,
-    initialState,
+    DefaultApplicationState,
     compose(
       applyMiddleware(...middlewares),
       // This added for Redux Dev Tools - install Chrome or Firefox extension to use

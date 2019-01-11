@@ -1,3 +1,3 @@
-import { Location, LocationTranslatable } from './Location';
+import { Location } from './Location';
 
-export { Location, LocationTranslatable };
+export { Location };

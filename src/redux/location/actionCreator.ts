@@ -1,12 +1,11 @@
 import {
   LocationClearedAction,
   LocationSetAction,
-  SetUiStateAction,
   LocationActionType,
   SetLocationFetchTypeAction,
   SetSplitDistrictAction
 } from './index';
-import { LocationFetchType, LocationUiState } from '../../common/model';
+import { LocationFetchType } from '../../common/models';
 import { SetInvalidAddressAction } from './action';
 
 export function setLocation(address: string): LocationSetAction {
@@ -26,13 +25,6 @@ export function setCachedCity(city: string | undefined) {
   return {
     type: LocationActionType.CACHE_CITY,
     payload: city
-  };
-}
-
-export function setUiState(uiState: LocationUiState): SetUiStateAction {
-  return {
-    type: LocationActionType.SET_UI_STATE,
-    payload: uiState
   };
 }
 

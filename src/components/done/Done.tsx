@@ -9,7 +9,7 @@ import 'react-phone-number-input/style.css';
 import i18n from '../../services/i18n';
 import * as Constants from '../../common/constants';
 import { translate } from 'react-i18next';
-import { Issue } from '../../common/model';
+import { Issue } from '../../common/models';
 import { CallCount } from '../shared';
 import { postPhoneRemind } from '../../services/apiServices';
 

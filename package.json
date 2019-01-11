@@ -5,6 +5,8 @@
   "private": true,
   "dependencies": {
     "@5calls/react-components": "0.0.14",
+    "@bugsnag/js": "^5.0.2",
+    "@bugsnag/plugin-react": "^5.0.2",
     "axios": "^0.18.0",
     "core-js": "^2.5.7",
     "i18next": "^8.4.3",
@@ -17,7 +19,6 @@
     "moment": "^2.22.2",
     "npm-run-all": "^4.1.5",
     "querystring": "^0.2.0",
-    "raven-js": "^3.27.0",
     "react": "^16.4.1",
     "react-dom": "^16.2.0",
     "react-ga": "^2.2.0",
@@ -104,6 +105,7 @@
     "typescript": "^3.0.3",
     "url-loader": "0.5.8",
     "webpack": "2.6.0",
+    "webpack-bugsnag-plugins": "^1.2.4",
     "webpack-dev-server": "2.4.5",
     "webpack-manifest-plugin": "1.1.0",
     "whatwg-fetch": "2.0.3"

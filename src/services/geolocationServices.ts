@@ -1,7 +1,4 @@
-import axios from 'axios';
-import { GeolocationPosition } from '../common/model';
-import { IpInfoData } from './../common/model';
-import * as Constants from '../common/constants';
+import { GeolocationPosition } from '../common/models';
 
 // Geolocation PositionOptions properties
 // Browser geolocation timeout in milliseconds
@@ -41,10 +38,8 @@ export const getBrowserGeolocation = (): Promise<GeolocationPosition> => {
             const msg = `Browser geolocation not successfully accomplished;
               PositionError code: ${code};
               PositionError message: ${e.message}`;
-            // tslint:disable-next-line:no-console
-            console.warn(msg, e);
             // send back an undefined location
-            resolve({ latitude: undefined, longitude: undefined });
+            reject(new Error(msg));
           } else {
             const msg = `Problem doing browser geolocation;
             PositionError code: ${code};
@@ -65,14 +60,4 @@ export const getBrowserGeolocation = (): Promise<GeolocationPosition> => {
       reject(new Error('Browser Geolocation API not available'));
     }
   });
-};
-
-/**
- * Use ipinfo.io to find location by IP address.
- */
-export const getLocationByIP = (): Promise<IpInfoData> => {
-  return axios
-    .get(Constants.IP_INFO_URL)
-    .then(response => Promise.resolve(response.data))
-    .catch(e => Promise.reject(e));
 };

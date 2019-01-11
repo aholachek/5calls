@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TranslationFunction } from 'i18next';
 import { translate } from 'react-i18next';
 import * as Constants from '../../common/constants';
-import { Issue } from '../../common/model';
+import { Issue } from '../../common/models';
 
 interface Props {
   readonly currentIssue: Issue | null;

@@ -1,12 +1,20 @@
 import { Reducer } from 'redux';
-import { Issue, Donations } from '../../common/model';
+import { Issue, ContactList, Contact } from '../../common/models';
 import { RemoteDataAction, RemoteDataActionType } from './index';
+
+export const defaultRemoteDataState: RemoteDataState = {
+  issues: [],
+  inactiveIssues: [],
+  contacts: new ContactList(),
+  callTotal: 0,
+  errorMessage: ''
+};
 
 export interface RemoteDataState {
   issues: Issue[];
   inactiveIssues: Issue[];
+  contacts: ContactList;
   callTotal: number;
-  donations: Donations;
   errorMessage: string;
 }
 
@@ -19,14 +27,18 @@ export const remoteDataReducer: Reducer<RemoteDataState> = (
       // filter all issues into active / inactive
       let activeIssues: Issue[] = [];
       let inactiveIssues: Issue[] = [];
-      if (action !== undefined && action.payload !== undefined) {
+      if (action && action.payload) {
         let issues = action.payload as Issue[];
-        activeIssues = issues.filter(item => {
-          return item.inactive === false;
-        });
-        inactiveIssues = issues.filter(item => {
-          return item.inactive === true;
-        });
+        activeIssues = issues
+          .filter(item => {
+            return item.active === true;
+          })
+          .map(item => Object.assign(new Issue(), item));
+        inactiveIssues = issues
+          .filter(item => {
+            return item.active === false;
+          })
+          .map(item => Object.assign(new Issue(), item));
       }
 
       const issuesState = Object.assign({}, state, {
@@ -34,12 +46,16 @@ export const remoteDataReducer: Reducer<RemoteDataState> = (
         inactiveIssues: inactiveIssues
       });
       return issuesState;
+    case RemoteDataActionType.GET_CONTACTS:
+      const contactList = action.payload as ContactList;
+      contactList.representatives = contactList.representatives.map(contact =>
+        Object.assign(new Contact(), contact)
+      );
+      return Object.assign({}, state, {
+        contacts: contactList
+      });
     case RemoteDataActionType.GET_CALL_TOTAL:
       return Object.assign({}, state, { callTotal: action.payload });
-    case RemoteDataActionType.GET_DONATIONS:
-      return Object.assign({}, state, { donations: action.payload });
-    case RemoteDataActionType.API_ERROR:
-      return Object.assign({}, state, { errorMessage: action.payload });
     default:
       return state;
   }

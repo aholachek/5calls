@@ -1,3 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Script component should be rendered if passed a valid object 1`] = `<span />`;
+exports[`Script component should be rendered if passed a valid object 1`] = `
+<div
+  className="call__script"
+>
+  <div
+    className="call__script__body"
+  >
+    <ReactMarkdown
+      astPlugins={Array []}
+      escapeHtml={true}
+      linkTarget="_blank"
+      plugins={Array []}
+      rawSourcePos={false}
+      renderers={
+        Object {
+          "linkReference": [Function],
+        }
+      }
+      skipHtml={false}
+      source="issue *mock script*"
+      sourcePos={false}
+      transformLinkUri={[Function]}
+    />
+  </div>
+</div>
+`;

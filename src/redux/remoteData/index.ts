@@ -2,22 +2,12 @@ export {
   IssuesAction,
   RemoteDataAction,
   RemoteDataActionType,
-  CallCountAction,
-  ApiErrorAction,
-  DonationsAction
+  CallCountAction
 } from './action';
-export {
-  issuesActionCreator,
-  callCountActionCreator,
-  apiErrorMessageActionCreator,
-  donationsActionCreator
-} from './actionCreator';
+export { issuesActionCreator, callCountActionCreator } from './actionCreator';
 export { RemoteDataState, remoteDataReducer } from './reducer';
 export {
   startup,
-  fetchAllIssues,
   getIssuesIfNeeded,
-  fetchCallCount,
-  fetchLocationByIP,
-  fetchBrowserGeolocation
+  fetchCallCount
 } from './asyncActionCreator';

@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { isEqual } from 'lodash';
-import { DoneTranslatable } from './index';
-import { Layout } from '../layout';
-import { Issue } from '../../common/model';
 import { withRouter, RouteComponentProps } from 'react-router';
 import { getIssuesIfNeeded, RemoteDataState } from '../../redux/remoteData';
 import { selectIssueActionCreator } from '../../redux/callState';
 import { store } from '../../redux/store';
 import { getIssue } from '../shared/utils';
 import { remoteStateContext } from '../../contexts';
+
+import { DoneTranslatable } from './index';
+import { Layout } from '../layout';
+import { Issue } from '../../common/models';
 
 interface Props extends RouteComponentProps<{}> {
   remoteState: RemoteDataState;

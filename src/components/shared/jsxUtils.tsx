@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FieldOffice, Contact } from '../../common/model';
+import { FieldOffice, Contact } from '../../common/models';
 
 export const makePhoneLink = (phoneNumber: string): JSX.Element => {
   if (phoneNumber) {

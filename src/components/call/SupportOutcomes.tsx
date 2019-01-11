@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { OutcomeButton } from '../../common/model';
+import { OutcomeButton } from '../../common/models';
 
 export interface Props {
   readonly onNextContact: (outcome: string) => void;

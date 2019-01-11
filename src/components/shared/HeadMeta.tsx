@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 
 import * as Constants from '../../common/constants';
-import { Issue, slugOrID } from '../../common/model';
+import { Issue } from '../../common/models';
 
 interface Props {
   issue?: Issue;
@@ -19,10 +19,9 @@ class HeadMeta extends React.Component<Props> {
     let canonicalURL: string | undefined = undefined;
     let shareImageURL = 'https://5calls.org/img/5calls-twitter.png';
     if (this.props.issue) {
-      let slug = slugOrID(this.props.issue);
+      let slug = this.props.issue.slugOrID();
 
       canonicalURL = Constants.APP_URL + '/issue/' + slug;
-
       shareImageURL = `${Constants.SHARE_BUCKET_URL}${this.props.issue.id}.png`;
     }
 
