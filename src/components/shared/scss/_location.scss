@@ -1,4 +1,7 @@
 .location {
+  @include bp(medium) {
+    border-top: 0.25rem solid $red;
+  }
   color: $blue;
   padding: 12px 6px;
 
