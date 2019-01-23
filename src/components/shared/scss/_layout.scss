@@ -15,7 +15,7 @@
 
 .layout__side {
   flex: 1;
-  margin: 30px;
+  margin: 30px 30px 2rem 0;
   min-width: 300px;
   max-width: 350px;
 
@@ -27,7 +27,7 @@
 
 .layout__main {
   flex: 2;
-  margin: 16px 24px 24px 6px;
+  margin: 1.4rem 24px 24px 6px;
   max-width: 830px;
 
   @include max-width-bp(medium) {
@@ -96,7 +96,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 1rem 0;
   }
 
   .stars {
