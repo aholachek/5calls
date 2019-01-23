@@ -2,7 +2,9 @@
   display: flex;
   flex-direction: row;
   margin: 0 auto;
-  max-width: 1224px;
+  max-width: 1256px;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   @include max-width-bp(medium) {
     // some safaris have trouble with this flex switch and both boxes are displayed over top one another
@@ -96,7 +98,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .stars {
