@@ -5,6 +5,12 @@
     box-shadow: none;
   }
 
+  margin-bottom: 1.5rem;
+
+  @include bp(medium) {
+    margin-bottom: 0;
+  }
+
   &__header {
     text-align: center;
     background-color: #fff;

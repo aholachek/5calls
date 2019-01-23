@@ -70,11 +70,12 @@
   font-weight: bold;
   color: $white;
   border-radius: 4px;
-  margin-right: 1.5rem;
+  margin-right: 1rem;
   font-family: $font-headings;
   letter-spacing: 0.075rem;
   text-transform: uppercase;
   transition: box-shadow 0.25s;
+  font-size: 15px;
 
   &:hover,
   &:focus {
@@ -83,6 +84,7 @@
   }
   @include bp(small) {
     font-size: $font-normal;
+    margin-right: 1.5rem;
   }
   @include bp(medium) {
     margin-right: 2.5rem;
@@ -92,7 +94,9 @@
 .logo__header {
   border-top: 0.3rem solid $blue;
   box-shadow: 0 2px 12px 0px rgba(0, 0, 0, 0.13);
-  margin-bottom: 1rem;
+  @include bp(medium) {
+    margin-bottom: 1rem;
+  }
 
   & > .layout {
     display: flex;
@@ -141,7 +145,10 @@
   }
 
   .logo__img {
-    width: 110px;
+    width: 90px;
+    @include bp(small) {
+      width: 110px;
+    }
   }
 
   .userHeader {
