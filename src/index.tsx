@@ -44,7 +44,13 @@ history.listen(trackPageView);
 
 const store = createStore({});
 
-ReactDOM.render(
+const rootElement = document.getElementById('root')!;
+let method = 'render';
+if (rootElement.hasChildNodes()) {
+  method = 'hydrate';
+}
+
+ReactDOM[method](
   <ErrorBoundary>
     <I18nextProvider i18n={i18n}>
       <Provider store={store}>
@@ -93,5 +99,5 @@ ReactDOM.render(
       </Provider>
     </I18nextProvider>
   </ErrorBoundary>,
-  document.getElementById('root')
+  rootElement
 );

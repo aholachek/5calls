@@ -1,18 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>5 Calls: Make your voice heard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="theme-color" content="#000000">
-  <!--
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>5 Calls: Make your voice heard</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-  <!--
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -22,93 +24,141 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
 
-  <meta name="apple-itunes-app" content="app-id=1202558609" />
+    <meta name="apple-itunes-app" content="app-id=1202558609" />
 
-  <!-- favicons -->
-  <link rel="apple-touch-icon" sizes="57x57" href="%PUBLIC_URL%/img/fav/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="%PUBLIC_URL%/img/fav/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="%PUBLIC_URL%/img/fav/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="%PUBLIC_URL%/img/fav/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="%PUBLIC_URL%/img/fav/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="%PUBLIC_URL%/img/fav/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="%PUBLIC_URL%/img/fav/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="%PUBLIC_URL%/img/fav/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/img/fav/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="%PUBLIC_URL%/img/fav/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/img/fav/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="%PUBLIC_URL%/img/fav/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/img/fav/favicon-16x16.png">
-  <meta name="msapplication-TileColor" content="#0032FF">
-  <meta name="msapplication-TileImage" content="%PUBLIC_URL%/img/fav/ms-icon-144x144.png">
-  <meta name="theme-color" content="#0032FF">
+    <!-- favicons -->
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="%PUBLIC_URL%/img/fav/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="%PUBLIC_URL%/img/fav/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="%PUBLIC_URL%/img/fav/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="%PUBLIC_URL%/img/fav/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="%PUBLIC_URL%/img/fav/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="%PUBLIC_URL%/img/fav/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="%PUBLIC_URL%/img/fav/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="%PUBLIC_URL%/img/fav/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="%PUBLIC_URL%/img/fav/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="%PUBLIC_URL%/img/fav/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="%PUBLIC_URL%/img/fav/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="%PUBLIC_URL%/img/fav/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="%PUBLIC_URL%/img/fav/favicon-16x16.png"
+    />
+    <meta name="msapplication-TileColor" content="#0032FF" />
+    <meta
+      name="msapplication-TileImage"
+      content="%PUBLIC_URL%/img/fav/ms-icon-144x144.png"
+    />
+    <meta name="theme-color" content="#0032FF" />
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/brands.css" integrity="sha384-VGCZwiSnlHXYDojsRqeMn3IVvdzTx5JEuHgqZ3bYLCLUBV8rvihHApoA1Aso2TZA" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
-  <!-- Facebook Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1564178430345036');
-    fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1564178430345036&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Facebook Pixel Code -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css"
+      integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.13/css/brands.css"
+      integrity="sha384-VGCZwiSnlHXYDojsRqeMn3IVvdzTx5JEuHgqZ3bYLCLUBV8rvihHApoA1Aso2TZA"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css"
+      integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV"
+      crossorigin="anonymous"
+    />
+    <!-- Facebook Pixel Code -->
+    <script>
+      !(function(f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function() {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        'script',
+        'https://connect.facebook.net/en_US/fbevents.js'
+      );
+      fbq('init', '1564178430345036');
+      fbq('track', 'PageView');
+    </script>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display:none"
+        src="https://www.facebook.com/tr?id=1564178430345036&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
   </head>
-<body>
-  <div id="root">
-    <header class="logo__header" role="banner">
-      <div class="logo__header__logo layout">
-        <a href="/">
-          <img src="/img/5calls-logo-small.png" alt="5 Calls" />5 Calls
-        </a>
-        <img class="stars" src="/img/5calls-stars.png" alt="Make your voice heard" />
-      </div>
-    </header>
-      <div class="layout">
-        <aside id="nav" role="contentinfo" class="layout__side">
-          <div class="issues">
-            <header class="issues__header" role="banner">
-              <div class="issues__location">
-                <p>5 Calls is loading...</p>
-              </div>
-            </header>
-          </div>
-        </aside>
-
-        <main id="content" role="main" class="layout__main">
-          <div class="hypothesis">
-            <header class="hypothesis__header">
-              <h1 class="hypothesis__title">Make your voice heard</h1>
-              <p>Turn your passive participation into active resistance. Facebook likes and Twitter retweets can’t create the change you want to see. Calling your Government on the phone can.</p>
-              <p><strong>Spend 5 minutes, make 5 calls.</strong></p>
-              <p>Download our <a href="https://crgj.app.link/7R2bEB0R4F">app on iPhone and Android</a>.</p>
-              <noscript>
-                <p>5 Calls requires JavaScript and a relatively modern browser to use.</p>
-              </noscript>
-          </header>
-          </div>
-        </main>
-      </div>
-    </header>
-  </div>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-</body>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
