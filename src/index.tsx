@@ -45,10 +45,7 @@ history.listen(trackPageView);
 const store = createStore({});
 
 const rootElement = document.getElementById('root')!;
-let method = 'render';
-if (rootElement.hasChildNodes()) {
-  method = 'hydrate';
-}
+const method = rootElement.hasChildNodes() ? 'hydrate' : 'render';
 
 ReactDOM[method](
   <ErrorBoundary>
