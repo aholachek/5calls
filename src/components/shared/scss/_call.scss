@@ -245,8 +245,14 @@
 }
 
 .call__reason {
-  p {
+  p,
+  ol,
+  ul {
     line-height: 1.6;
+  }
+  ol,
+  ul {
+    font-size: $font-normal;
   }
 }
 
