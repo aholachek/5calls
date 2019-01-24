@@ -33,20 +33,17 @@ class CallPageView extends React.Component<Props> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (this.props.remoteState.issues) {
-      const currentIssueId = this.getIssueIdFromLocation(this.props);
-      const previousIssueId = this.getIssueIdFromLocation(prevProps);
-      if (currentIssueId && !isEqual(currentIssueId, previousIssueId)) {
-        store.dispatch(selectIssueActionCreator(currentIssueId));
-      }
+    if (!this.props.remoteState.issues) {
+      return;
+    }
+    const currentIssueId = this.getIssueIdFromLocation(this.props);
+    const previousIssueId = this.getIssueIdFromLocation(prevProps);
+    if (currentIssueId && !isEqual(currentIssueId, previousIssueId)) {
+      store.dispatch(selectIssueActionCreator(currentIssueId));
     }
   }
 
-  getIssueIdFromLocation = (props = this.props) => {
-    const pathnameMatch = props.location.pathname.match(/issue\/([^/]+)/);
-    const issueid = pathnameMatch && pathnameMatch[1];
-    return issueid;
-  };
+  getIssueIdFromLocation = (props = this.props) => props.match.params.issueid;
 
   render() {
     const issueid = this.getIssueIdFromLocation();
