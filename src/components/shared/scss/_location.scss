@@ -4,6 +4,12 @@
   }
   padding: 12px 6px;
 
+  .input-group {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
+
   p {
     margin: 0;
     font-size: 19px;
@@ -11,6 +17,7 @@
 
     &.loadingAnimation {
       color: $gray;
+      margin-bottom: 0.5rem;
     }
   }
   input {
@@ -27,9 +34,5 @@
 
   span {
     font-weight: bold;
-  }
-
-  button {
-    margin: 6px 0 8px 0;
   }
 }

@@ -71,10 +71,12 @@ input[type='text'] {
 }
 
 .input-group {
+  display: flex;
+  align-items: center;
   input[type='text'] {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    padding-right:0;
+    padding-right: 0;
   }
 
   .btn {
