@@ -1,3 +1,6 @@
+#locationMessage {
+  margin-bottom: .5rem;
+}
 .location {
   @include bp(medium) {
     border-top: 0.25rem solid $red;
