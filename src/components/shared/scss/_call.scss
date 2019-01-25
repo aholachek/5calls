@@ -85,10 +85,8 @@
     }
 
     &__image {
-      margin-bottom: 0.5rem;
 
       @include bp(large) {
-        margin-bottom: 0;
         margin-right: 2rem;
       }
 
@@ -97,8 +95,8 @@
         width: 7rem;
 
         @include bp(medium) {
-          height: 9rem;
-          width: 9rem;
+          height: 8.5rem;
+          width: 8.5rem;
         }
 
         border-radius: 50%;
