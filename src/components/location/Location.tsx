@@ -124,6 +124,7 @@ export class Location extends React.Component<Props, State> {
       <>
         <button
           className="btn btn-outline"
+          id="setLocationMessage"
           onClick={e => this.enterLocation(e)}
         >
           Set your location
