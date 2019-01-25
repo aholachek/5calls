@@ -187,7 +187,7 @@ export class Done extends React.Component<Props, State> {
                       }
                     />
                     <button
-                      className="button"
+                      className="btn btn-secondary btn-subtle"
                       onClick={e => this.setReminder(e)}
                     >
                       Remind me
