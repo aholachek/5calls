@@ -1,6 +1,7 @@
 .btn {
   font-family: $font-headings;
   text-transform: uppercase;
+  font-weight: 600;
   color: inherit;
   background-color: transparent;
   cursor: pointer;
@@ -11,18 +12,82 @@
   border: solid 1px transparent;
   border-radius: 4px;
   padding: 0.5rem 1rem;
+  transition: box-shadow 0.3s, background-color 0.3s;
+  letter-spacing: 0.075rem;
+  font-size: 15px;
+  @include bp(small) {
+    font-size: $font-normal;
+  }
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
 }
 
-.btn--primary {
+.btn-primary {
+  -webkit-font-smoothing: antialiased;
   color: $white;
   background-color: $red;
+  border: 1px solid darken($red, 10%);
+  &:hover,
+  &:focus {
+    background-color: darken($red, 5%);
+  }
+  &:hover {
+    box-shadow: 0 1px 10px fade-out($red, 0.15);
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem fade-out($red, 0.4);
+  }
 }
 
-.btn--secondary {
-  color: $blue;
-  border: 1px solid $blue;
-  background-color: $fade-out($blue, 0.9);
+$btn-secondary-color: $blue;
+
+.btn-secondary {
+  -webkit-font-smoothing: antialiased;
+  color: $white;
+  background-color: $btn-secondary-color;
+  border: 1px solid darken($btn-secondary-color, 7.5%);
+
+  &:hover,
+  &:focus {
+    background-color: darken($btn-secondary-color, 5%);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem fade-out($btn-secondary-color, 0.4);
+  }
+}
+
+$outline-btn-color: mix($gray, $blue, 10%);
+
+.btn-outline {
+  color: $outline-btn-color;
+  border: 1px solid $outline-btn-color;
+
+  &:hover,
+  &:focus {
+    background-color: fade-out($outline-btn-color, 0.9);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem fade-out($blue, 0.4);
+  }
 }
 
 .btn-large {
+  font-size: $font-large;
+  padding: 1rem 1.5rem;
+}
+
+.btn-small {
+  padding: 0.4rem 0.75rem;
+}
+
+.btn-subtle {
+  text-transform: none !important;
+  letter-spacing: 0.05rem;
 }

@@ -71,10 +71,17 @@
     padding: 3px 12px 3px 48px;
     margin: 0;
     color: $blue;
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: $color-text;
+      background-color: lighten($gray-xlight, 2%);
+    }
 
     &__status {
       position: absolute;
-      top: 14px;
+      top: 50%;
+      transform: translateY(-50%);
       left: 12px;
       border-radius: 50%;
       border: 3px solid $gray-lesslight;
@@ -120,9 +127,9 @@
       right: -35px;
     }
 
-    &.is-active,
-    &:hover {
+    &.is-active {
       background-color: $white;
+      color: $color-text;
     }
 
     &:hover {
