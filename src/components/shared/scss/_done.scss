@@ -40,7 +40,7 @@
     grid-template-rows: auto;
     grid-column-gap: 20px;
 
-    @include bp(medium) {
+    @include max-width-bp(medium) {
       display: inherit;
     }
   }
@@ -84,7 +84,7 @@
     grid-column: 2;
     // width: 400px;
 
-    @include bp(medium) {
+    @include max-width-bp(medium) {
       text-align: left;
       width: 100%;
     }
@@ -95,7 +95,7 @@
       width: 100%;
       border: none;
 
-      @include bp(medium) {
+      @include max-width-bp(medium) {
         width: 100%;
       }
     }

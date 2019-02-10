@@ -1,13 +1,13 @@
 .call {
   &__title {
-    margin: 12px 0 1rem 0;
+    margin: 2px 0 1rem 0;
     font-size: 42px;
     text-align: left;
     font-weight: 900;
     letter-spacing: 0.05rem;
     text-transform: uppercase;
 
-    @include bp(small) {
+    @include max-width-bp(small) {
       font-size: $font-xlarge;
     }
   }
@@ -87,7 +87,7 @@
         height: auto;
       }
 
-      @include bp(small) {
+      @include max-width-bp(small) {
         position: relative;
         margin: auto;
       }
@@ -133,11 +133,11 @@
       font-weight: bold;
       margin: 0 150px 0 0;
 
-      @include bp(medium) {
+      @include max-width-bp(medium) {
         font-size: $font-xlarge;
       }
 
-      @include bp(small) {
+      @include max-width-bp(small) {
         font-size: $font-xlarge;
         margin: 0;
       }

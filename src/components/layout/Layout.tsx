@@ -51,7 +51,7 @@ const Layout: React.StatelessComponent<Props> = (props: Props) => (
                   />
                 )}
               </userStateContext.Consumer>
-              <div className="layout">
+              <div className="layout ">
                 <aside id="nav" role="contentinfo" className="layout__side">
                   <div className="issues">
                     <SidebarHeader />

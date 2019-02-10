@@ -25,7 +25,7 @@ footer {
       -webkit-margin-after: 0;
       -webkit-padding-start: 0;
 
-      @include bp(medium) {
+      @include max-width-bp(medium) {
         width: inherit;
       }
     }
@@ -48,14 +48,14 @@ footer {
     &__left {
       float: left;
 
-      @include bp(medium) {
+      @include max-width-bp(medium) {
         float: none;
       }
 
       li {
         text-align: left;
 
-        @include bp(medium) {
+        @include max-width-bp(medium) {
           text-align: center;
         }
       }
@@ -64,14 +64,14 @@ footer {
     &__right {
       float: right;
 
-      @include bp(medium) {
+      @include max-width-bp(medium) {
         float: none;
       }
 
       li {
         text-align: right;
 
-        @include bp(medium) {
+        @include max-width-bp(medium) {
           text-align: center;
         }
       }

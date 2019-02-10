@@ -60,7 +60,7 @@
       height: auto;
     }
 
-    @include bp(small) {
+    @include max-width-bp(small) {
       position: relative;
       margin: auto;
     }
