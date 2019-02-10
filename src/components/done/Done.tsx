@@ -131,22 +131,31 @@ export class Done extends React.Component<Props, State> {
               develop new ways to make your voice heard!
             </p>
             <div className="call__complete__donate__grid">
-              <button onClick={e => this.donateClick(10)} className="grid-1">
+              <button
+                onClick={e => this.donateClick(10)}
+                className="btn btn-outline grid-1"
+              >
                 $10
                 <span>Supports 200 calls to Congress</span>
               </button>
-              <button onClick={e => this.donateClick(15)} className="grid-2">
+              <button
+                onClick={e => this.donateClick(15)}
+                className="btn btn-outline  grid-2"
+              >
                 $15
                 <span>Supports outreach to new activists</span>
               </button>
               <button
                 onClick={e => this.donateClick(25)}
-                className="donate-best grid-1"
+                className="donate-best grid-1 btn btn-outline"
               >
                 $25
                 <span>Supports issue research and writeups</span>
               </button>
-              <button onClick={e => this.donateClick(100)} className="grid-2">
+              <button
+                onClick={e => this.donateClick(100)}
+                className="grid-2 btn btn-outline "
+              >
                 $100
                 <span>Keeps the server running for a month</span>
               </button>
@@ -178,7 +187,7 @@ export class Done extends React.Component<Props, State> {
                       }
                     />
                     <button
-                      className="button"
+                      className="btn btn-secondary btn-subtle"
                       onClick={e => this.setReminder(e)}
                     >
                       Remind me

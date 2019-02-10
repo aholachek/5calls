@@ -122,8 +122,13 @@ export class Location extends React.Component<Props, State> {
   noLocation() {
     return (
       <>
-        <p id="setLocationMessage">Set your location</p>
-        <button onClick={e => this.enterLocation(e)}>Set Location</button>
+        <button
+          className="btn btn-outline"
+          id="setLocationMessage"
+          onClick={e => this.enterLocation(e)}
+        >
+          Set your location
+        </button>
       </>
     );
   }
@@ -146,16 +151,16 @@ export class Location extends React.Component<Props, State> {
   enteringLocation() {
     return (
       <>
-        <p>Set your location</p>
-        <form onSubmit={e => this.submitLocation(e)}>
+        <p>Enter an address or zip code</p>
+        <form onSubmit={e => this.submitLocation(e)} className="input-group">
           <input
             type="text"
             autoFocus={true}
             id="address"
             name="address"
-            placeholder="Enter an address or zip code"
+            placeholder="1600 Pennsylvania Ave NW, Washington, DC 20500"
           />
-          <button>Go</button>
+          <button className="btn btn-secondary">Go</button>
         </form>
       </>
     );
@@ -167,7 +172,12 @@ export class Location extends React.Component<Props, State> {
         <p id="locationMessage">
           Your location: <span>{this.props.locationState.cachedCity}</span>
         </p>
-        <button onClick={e => this.enterLocation(e)}>Change Location</button>
+        <button
+          className="btn btn-outline"
+          onClick={e => this.enterLocation(e)}
+        >
+          Change Location
+        </button>
       </>
     );
   }

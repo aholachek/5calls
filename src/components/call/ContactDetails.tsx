@@ -18,14 +18,18 @@ const ContactDetails: React.StatelessComponent<Props> = ({
       <div className="call__contact__image">
         <img alt="" src={currentContact.photoURL} />
       </div>
-      <h3 className="call__contact__name">{currentContact.contactDisplay()}</h3>
-      <p className="call__contact__phone">
-        {makePhoneLink(currentContact.phone)}
-      </p>
-      <ContactOffices
-        currentIssue={currentIssue}
-        currentContact={currentContact}
-      />
+      <div>
+        <h3 className="call__contact__name">
+          {currentContact.contactDisplay()}
+        </h3>
+        <p className="call__contact__phone">
+          {makePhoneLink(currentContact.phone)}
+        </p>
+        <ContactOffices
+          currentIssue={currentIssue}
+          currentContact={currentContact}
+        />
+      </div>
     </div>
   );
 };

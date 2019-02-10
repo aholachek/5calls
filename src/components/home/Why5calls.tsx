@@ -41,14 +41,18 @@ const Why5calls: React.StatelessComponent<Props> = (props: Props) => (
           <label htmlFor="email">
             <strong>Get email alerts once a week</strong>
           </label>
-          <span className="emailform">
+          <span className="emailform input-group">
             <input
               type="text"
               placeholder="youremail@example.com"
               name="email"
               id="email"
             />
-            <input type="submit" value="Subscribe" />
+            <input
+              type="submit"
+              value="Subscribe"
+              className=" btn btn-secondary btn-subtle"
+            />
           </span>
         </form>
       </div>

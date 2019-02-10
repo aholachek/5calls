@@ -1,19 +1,12 @@
 footer {
-  background-color: $blue;
+  margin-top: 1.5rem;
+  background-color: $gray-light;
   text-align: center;
   font-size: $font-small;
-  color: #fff;
-  padding-top: 12px;
-  // text-align: center;
-
-  a {
-    color: #fff;
-  }
-
+  padding: 2rem 0;
   .colophon {
     width: 100%;
     position: relative;
-    margin: 0 10px;
     padding: 6px 0 24px 0;
     line-height: 2em;
 
@@ -31,8 +24,6 @@ footer {
     }
 
     a {
-      padding: 0 12px;
-
       span {
         margin-left: 5px;
       }

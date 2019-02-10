@@ -122,7 +122,7 @@ class HeaderImpl extends React.Component<Props, State> {
             </ul> */}
               <a
                 href="https://secure.actblue.com/donate/5calls-donate?amount=25"
-                className="donate-btn"
+                className="btn btn-primary donate-btn"
               >
                 Donate
               </a>

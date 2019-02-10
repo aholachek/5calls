@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,900');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,900');
 
 @import 'normalize';
 @import 'variables-and-mixins';
@@ -6,6 +6,7 @@
 @import 'utility';
 
 // Components
+@import 'buttons';
 @import 'layout';
 @import 'issues';
 @import 'location';

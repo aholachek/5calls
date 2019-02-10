@@ -1,0 +1,96 @@
+.btn {
+  font-family: $font-headings;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  margin: 2px 0;
+  border: solid 1px transparent;
+  border-radius: 4px;
+  padding: 0.55rem 1rem 0.45rem 1rem;
+  transition: box-shadow 0.3s, background-color 0.3s;
+  letter-spacing: 0.075rem;
+  font-size: 0.9rem;
+  @include bp(small) {
+    font-size: $font-normal;
+  }
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+$btn-primary-color: $red;
+
+.btn-primary {
+  -webkit-font-smoothing: antialiased;
+  color: $white;
+  background-color: $btn-primary-color;
+  border: 1px solid darken($btn-primary-color, 10%);
+  &:hover,
+  &:focus {
+    background-color: darken($btn-primary-color, 5%);
+  }
+  &:hover {
+    box-shadow: 0 1px 10px fade-out($btn-primary-color, 0.15);
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem fade-out($btn-primary-color, 0.4);
+  }
+}
+
+$btn-secondary-color: $blue;
+
+.btn-secondary {
+  -webkit-font-smoothing: antialiased;
+  color: $white;
+  background-color: $btn-secondary-color;
+  border: 1px solid darken($btn-secondary-color, 7.5%);
+
+  &:hover,
+  &:focus {
+    background-color: darken($btn-secondary-color, 5%);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem fade-out($btn-secondary-color, 0.4);
+  }
+}
+
+$outline-btn-color: mix($gray, $blue, 10%);
+
+.btn-outline {
+  color: $outline-btn-color;
+  border: 2px solid $outline-btn-color;
+  font-size: 1rem;
+
+  &:hover,
+  &:focus {
+    background-color: fade-out($outline-btn-color, 0.9);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem fade-out($blue, 0.4);
+  }
+}
+
+.btn-large {
+  font-size: $font-large;
+  padding: 1rem 1.5rem;
+}
+
+.btn-small {
+  padding: 0.4rem 0.75rem;
+}
+
+.btn-subtle {
+  text-transform: none !important;
+  letter-spacing: 0.05rem;
+}

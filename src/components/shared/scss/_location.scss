@@ -1,9 +1,17 @@
+#locationMessage {
+  margin-bottom: .5rem;
+}
 .location {
   @include bp(medium) {
     border-top: 0.25rem solid $red;
   }
-  color: $blue;
   padding: 12px 6px;
+
+  .input-group {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
 
   p {
     margin: 0;
@@ -12,6 +20,7 @@
 
     &.loadingAnimation {
       color: $gray;
+      margin-bottom: 0.5rem;
     }
   }
   input {
@@ -28,9 +37,5 @@
 
   span {
     font-weight: bold;
-  }
-
-  button {
-    margin: 6px 0 8px 0;
   }
 }
