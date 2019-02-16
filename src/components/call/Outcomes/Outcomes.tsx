@@ -3,11 +3,11 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import EventEmitter = require('wolfy87-eventemitter');
 
-import { submitOutcome } from '../../redux/callState';
-import { store } from '../../redux/store';
-import { Issue } from '../../common/models';
-import { UserState } from '../../redux/userState';
-import { Mixpanel } from '../../services/mixpanel';
+import { submitOutcome } from '../../../redux/callState';
+import { store } from '../../../redux/store';
+import { Issue } from '../../../common/models';
+import { UserState } from '../../../redux/userState';
+import { Mixpanel } from '../../../services/mixpanel';
 
 interface Props {
   readonly currentIssue: Issue;
@@ -16,12 +16,8 @@ interface Props {
   readonly currentContactId: string;
   readonly numberContactsLeft: number;
 }
-interface State {}
 
-class Outcomes extends React.Component<
-  Props & RouteComponentProps<any>, // tslint:disable-line:no-any
-  State
-> {
+class Outcomes extends React.Component<Props & RouteComponentProps<any>> { // tslint:disable-line:no-any
   dispatchOutcome(e: React.MouseEvent<HTMLButtonElement>, outcome: string) {
     e.currentTarget.blur();
 

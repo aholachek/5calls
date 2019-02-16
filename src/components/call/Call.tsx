@@ -2,11 +2,13 @@ import * as React from 'react';
 import { isEqual } from 'lodash';
 
 import { Issue, Contact, ContactList } from '../../common/models';
-import { CallHeader, ContactDetails, Outcomes, Script } from './index';
+import CallHeader from './CallHeader';
+import ContactDetails from './ContactDetails';
+import Outcomes from './Outcomes';
+import Script from './Script';
 import { CallState } from '../../redux/callState';
 import {
   locationStateContext,
-  userStateContext,
   userStatsContext
 } from '../../contexts';
 import { eventContext } from '../../contexts/EventContext';
@@ -121,25 +123,20 @@ export default class Call extends React.Component<Props, State> {
                 </>
               )}
             </locationStateContext.Consumer>
-            <userStateContext.Consumer>
-              {userState => (
-                <eventContext.Consumer>
-                  {eventManager => (
-                    <Outcomes
-                      currentIssue={this.props.issue}
-                      userState={userState}
-                      eventEmitter={eventManager.ee}
-                      numberContactsLeft={this.state.numberContactsLeft}
-                      currentContactId={
-                        this.state.currentContact
-                          ? this.state.currentContact.id
-                          : ''
-                      }
-                    />
-                  )}
-                </eventContext.Consumer>
+            <eventContext.Consumer>
+              {eventManager => (
+                <Outcomes
+                  currentIssue={this.props.issue}
+                  eventEmitter={eventManager.ee}
+                  numberContactsLeft={this.state.numberContactsLeft}
+                  currentContactId={
+                    this.state.currentContact
+                      ? this.state.currentContact.id
+                      : ''
+                  }
+                />
               )}
-            </userStateContext.Consumer>
+            </eventContext.Consumer>
           </>
         )}
       </section>

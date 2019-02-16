@@ -4,7 +4,7 @@ import { withRouter, RouteComponentProps } from 'react-router';
 
 import { getIssue } from '../shared/utils';
 import i18n from '../../services/i18n';
-import { Call } from './index';
+import Call from './Call';
 import { Layout } from '../layout';
 import { Issue } from '../../common/models';
 
@@ -108,7 +108,7 @@ class CallPageView extends React.Component<Props, State> {
   }
 }
 
-export const CallPageWithRouter = withRouter(CallPageView);
+const CallPageWithRouter = withRouter(CallPageView);
 
 export default class CallPage extends React.Component {
   render() {

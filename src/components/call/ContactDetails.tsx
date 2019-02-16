@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Issue, Contact } from '../../common/models';
-import { ContactOffices } from './index';
+import ContactOffices from './ContactOffices';
 import { makePhoneLink } from '../shared/jsxUtils';
 
 interface Props {

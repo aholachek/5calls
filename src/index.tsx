@@ -18,7 +18,7 @@ import { FaqPage } from './components/faq';
 import { PrivacyPage } from './components/privacy';
 import { DonePage } from './components/done';
 import { MoreIssuesPage } from './components/issues';
-import { CallPage } from './components/call';
+import CallPage from './components/call';
 import { MyImpactPage } from './components/myimpact';
 import { Auth0CallbackContainer } from './components/shared';
 import ProfilePageContainer from './components/profile/ProfilePageContainer';

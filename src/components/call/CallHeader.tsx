@@ -8,7 +8,7 @@ interface Props {
   currentIssue: Issue;
 }
 
-export const CallHeader: React.StatelessComponent<Props> = ({
+const CallHeader: React.StatelessComponent<Props> = ({
   currentIssue
 }: Props) => {
   return (
@@ -24,3 +24,5 @@ export const CallHeader: React.StatelessComponent<Props> = ({
     </header>
   );
 };
+
+export default CallHeader;
