@@ -17,7 +17,8 @@ interface Props {
   readonly numberContactsLeft: number;
 }
 
-class Outcomes extends React.Component<Props & RouteComponentProps<any>> { // tslint:disable-line:no-any
+class Outcomes extends React.Component<Props & RouteComponentProps<any>> {
+  // tslint:disable-line:no-any
   dispatchOutcome(e: React.MouseEvent<HTMLButtonElement>, outcome: string) {
     e.currentTarget.blur();
 

@@ -7,10 +7,7 @@ import ContactDetails from './ContactDetails';
 import Outcomes from './Outcomes';
 import Script from './Script';
 import { CallState } from '../../redux/callState';
-import {
-  locationStateContext,
-  userStatsContext
-} from '../../contexts';
+import { locationStateContext, userStatsContext } from '../../contexts';
 import { eventContext } from '../../contexts/EventContext';
 import { Mixpanel } from '../../services/mixpanel';
 import { ContactProgress } from './ContactProgress';
