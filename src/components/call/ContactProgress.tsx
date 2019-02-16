@@ -1,17 +1,16 @@
 import * as React from 'react';
-
+import { connect } from 'react-redux';
 import { Contact, ContactList, Issue } from '../../common/models';
-import { CallState } from '../../redux/callState';
-import { UserStatsState } from '../../redux/userStats';
 import {
   HELP_SET_LOCATION,
   HELP_OTHER_REPRESENTATIVES
 } from '../../common/constants';
+import { ApplicationState } from '../../redux/root';
+import { UserContactEvent } from '../../redux/userStats';
 
 interface Props {
   readonly currentIssue: Issue;
-  readonly callState: CallState;
-  readonly userStatsState: UserStatsState;
+  readonly all: UserContactEvent[];
   readonly contactList: ContactList;
   readonly currentContact?: Contact;
   readonly selectContact: (index: number) => void;
@@ -19,23 +18,19 @@ interface Props {
 
 export const ContactProgress: React.StatelessComponent<Props> = ({
   currentIssue,
-  callState,
-  userStatsState,
+  all,
   contactList,
-  currentContact,
-  selectContact
+  currentContact
 }: Props) => {
   const contactCalled = (contact: Contact): Boolean => {
-    if (userStatsState.all) {
-      let completed = userStatsState.all.filter(result => {
+    if (all) {
+      const completed = all.filter(result => {
         return (
           result.contactid === contact.id &&
           result.issueid === currentIssue.id.toString()
         );
       });
-      if (completed.length > 0) {
-        return true;
-      }
+      return Boolean(completed.length);
     }
 
     return false;
@@ -195,3 +190,9 @@ export const ContactProgress: React.StatelessComponent<Props> = ({
     </div>
   );
 };
+
+const mapStateToProps = (state: ApplicationState) => ({
+  all: state.userStatsState.all
+});
+
+export default connect(mapStateToProps)(ContactProgress);

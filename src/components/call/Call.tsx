@@ -1,22 +1,21 @@
 import * as React from 'react';
 import { isEqual } from 'lodash';
-
+import { connect } from 'react-redux';
 import { Issue, Contact, ContactList } from '../../common/models';
 import CallHeader from './CallHeader';
 import ContactDetails from './ContactDetails';
 import Outcomes from './Outcomes';
 import Script from './Script';
-import { CallState } from '../../redux/callState';
-import { locationStateContext, userStatsContext } from '../../contexts';
+import ContactProgress from './ContactProgress';
 import { eventContext } from '../../contexts/EventContext';
 import { Mixpanel } from '../../services/mixpanel';
-import { ContactProgress } from './ContactProgress';
+import { ApplicationState } from '../../redux/root';
 
 // This defines the props that we must pass into this component.
 export interface Props {
   issue: Issue;
   contacts: ContactList;
-  callState: CallState;
+  contactIndexes: [];
   getContactsIfNeeded: (force: boolean) => void;
 }
 
@@ -26,7 +25,7 @@ export interface State {
   numberContactsLeft: number;
 }
 
-export default class Call extends React.Component<Props, State> {
+export class Call extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     // set initial state
@@ -42,10 +41,10 @@ export default class Call extends React.Component<Props, State> {
     let currentContactIndex = 0;
     if (
       props.issue &&
-      props.callState.contactIndexes &&
-      props.callState.contactIndexes[props.issue.slug]
+      props.contactIndexes &&
+      props.contactIndexes[props.issue.slug]
     ) {
-      currentContactIndex = props.callState.contactIndexes[props.issue.slug];
+      currentContactIndex = props.contactIndexes[props.issue.slug];
     }
 
     // after this contact, the number of contacts that are left to connect with
@@ -86,40 +85,22 @@ export default class Call extends React.Component<Props, State> {
     return (
       <section className="call">
         <CallHeader currentIssue={this.props.issue} />
-        <userStatsContext.Consumer>
-          {userStatsState => (
-            <ContactProgress
-              currentIssue={this.props.issue}
-              contactList={this.props.contacts}
-              callState={this.props.callState}
-              userStatsState={userStatsState}
-              currentContact={this.state.currentContact}
-              selectContact={index => {
-                this.selectContact(index);
-              }}
-            />
-          )}
-        </userStatsContext.Consumer>
+        <ContactProgress
+          currentIssue={this.props.issue}
+          contactList={this.props.contacts}
+          currentContact={this.state.currentContact}
+          selectContact={this.selectContact}
+        />
         {this.state.currentContact && (
           <>
             <ContactDetails
               currentIssue={this.props.issue}
               currentContact={this.state.currentContact}
             />
-            <locationStateContext.Consumer>
-              {locationState => (
-                <>
-                  {/* this is sort of weird, right? Should be implicit from above */}
-                  {this.state.currentContact && (
-                    <Script
-                      issue={this.props.issue}
-                      currentContact={this.state.currentContact}
-                      locationState={locationState}
-                    />
-                  )}
-                </>
-              )}
-            </locationStateContext.Consumer>
+            <Script
+              issue={this.props.issue}
+              currentContact={this.state.currentContact}
+            />
             <eventContext.Consumer>
               {eventManager => (
                 <Outcomes
@@ -140,3 +121,9 @@ export default class Call extends React.Component<Props, State> {
     );
   }
 }
+
+const mapStateToProps = (state: ApplicationState) => ({
+  contactIndexes: state.callState.contactIndexes
+});
+
+export default connect(mapStateToProps)(Call);

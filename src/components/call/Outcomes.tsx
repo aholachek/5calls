@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import EventEmitter = require('wolfy87-eventemitter');
 
-import { submitOutcome } from '../../../redux/callState';
-import { store } from '../../../redux/store';
-import { Issue } from '../../../common/models';
-import { UserState } from '../../../redux/userState';
-import { Mixpanel } from '../../../services/mixpanel';
+import { submitOutcome } from '../../redux/callState';
+import { store } from '../../redux/store';
+import { Issue } from '../../common/models';
+import { Mixpanel } from '../../services/mixpanel';
 
 interface Props {
   readonly currentIssue: Issue;
-  readonly userState: UserState;
   readonly eventEmitter: EventEmitter;
   readonly currentContactId: string;
   readonly numberContactsLeft: number;
+  readonly hasProfile: boolean;
 }
 
 class Outcomes extends React.Component<Props & RouteComponentProps<any>> {
@@ -65,7 +65,7 @@ class Outcomes extends React.Component<Props & RouteComponentProps<any>> {
   render() {
     if (this.props.currentIssue) {
       if (this.props.currentIssue.contactType === 'ACTION') {
-        if (this.props.userState.profile) {
+        if (this.props.hasProfile) {
           return (
             <div className="call__outcomes">
               <div className="call__outcomes__items">
@@ -123,4 +123,8 @@ class Outcomes extends React.Component<Props & RouteComponentProps<any>> {
   }
 }
 
-export default withRouter(Outcomes);
+const mapStateToProps = state => ({
+  hasProfile: state.userState.profile
+});
+
+export default connect(mapStateToProps)(withRouter(Outcomes));

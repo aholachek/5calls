@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { isEqual } from 'lodash';
-import { withRouter, RouteComponentProps } from 'react-router';
-
+import { RouteComponentProps } from 'react-router';
+import { connect } from 'react-redux';
 import { getIssue } from '../shared/utils';
 import i18n from '../../services/i18n';
 import Call from './Call';
 import { Layout } from '../layout';
 import { Issue } from '../../common/models';
 
-import { CallState, selectIssueActionCreator } from '../../redux/callState';
+import { selectIssueActionCreator } from '../../redux/callState';
 import { RemoteDataState } from '../../redux/remoteData';
 import { store } from '../../redux/store';
 
-import { remoteStateContext, callStateContext } from '../../contexts';
 import { getContactsIfNeeded } from '../../redux/remoteData/asyncActionCreator';
+import { ApplicationState } from '../../redux/root';
 
 interface RouteProps {
   readonly groupid: string;
@@ -22,7 +22,6 @@ interface RouteProps {
 
 interface Props extends RouteComponentProps<RouteProps> {
   remoteState: RemoteDataState;
-  callState: CallState;
 }
 
 export interface State {
@@ -91,7 +90,6 @@ class CallPageView extends React.Component<Props, State> {
           <Call
             issue={this.state.currentIssue}
             contacts={this.props.remoteState.contacts}
-            callState={this.props.callState}
             getContactsIfNeeded={getContactsIfNeeded}
           />
         </Layout>
@@ -108,23 +106,8 @@ class CallPageView extends React.Component<Props, State> {
   }
 }
 
-const CallPageWithRouter = withRouter(CallPageView);
+const mapStateToProps = (state: ApplicationState) => ({
+  remoteDataState: state.remoteDataState
+});
 
-export default class CallPage extends React.Component {
-  render() {
-    return (
-      <remoteStateContext.Consumer>
-        {remoteState => (
-          <callStateContext.Consumer>
-            {callState => (
-              <CallPageWithRouter
-                remoteState={remoteState}
-                callState={callState}
-              />
-            )}
-          </callStateContext.Consumer>
-        )}
-      </remoteStateContext.Consumer>
-    );
-  }
-}
+export default connect(mapStateToProps)(CallPageView);

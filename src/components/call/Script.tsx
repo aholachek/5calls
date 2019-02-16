@@ -1,22 +1,22 @@
 import * as React from 'react';
 import * as ReactMarkdown from 'react-markdown';
-
-import { LocationState } from '../../redux/location/reducer';
+import { connect } from 'react-redux';
 import { linkRefRenderer } from '../shared/markdown-utils';
 import { Contact } from '../../common/models/contact';
 import { Issue } from '../../common/models/issue';
+import { ApplicationState } from '../../redux/root';
 
 interface Props {
   readonly issue: Issue;
   readonly currentContact: Contact;
-  readonly locationState: LocationState;
+  readonly cachedCity: String;
 }
 
 // Replacement regexes, ideally standardize copy to avoid complex regexs
 const titleReg = /\[REP\/SEN NAME\]|\[SENATOR\/REP NAME\]/gi;
 const locationReg = /\[CITY,\s?ZIP\]|\[CITY,\s?STATE\]/gi;
 
-function getContactNameWithTitle(contact: Contact) {
+export function getContactNameWithTitle(contact: Contact) {
   let title = '';
   switch (contact.area) {
     case 'House':
@@ -44,15 +44,10 @@ function getContactNameWithTitle(contact: Contact) {
   return title + contact.name;
 }
 
-function scriptFormat(
-  issue: Issue,
-  locationState: LocationState,
-  contact: Contact
-) {
-  const location = locationState.cachedCity;
+function scriptFormat(issue: Issue, cachedCity: String, contact: Contact) {
   let script = issue.script;
-  if (location) {
-    script = script.replace(locationReg, location);
+  if (cachedCity) {
+    script = script.replace(locationReg, cachedCity);
   }
 
   const title = getContactNameWithTitle(contact);
@@ -64,9 +59,9 @@ function scriptFormat(
 export const Script: React.StatelessComponent<Props> = ({
   issue,
   currentContact,
-  locationState
+  cachedCity
 }: Props) => {
-  let formattedScript = scriptFormat(issue, locationState, currentContact);
+  let formattedScript = scriptFormat(issue, cachedCity, currentContact);
 
   return (
     <div className="call__script">
@@ -81,6 +76,8 @@ export const Script: React.StatelessComponent<Props> = ({
   );
 };
 
-export default Script;
+const mapStateToProps = (state: ApplicationState) => ({
+  cachedCity: state.locationState.cachedCity
+});
 
-export { getContactNameWithTitle };
+export default connect(mapStateToProps)(Script);
