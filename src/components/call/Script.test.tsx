@@ -1,12 +1,11 @@
 import * as React from 'react';
 import * as ReactMarkdown from 'react-markdown';
 import { shallow } from 'enzyme';
-import i18n from '../../services/i18n';
-import { Script } from './';
+import { Script } from './Script';
 import { getContactNameWithTitle } from './Script';
 import { LocationState } from '../../redux/location';
 import { linkRefRenderer } from '../shared/markdown-utils';
-import { Issue, mockIssue } from '../../common/models/issue';
+import { mockIssue } from '../../common/models/issue';
 import { Contact, LocationFetchType } from '../../common/models';
 import { mockContact } from '../../common/models/contact';
 

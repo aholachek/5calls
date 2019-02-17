@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import i18n from '../../services/i18n';
-import { ContactOffices } from './index';
+import ContactOffices from './ContactOffices';
 import { mockContact } from '../../common/models/contact';
 import { mockIssue } from '../../common/models/issue';
 

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-
-import { CallHeader } from './index';
+import CallHeader from './CallHeader';
 import { Issue } from '../../common/models';
 
 test('Call header component should be rendered if passed a valid object', () => {

@@ -5,7 +5,7 @@ import { linkRefRenderer } from '../shared/markdown-utils';
 import { Contact } from '../../common/models/contact';
 import { Issue } from '../../common/models/issue';
 import { ApplicationState } from '../../redux/root';
-import { Omit } from 'lodash';
+import { Omit } from '../shared/typeHelpers';
 
 interface Props {
   readonly issue: Issue;

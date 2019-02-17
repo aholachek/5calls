@@ -29,7 +29,7 @@ export interface State {
   currentIssueId: string;
 }
 
-class CallPageView extends React.Component<Props, State> {
+export class CallPageView extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
