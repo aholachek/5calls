@@ -18,8 +18,8 @@ interface Props {
   readonly hasProfile: boolean;
 }
 
+// tslint:disable-next-line:no-any
 class Outcomes extends React.Component<Props & RouteComponentProps<any>> {
-  // tslint:disable-line:no-any
   dispatchOutcome(e: React.MouseEvent<HTMLButtonElement>, outcome: string) {
     e.currentTarget.blur();
 
@@ -125,7 +125,7 @@ class Outcomes extends React.Component<Props & RouteComponentProps<any>> {
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  hasProfile: state.userState.profile
+  hasProfile: Boolean(state.userState.profile)
 });
 // @ts-ignore
 export default connect(mapStateToProps)(withRouter(Outcomes));

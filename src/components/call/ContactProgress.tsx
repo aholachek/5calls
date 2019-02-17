@@ -33,7 +33,6 @@ export const ContactProgress: React.StatelessComponent<Props> = ({
       });
       return Boolean(completed.length);
     }
-
     return false;
   };
 
