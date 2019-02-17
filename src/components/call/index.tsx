@@ -107,7 +107,7 @@ class CallPageView extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  remoteDataState: state.remoteDataState
+  remoteState: state.remoteDataState
 });
 
 export default connect(mapStateToProps)(CallPageView);

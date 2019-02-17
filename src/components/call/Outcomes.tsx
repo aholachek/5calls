@@ -8,6 +8,7 @@ import { submitOutcome } from '../../redux/callState';
 import { store } from '../../redux/store';
 import { Issue } from '../../common/models';
 import { Mixpanel } from '../../services/mixpanel';
+import { ApplicationState } from '../../redux/root';
 
 interface Props {
   readonly currentIssue: Issue;
@@ -123,8 +124,8 @@ class Outcomes extends React.Component<Props & RouteComponentProps<any>> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: ApplicationState) => ({
   hasProfile: state.userState.profile
 });
-
+// @ts-ignore
 export default connect(mapStateToProps)(withRouter(Outcomes));

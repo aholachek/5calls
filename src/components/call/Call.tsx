@@ -10,12 +10,13 @@ import ContactProgress from './ContactProgress';
 import { eventContext } from '../../contexts/EventContext';
 import { Mixpanel } from '../../services/mixpanel';
 import { ApplicationState } from '../../redux/root';
+import { Omit } from 'react-router';
 
 // This defines the props that we must pass into this component.
 export interface Props {
   issue: Issue;
   contacts: ContactList;
-  contactIndexes: [];
+  contactIndexes: { [key: string]: number };
   getContactsIfNeeded: (force: boolean) => void;
 }
 
@@ -126,4 +127,10 @@ const mapStateToProps = (state: ApplicationState) => ({
   contactIndexes: state.callState.contactIndexes
 });
 
-export default connect(mapStateToProps)(Call);
+export default connect<
+  {
+    contactIndexes: Props['contactIndexes'];
+  },
+  null,
+  Omit<Props, 'contactIndexes'>
+>(mapStateToProps)(Call);

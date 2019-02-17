@@ -5,11 +5,12 @@ import { linkRefRenderer } from '../shared/markdown-utils';
 import { Contact } from '../../common/models/contact';
 import { Issue } from '../../common/models/issue';
 import { ApplicationState } from '../../redux/root';
+import { Omit } from 'lodash';
 
 interface Props {
   readonly issue: Issue;
   readonly currentContact: Contact;
-  readonly cachedCity: String;
+  readonly cachedCity: string;
 }
 
 // Replacement regexes, ideally standardize copy to avoid complex regexs
@@ -44,7 +45,7 @@ export function getContactNameWithTitle(contact: Contact) {
   return title + contact.name;
 }
 
-function scriptFormat(issue: Issue, cachedCity: String, contact: Contact) {
+function scriptFormat(issue: Issue, cachedCity: string, contact: Contact) {
   let script = issue.script;
   if (cachedCity) {
     script = script.replace(locationReg, cachedCity);
@@ -80,4 +81,6 @@ const mapStateToProps = (state: ApplicationState) => ({
   cachedCity: state.locationState.cachedCity
 });
 
-export default connect(mapStateToProps)(Script);
+export default connect<{ cachedCity: string }, null, Omit<Props, 'cachedCity'>>(
+  mapStateToProps
+)(Script);

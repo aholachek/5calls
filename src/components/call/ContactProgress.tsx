@@ -7,6 +7,7 @@ import {
 } from '../../common/constants';
 import { ApplicationState } from '../../redux/root';
 import { UserContactEvent } from '../../redux/userStats';
+import { Omit } from '../shared/typeHelpers';
 
 interface Props {
   readonly currentIssue: Issue;
@@ -195,4 +196,6 @@ const mapStateToProps = (state: ApplicationState) => ({
   all: state.userStatsState.all
 });
 
-export default connect(mapStateToProps)(ContactProgress);
+export default connect<{ all: UserContactEvent[] }, null, Omit<Props, 'all'>>(
+  mapStateToProps
+)(ContactProgress);
