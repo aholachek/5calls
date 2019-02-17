@@ -9,6 +9,7 @@ import { store } from '../../redux/store';
 import { Issue } from '../../common/models';
 import { Mixpanel } from '../../services/mixpanel';
 import { ApplicationState } from '../../redux/root';
+import { Omit } from '../shared/typeHelpers';
 
 interface Props {
   readonly currentIssue: Issue;
@@ -127,5 +128,8 @@ class Outcomes extends React.Component<Props & RouteComponentProps<any>> {
 const mapStateToProps = (state: ApplicationState) => ({
   hasProfile: Boolean(state.userState.profile)
 });
-// @ts-ignore
-export default connect(mapStateToProps)(withRouter(Outcomes));
+export default connect<
+  { hasProfile: boolean },
+  null,
+  Omit<Props, 'hasProfile'>
+>(mapStateToProps)(withRouter(Outcomes));
