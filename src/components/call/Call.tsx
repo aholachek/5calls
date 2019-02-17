@@ -10,7 +10,7 @@ import ContactProgress from './ContactProgress';
 import { eventContext } from '../../contexts/EventContext';
 import { Mixpanel } from '../../services/mixpanel';
 import { ApplicationState } from '../../redux/root';
-import { Omit } from 'react-router';
+import { Omit } from '../shared/typeHelpers';
 
 // This defines the props that we must pass into this component.
 export interface Props {
