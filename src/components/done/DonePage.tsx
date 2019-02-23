@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { isEqual } from 'lodash';
+import isEqual from 'lodash.isequal';
+
 import { withRouter, RouteComponentProps } from 'react-router';
 import { getIssuesIfNeeded, RemoteDataState } from '../../redux/remoteData';
 import { selectIssueActionCreator } from '../../redux/callState';

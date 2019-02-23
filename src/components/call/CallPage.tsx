@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { isEqual } from 'lodash';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 import { getIssue } from '../shared/utils';
@@ -38,7 +37,7 @@ class CallPageView extends React.Component<Props> {
     }
     const currentIssueId = this.getIssueIdFromLocation(this.props);
     const previousIssueId = this.getIssueIdFromLocation(prevProps);
-    if (currentIssueId && !isEqual(currentIssueId, previousIssueId)) {
+    if (currentIssueId && currentIssueId !== previousIssueId) {
       store.dispatch(selectIssueActionCreator(currentIssueId));
     }
   }

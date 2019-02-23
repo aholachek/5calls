@@ -1,7 +1,6 @@
 import * as React from 'react';
 import i18n from '../../services/i18n';
 import { Link } from 'react-router-dom';
-import { find } from 'lodash';
 
 import { Issue } from '../../common/models';
 import { IssuesListItem } from './index';
@@ -40,8 +39,7 @@ export class IssuesList extends React.Component<Props> {
           issue={issue}
           isIssueComplete={
             this.props.completedIssueIds &&
-            find(
-              this.props.completedIssueIds,
+            this.props.completedIssueIds.find(
               (issueId: string) => issue.slug === issueId
             ) !== undefined
           }

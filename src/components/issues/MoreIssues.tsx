@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { find } from 'lodash';
 
 import { Issue, Category, CategoryMap } from '../../common/models';
 import { IssuesListItem } from './index';
@@ -91,8 +90,7 @@ export class MoreIssues extends React.Component<Props, State> {
 
   isIssueComplete(issue: Issue): boolean {
     return (
-      find(
-        this.props.completedIssueIds,
+      this.props.completedIssueIds.find(
         (issueId: string) => issue.slugOrID() === issueId
       ) !== undefined
     );

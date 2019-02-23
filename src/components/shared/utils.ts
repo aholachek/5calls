@@ -2,7 +2,6 @@ import * as Constants from '../../common/constants';
 import { Issue } from './../../common/models';
 import { RemoteDataState } from '../../redux/remoteData';
 
-import { find } from 'lodash';
 import { store } from '../../redux/store';
 import { UserState } from '@5calls/react-components/lib/shared/model';
 
@@ -67,18 +66,17 @@ export const getIssue = (
   issueId: string
 ): Issue | undefined => {
   if (remoteDataState.issues) {
-    const currentActiveIssue = find(
-      remoteDataState.issues,
+    const currentActiveIssue = remoteDataState.issues.find(
       i => i.id.toString() === issueId || i.slug === issueId
     );
+
     if (currentActiveIssue) {
       return currentActiveIssue;
     }
   }
 
   if (remoteDataState.inactiveIssues) {
-    const currentInactiveIssue = find(
-      remoteDataState.inactiveIssues,
+    const currentInactiveIssue = remoteDataState.inactiveIssues.find(
       i => i.id.toString() === issueId || i.slug === issueId
     );
     if (currentInactiveIssue) {
@@ -94,8 +92,7 @@ export const isIssueComplete = (issueID: string): boolean => {
 
   if (state.callState && state.callState.completedIssueIds) {
     return (
-      find(
-        state.callState.completedIssueIds,
+      state.callState.completedIssueIds.find(
         (issueId: string) => issueID === issueId
       ) !== undefined
     );
