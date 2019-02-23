@@ -15,9 +15,12 @@ interface State {
 }
 
 export class MoreIssues extends React.Component<Props, State> {
+  static defaultProps = {
+    completedIssueIds: []
+  };
+
   constructor(props: Props) {
     super(props);
-
     this.state = this.setStateFromProps(props);
   }
 
