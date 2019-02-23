@@ -1,5 +1,5 @@
 import * as React from 'react';
-import isEqual from 'lodash.isequal';
+import isEqual from 'lodash-es/isEqual';
 
 import { Issue, Contact, ContactList } from '../../common/models';
 import { CallHeader, ContactDetails, Outcomes, Script } from './index';
