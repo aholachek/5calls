@@ -7,6 +7,8 @@ import {
 } from 'redux';
 import { persistStore, Persistor } from 'redux-persist';
 import rootReducer, { ApplicationState, DefaultApplicationState } from './root';
+import { Issue } from '../common/models/issue';
+
 import thunk from 'redux-thunk';
 
 const middlewares: Middleware[] = [thunk];
@@ -20,9 +22,32 @@ export default () => {
   // @ts-ignore
   delete window.__PRELOADED_STATE__;
 
+  let partiallyHydratedDefaultState = DefaultApplicationState;
+
+  if (preloadedState && preloadedState.remoteDataState) {
+    // only hydrate  the remotedatastore (for better transition from server rendered page)
+    // we have to re-instantiate the Issue objects before
+    // putting them in the store
+    // (this is kind of a workaround bc we store nonserializable state in redux)
+    const hydratedRemoteDataState = {
+      ...preloadedState.remoteDataState,
+      issues: preloadedState.remoteDataState.issues.map(issue =>
+        Object.assign(new Issue(), issue)
+      ),
+      inactiveIssues: preloadedState.remoteDataState.inactiveIssues.map(issue =>
+        Object.assign(new Issue(), issue)
+      )
+    };
+
+    partiallyHydratedDefaultState = {
+      ...DefaultApplicationState,
+      remoteDataState: hydratedRemoteDataState
+    };
+  }
+
   store = createStore(
     rootReducer,
-    preloadedState || DefaultApplicationState,
+    partiallyHydratedDefaultState,
     compose(
       applyMiddleware(...middlewares),
       // This added for Redux Dev Tools - install Chrome or Firefox extension to use
