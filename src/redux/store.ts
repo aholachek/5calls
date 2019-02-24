@@ -10,6 +10,7 @@ import rootReducer, { ApplicationState, DefaultApplicationState } from './root';
 import { Issue } from '../common/models/issue';
 
 import thunk from 'redux-thunk';
+import { ContactList } from '../common/models/contactList';
 
 const middlewares: Middleware[] = [thunk];
 
@@ -36,7 +37,8 @@ export default () => {
       ),
       inactiveIssues: preloadedState.remoteDataState.inactiveIssues.map(issue =>
         Object.assign(new Issue(), issue)
-      )
+      ),
+      contacts: new ContactList()
     };
 
     partiallyHydratedDefaultState = {
