@@ -49,7 +49,7 @@ const history = createHistory();
 trackPageView(history.location);
 history.listen(trackPageView);
 
-const store = createStore({});
+const store = createStore();
 
 const rootElement = document.getElementById('root')!;
 const method = rootElement.hasChildNodes() ? 'hydrate' : 'render';

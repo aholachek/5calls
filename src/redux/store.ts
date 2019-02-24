@@ -23,7 +23,7 @@ window.snapSaveState = () => ({
   __PRELOADED_STATE__: store.getState()
 });
 
-export default initialState => {
+export default () => {
   store = createStore(
     rootReducer,
     preloadedState || DefaultApplicationState,
