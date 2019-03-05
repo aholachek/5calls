@@ -29,6 +29,8 @@ class HeadMeta extends React.Component<Props> {
       <Helmet>
         <title>{pageTitle}</title>
 
+        <meta name="description" content={pageDescription} />
+
         <meta itemProp="name" content={pageTitle} />
         <meta itemProp="description" content={pageDescription} />
         <meta itemProp="image" content={shareImageURL} />

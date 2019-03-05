@@ -270,6 +270,11 @@
   ul {
     font-size: $font-normal;
   }
+  blockquote {
+    margin-left: 0;
+    border-left: 0.3rem solid $blue;
+    padding-left: 1.2rem;
+  }
 }
 
 .voter {
